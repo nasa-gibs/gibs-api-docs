@@ -486,8 +486,7 @@ WMS Response - See picture ...
 
 ![wms_response](img/wms_response.png)
 
-Vector products are not natively provided in the EPSG:3857 projection through either the WMTS or WMS services. A workaround for WMS
-requests is to utilize the EPSG:4326 endpoint with EPSG:3857-based SRS and BBOX query parameters (example).
+Vector products are not natively provided in the EPSG:3857 projection through either the WMTS or WMS services. A workaround for WMS requests is to utilize the EPSG:4326 endpoint with EPSG:3857-based SRS and BBOX query parameters (example).
 
 
 Almost all raster layers in the GIBS WMS service provide a link to a pre-generated legend image as the LegendURL associated with the default
@@ -652,8 +651,12 @@ enhancements are made to the GIBS vector product visualization capabilities, whi
 #### WMTS Capabilities Layer Metadata
 
 ```
-<ows:Metadata xlink:type="simple" xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/layer" xlink:href="https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json" xlink:title="Layer Metadata"/>
-<ows:Metadata xlink:type="simple" xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/layer/1.0" xlink:href="https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json" xlink:title="Layer Metadata"/>
+<ows:Metadata xlink:type="simple" xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style"
+xlink:href="https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json" xlink:
+title="Mapbox GL Layer Styles"/>
+<ows:Metadata xlink:type="simple" xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style/1.
+0" xlink:href="https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json" xlink:
+title="Mapbox GL Layer Styles"/>
 ```
 
 ## Vector Style Contents

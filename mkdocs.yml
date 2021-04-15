@@ -4,6 +4,6 @@ nav:
     - API Documentation: index.md
     - Available Imagery Products: about.md
 extra_css:
-    - css/images.css
+    - css/style.css
 theme:
     name: cinder
