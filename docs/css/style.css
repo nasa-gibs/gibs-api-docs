@@ -3,6 +3,7 @@
     max-height:85vh;
     overflow-y: auto;
 }
-.container a {
+.container a, .container code {
     word-break: break-all;
+    white-space: normal;
 }
