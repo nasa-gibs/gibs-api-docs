@@ -1,0 +1,9 @@
+site_name: NASA GIBS
+
+nav:
+    - API Documentation: index.md
+    - Available Imagery Products: about.md
+extra_css:
+    - css/images.css
+theme:
+    name: cinder
