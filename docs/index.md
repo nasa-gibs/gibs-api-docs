@@ -191,8 +191,9 @@ services have multiple "endpoints" that contain a specific set of GIBS imagery l
 
 The pattern for a GIBS service endpoint is shown below. Parameterized elements of the pattern are provided in \{paramter:value1[|value2]*\} notation.
 
-`https://gibs.earthdata.nasa.gov/{service:wmts|wms|twms}/epsg{code:4326|3857|3413|3031}/{type:
-all|best|nrt|std}`
+```xml
+https://gibs.earthdata.nasa.gov/{service:wmts|wms|twms}/epsg{code:4326|3857|3413|3031}/{type:all|best|nrt|std}
+```
 
 The following table provides some sample endpoints for various unique combinations:
 
@@ -245,7 +246,7 @@ Here is a list of available service endpoints, projections, and their GetCapabil
 The core concept within the GetCapabilities response is a map layer. GIBS map layers represent data that changes over time, most
 commonly providing a different map each day. Therefore, the layer definition within the GIBS GetCapabilities response must present a
 time dimension. The GIBS team has chosen to address this in the following manner, within each layer:
-```
+```xml
 <Dimension>
   <ows:Identifier>time</ows:Identifier>
   <UOM>ISO8601</UOM>
@@ -276,7 +277,9 @@ GIBS has chosen to implement the Key-Value Pair and RESTful service interfaces. 
 
 More generically, the RESTful request follows the form of:
 
-`https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/{ProductName}/default/{Time}/{TileMatrixSet}/{ZoomLevel}/{TileRow}/{TileCol}.png`
+```xml
+https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/{ProductName}/default/{Time}/{TileMatrixSet}/{ZoomLevel}/{TileRow}/{TileCol}.png
+```
 
 #### Example Clients
 
@@ -289,12 +292,16 @@ More generically, the RESTful request follows the form of:
 The WMTS RESTful interface above can be easily adapted for use as a "generic" XYZ tile server if the developer pre-populates all of the
 required fields except the tile row, column, and zoom level. For example, by starting with the most generalized GIBS API request:
 
-`https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/{ProductName}/default/{Time}/{TileMatrixSet}/{ZoomLevel}/{TileRow}/{TileCol}.png`
+```xml
+https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/{ProductName}/default/{Time}/{TileMatrixSet}/{ZoomLevel}/{TileRow}/{TileCol}.png
+```
 
 Populating the fields with the desired projection, product, time, etc (Terra/MODIS Aerosol Optical depth from 2014/04/09, in this case), GIBS
 products can be used by clients such as ESRI's ArcGIS Online to add a "Tile Layer" by leaving the row, column, and zoom level as parameters:
 
-`https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Aerosol/default/2014-04-09/GoogleMapsCompatible_Level6/{level}/{row}/{col}.png`
+```xml
+https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Aerosol/default/2014-04-09/GoogleMapsCompatible_Level6/{level}/{row}/{col}.png
+```
 
 
 ## OGC Web Map Service (WMS)
@@ -550,87 +557,87 @@ The following block provides a full example of a vector metadata file.
 
 
 #### Sample Vector Metadata File
-```
+```json
 {
-  "id": "GRUMP_Settlements",
-  "mvt_properties": [
+  "id": "GRUMP_Settlements", 
+  "mvt_properties": [ 
 
     {
-      "Identifier" : "Name1",
-      "Title"      : "Settlement Name",
-      "Description": "Name of the settlement",
-      "DataType"   : "string",
-      "Function"   : "Describe",
-      "IsOptional" : false,
-      "IsLabel"    : true
+      "Identifier" : "Name1", 
+      "Title"      : "Settlement Name", 
+      "Description": "Name of the settlement", 
+      "DataType"   : "string", 
+      "Function"   : "Describe", 
+      "IsOptional" : false, 
+      "IsLabel"    : true 
+    }, 
+ 
+    { 
+      "Identifier" : "ES00POP", 
+      "Title"      : "Estimated 2000 Population", 
+      "Description": "Estimated 2000 population, calculated using the UN population projections or  intrinsic growth rates", 
+      "DataType"   : "int", 
+      "ValueRanges": [ { "Min": -999, "Max": 18476438 } ], 
+      "Function"   : "Style", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
+    }, 
+ 
+    { 
+      "Identifier" : "Country", 
+      "Title"      : "Country", 
+      "Description": "Country name", 
+      "DataType"   : "string", 
+      "Function"   : "Describe", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
     },
-
+ 
+    { 
+      "Identifier" : "Urborrur", 
+      "Title"      : "Urban or Rural", 
+      "Description": "Type of settlement, urban or rural", 
+      "DataType"   : "string", 
+      "ValueMap"   : { "U" : "Urban", "R" : "Rural" }, 
+      "Function"   : "Style", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
+    }, 
+ 
     {
-      "Identifier" : "ES00POP",
-      "Title"      : "Estimated 2000 Population",
-      "Description": "Estimated 2000 population, calculated using the UN population projections or intrinsic growth rates",
-      "DataType"   : "int",
-      "ValueRanges": [ { "Min": -999, "Max": 18476438 } ],
-      "Function"   : "Style",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    },
-
+      "Identifier" : "Latitude", 
+      "Title"      : "Latitude", 
+      "Description": "Latitude in Decimal Degrees", 
+      "Units"      : "°", 
+      "DataType"   : "float",  
+      "Function"   : "Describe", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
+    }, 
+ 
     {
-      "Identifier" : "Country",
-      "Title"      : "Country",
-      "Description": "Country name",
-      "DataType"   : "string",
-      "Function"   : "Describe",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    },
-
-    {
-      "Identifier" : "Urborrur",
-      "Title"      : "Urban or Rural",
-      "Description": "Type of settlement, urban or rural",
-      "DataType"   : "string",
-      "ValueMap"   : { "U" : "Urban", "R" : "Rural" },
-      "Function"   : "Style",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    },
-
-    {
-      "Identifier" : "Latitude",
-      "Title"      : "Latitude",
-      "Description": "Latitude in Decimal Degrees",
-      "Units"      : "°",
-      "DataType"   : "float",
-      "Function"   : "Describe",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    },
-
-    {
-      "Identifier" : "Longitude",
-      "Title"      : "Longitude",
-      "Description": "Longitude in Decimal Degrees",
-      "Units"      : "°",
-      "DataType"   : "float",
-      "Function"   : "Describe",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    },
-
-    {
-      "Identifier" : "UID",
-      "Title"      : "ID",
-      "Description": "Settlement ID",
-      "DataType"   : "int",
-      "ValueRanges": [ { "Min": 0, "Max": 48694 } ],
-      "Function"   : "Identify",
-      "IsOptional" : false,
-      "IsLabel"    : false
-    }
-  ]
-}
+      "Identifier" : "Longitude", 
+      "Title"      : "Longitude", 
+      "Description": "Longitude in Decimal Degrees", 
+      "Units"      : "°", 
+      "DataType"   : "float", 
+      "Function"   : "Describe", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
+    }, 
+ 
+    { 
+      "Identifier" : "UID", 
+      "Title"      : "ID", 
+      "Description": "Settlement ID", 
+      "DataType"   : "int", 
+      "ValueRanges": [ { "Min": 0, "Max": 48694 } ], 
+      "Function"   : "Identify", 
+      "IsOptional" : false, 
+      "IsLabel"    : false 
+    } 
+  ] 
+} 
 ```
 
 # Vector Styling
@@ -647,7 +654,7 @@ enhancements are made to the GIBS vector product visualization capabilities, whi
 
 #### WMTS Capabilities Layer Metadata
 
-```
+```xml
 <ows:Metadata xlink:type="simple" xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style"
 xlink:href="https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json" xlink:
 title="Mapbox GL Layer Styles"/>
@@ -666,7 +673,7 @@ style file.
 
 #### Sample Vector Style File
 
-```
+```json
 {
   "version": 8,
   "name": "SEDAC",
