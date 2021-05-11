@@ -1,3 +1,4 @@
+# GIBS API for Developers
 # Overview
 
 The Global Imagery Browse Services (GIBS) are designed to deliver global, full-resolution satellite imagery to users in a highly responsive manner,
@@ -12,7 +13,7 @@ An image tile pyramid (from OGC WMTS 1.0.0 specification)
 ![tile_pyramid](img/tile_pyramid.png)
 
 
-While the requests made to GIBS are for individual tiles, users generally work at a higher level and configure a [map library](https://wiki.earthdata.nasa.gov/display/GIBS/Map+Library+Usage), [GIS client](https://wiki.earthdata.nasa.gov/display/GIBS/Geographic+Information+System+%28GIS%29+Usage), or [script](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+API+for+Developers#GIBSAPIforDevelopers-Script-levelAccessviaGDAL) to
+While the requests made to GIBS are for individual tiles, users generally work at a higher level and configure a [map library](http://127.0.0.1:8000/map-library-usage/), [GIS client](http://127.0.0.1:8000/gis-usage/), or [script](http://127.0.0.1:8000/#script-level-access-via-gdal) to
 determine which tiles to retrieve. These clients and scripts need to know which products are available, which map projections are available, and how
 many zoom levels they support. GIBS provides this access through five mechanisms:
 
@@ -370,8 +371,7 @@ GIBS has chosen to implement the Key-Value Pair and RESTful service interfaces. 
 
 #### Geographic Information System (GIS) Client Usage
 
-
-- [ESRI ArcGIS, Google Earth, SCISS Uniview](https://wiki.earthdata.nasa.gov/display/GIBS/Geographic+Information+System+%28GIS%29+Usage)
+- [ESRI ArcGIS, Google Earth](http://127.0.0.1:8000/gis-usage/)
 
 ## Tiled Web Map Service (TWMS)
 
@@ -705,7 +705,7 @@ style file.
 The Geospatial Data Abstraction Library ([GDAL](http://gdal.org/)) WMS driver supports several internal 'minidrivers' that allow access to different web mapping
 services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found [here](http://www.gdal.org/frmt_wms.html) on the GDAL website. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map
 Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. For more information and examples regarding interacting with the GIBS API
-through these GDAL minidrivers, refer to our [Map Library Usage](https://wiki.earthdata.nasa.gov/display/GIBS/Map+Library+Usage#expand-GDALBasics) wiki page.
+through these GDAL minidrivers, refer to our [Map Library Usage](http://127.0.0.1:8000/map-library-usage/#gdal-basic) page.
 
 # Bulk Downloading
 
