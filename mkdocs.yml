@@ -8,4 +8,4 @@ nav:
 extra_css:
     - css/style.css
 theme:
-    name: cinder
+    name: windmill
