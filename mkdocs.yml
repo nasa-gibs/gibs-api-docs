@@ -9,3 +9,5 @@ extra_css:
     - css/style.css
 theme:
     name: material
+    plugins:
+        - search
