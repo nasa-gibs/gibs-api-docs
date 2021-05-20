@@ -9,5 +9,7 @@ extra_css:
     - css/style.css
 theme:
     name: material
+    features:
+        - navigation.sections
     plugins:
         - search
