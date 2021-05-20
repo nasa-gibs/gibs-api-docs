@@ -13,3 +13,6 @@ theme:
         - navigation.sections
     plugins:
         - search
+    palette:
+        scheme: slate
+        primary: deep orange
