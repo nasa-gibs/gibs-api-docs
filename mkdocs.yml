@@ -10,9 +10,19 @@ extra_css:
 theme:
     name: material
     features:
-        - navigation.sections
+      - navigation.expand
+      - toc.integrate
+      - navigation.tabs
+      - navigation.tabs.sticky
     plugins:
         - search
     palette:
-        scheme: slate
-        primary: deep orange
+        - scheme: default
+          toggle:
+            icon: material/toggle-switch-off-outline
+            name: Switch to dark mode
+        - scheme: slate
+          toggle:
+            icon: material/toggle-switch
+            name: Switch to light mode
+    
