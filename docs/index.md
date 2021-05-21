@@ -7,6 +7,7 @@ continuous basis, creates a global mosaic of that imagery, then chops the mosaic
 the [MapBox Developers Guide](https://www.mapbox.com/help/how-web-maps-work/).
 
 An image tile pyramid (from OGC WMTS 1.0.0 specification)
+
 ![tile_pyramid](img/tile_pyramid.png)
 
 While the requests made to GIBS are for individual tiles, users generally work at a higher level and configure a [map library](http://127.0.0.1:8000/map-library-usage/), [GIS client](http://127.0.0.1:8000/gis-usage/), or [script](http://127.0.0.1:8000/#script-level-access-via-gdal) to
