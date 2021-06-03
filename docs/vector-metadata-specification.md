@@ -14,20 +14,6 @@ NOTE: Insert link to JSON schema when it's available via link. For how, it's att
 
 The following table outlines the fields in the GIBS vector metadata specification.  
 
-| Name | Description | Type | Required? | Sample Value |
-| ---- | ----------- | ---- | --------- | ------------ |
-| **Identifier** | The unique identifier of the MVT property. | String | Yes | `FRP` |
-| **Title** | A human readable title for the property. | String | Yes | `Fire Radiative Power` |
-| **Description** | A human readable description for the property. | String | Yes | `A measure of the rate of radiant heat output from a fire.` |
-| **Units** | The units value to be applied to the actual value of this property. | String | No | `MW` | 
-| **DataType** | The data type of this property. Possible values include *int*, *float*, *string*, or *datetime*. | Enumeration | Yes | `float` |
-| **ValueList** | 	A listing of the possible valid values for a 'string' property type, if the property has a controlled list. | Array | Only one may be used | `["Lake Ice", "Sea Ice", "Not Ice"]` |
-| **ValueRanges** | A listing of mutually exclusive min and max value pairs representing ranges of valid values for the 'Integer', 'float', and 'datetime' property types. | Array of Objects | Only one may be used | `[ { "Min": 0, "Max": 99999999 } ]` |
-| **ValueMap** | A map of the possible valid values for 'string' or 'int' property types, and their associated description.  This facilitates a key-value lookup table allowing for a simplified property value (i.e. the ‘key’). | Object | Only one may be used | `{ 10 : “Processed Fire Pixel”,    20 : “Saturated Fire Pixel” }` |
-| **Function** | The property’s intended function as a part of the visualization product. Possible values include: <br> <li> *Identify*: Properties that form a “primary key” to identify the visualization product. Often these are used used during processing to separate data points into separate layers (e.g. Platform and Day/Night).  These properties typically would also be in the associated layer metadata (e.g. Platform or Version) and embedded in the layer identifier (e.g. MODIS_Terra_Day_Fires).</li> <li>*Style*: Properties that are utilized for styling or filtering vector features.  These will typically be included in the default style(s) offered through WMS or the Mapbox Style JSONs.</li> <li>*Describe*: Properties that provide additional information regarding the vector feature (e.g. Acquisition Time or Inclination Angle).  They may be useful for tooltip presentation to users.</li> | Enumeration | Yes | `Describe` | 
-| **IsOptional** | Indicates whether the property is optional. | Boolean | Yes | `true` | 
-| **IsLabel** | Indicates whether the property should be used to label the point in a user interface. | Boolean | Yes | `true` |
-
 <table style="width: 100.0%;">
         <colgroup>
           <col style="width: 7.0931%;"/>
