@@ -1,3 +1,4 @@
+# Vector Metadata Specification
 ## Overview
 The Mapbox vector tile specification provides structure for including data values as properties associated with a feature, but no mechanism for interpreting the meaning or intended use.  As such, GIBS has developed a specification for defining each property contained within MVTs in its vector products. Each vector product has an associated JSON vector metadata file which provides the following information:
 
@@ -212,7 +213,7 @@ All vector metadata file are validated against the following "business logic" ru
 ### Sample Content
 A vector metadata file is a list of content blocks defining each property. The following snippet shows an example of a single property's definition within the *vector metadata* file.
 
-#### MVT Property Snippet
+**MVT Property Snippet**
 
 ```json
 {
@@ -229,6 +230,8 @@ A vector metadata file is a list of content blocks defining each property. The f
 ```
 
 The following block provides a full example of a *vector metadata* file.
+
+**Sample Vector Metadata File**
 
 ```json
 {
