@@ -1,9 +1,10 @@
 # GIBS API for Developers
 
+The Global Imagery Browse Services (GIBS) vision is to provide visual access to NASA’s Earth observations through standardized web services. These services are designed to facilitate visual discovery of scientific phenomena, support timely decision making for natural hazards, educate the next generation of scientists, and make imagery of the planet more accessible to the media and public. Browse all of this imagery through our [Worldview](https://worldview.earthdata.nasa.gov) interface.
+
 ## Overview
 
-The Global Imagery Browse Services (GIBS) are designed to deliver global, full-resolution satellite imagery to users in a highly responsive manner, enabling interactive exploration of the Earth. To achieve that interactivity, GIBS first ingests imagery from a given NASA data provider on a
-continuous basis, creates a global mosaic of that imagery, then chops the mosaic into an image tile pyramid (see figure below). By pre-generating these tiles, it relieves the servers of image rescaling and cropping duties, greatly reducing computational overhead and enabling a highly responsive system. This also means that the primary method of imagery retrieval for clients is tile-based. For more background on how tiled web maps work, see the [MapBox Developers Guide](https://www.mapbox.com/help/how-web-maps-work/).
+The Global Imagery Browse Services (GIBS) are designed to deliver global, full-resolution satellite imagery to users in a highly responsive manner, enabling interactive exploration of the Earth. To achieve that interactivity, GIBS first ingests imagery from a given NASA data provider on a continuous basis, creates a global mosaic of that imagery, then chops the mosaic into an image tile pyramid (see figure below). By pre-generating these tiles, it relieves the servers of image rescaling and cropping duties, greatly reducing computational overhead and enabling a highly responsive system. This also means that the primary method of imagery retrieval for clients is tile-based. For more background on how tiled web maps work, see the [MapBox Developers Guide](https://www.mapbox.com/help/how-web-maps-work/).
 
 ![tile_pyramid](img/tile_pyramid.png)
 
