@@ -79,6 +79,9 @@ h5::before {
 .can-collapse {
   position: relative;
 }
+.can-collapse .link-collapse {
+  max-width: 200px;
+}
 .link-collapse::before {
   display: inline-block;
   cursor: pointer;
