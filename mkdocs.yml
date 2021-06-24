@@ -7,10 +7,11 @@ nav:
     - Geographic Information System (GIS) Usage: gis-usage.md
 extra_css:
     - css/style.css
+extra_javascript:
+    - javascript/overrides.js
 theme:
     name: material
     features:
-      - navigation.expand
       - toc.integrate
       - navigation.tabs
       - navigation.tabs.sticky

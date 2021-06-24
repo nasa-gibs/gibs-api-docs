@@ -66,7 +66,13 @@ h5::before {
 .md-sidebar--primary {
   padding: 50px 0;
 }
-
+.md-main__inner {
+  padding-top: 0;
+  margin-top: 0;
+}
+.md-header {
+  margin-bottom: 40px;
+}
 /* ***********  */
 /* Collapse TOC */
 /* ************ */
