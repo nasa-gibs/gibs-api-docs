@@ -1,16 +1,17 @@
 site_name: NASA GIBS
 
 nav:
-    - API Documentation: index.md
-    - Available Imagery Products: about.md
+    - GIBS API for Developers: index.md
+    - Available Imagery Products: available-imagery.md
     - Map Library Usage: map-library-usage.md
     - Geographic Information System (GIS) Usage: gis-usage.md
 extra_css:
     - css/style.css
+extra_javascript:
+    - javascript/overrides.js
 theme:
     name: material
     features:
-      - navigation.expand
       - toc.integrate
       - navigation.tabs
       - navigation.tabs.sticky
