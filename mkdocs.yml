@@ -1,7 +1,6 @@
 site_name: GIBS API for Developers
 
 nav:
-    - Overview: overview.md
     - Imagery Layers & Endpoints: layers-endpoints.md
     - Layer Naming: layer-naming.md
     - Best Available Layers: best-available-layers.md
