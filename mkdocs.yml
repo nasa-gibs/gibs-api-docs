@@ -1,10 +1,19 @@
-site_name: NASA GIBS
+site_name: GIBS API for Developers
 
 nav:
-    - GIBS API for Developers: index.md
-    - Available Imagery Products: available-imagery.md
+    - Overview: overview.md
+    - Imagery Layers & Endpoints: layers-endpoints.md
+    - Layer Naming: layer-naming.md
+    - Best Available Layers: best-available-layers.md
+    - Projections and Resolution: projection-resolution.md
+    - Service Endpoints: service-endpoints.md
+    - Imagery API/Services: imagery-api-services.md
+    - Vector Visualization Products: vector-visualization.md
+    - Script Level Access: script-level-access.md
+    - Bulk Downloading: bulk-download.md
     - Map Library Usage: map-library-usage.md
     - Geographic Information System (GIS) Usage: gis-usage.md
+    - Available Imagery Products: available-imagery.md
 extra_css:
     - css/style.css
 extra_javascript:
