@@ -16,28 +16,16 @@ World Wind is a now-deprecated virtual globe developed by NASA that runs in Java
 
 NASA World Wind 1.3+
 
-#### Usage (KML)
-
-To run the World Wind client with [GIBS KML capabilities](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+API+for+Developers#GIBSAPIforDevelopers-GoogleEarthKMLAccess), load the "KML Viewer" demo application from the standalone client. To load a specific layer, select File | Open URL... and enter a URL for the layer in this format:
-<i>`https://<url to kmlgen.cgi>?layers=<layername>&time=<time>`</i>
-for example, [https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=2012-06-21](https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=2012-06-21)
-
-
-To enable time adjustment on a particular layer, use the following URL parameter: <i>`time=R10/<date>/P1D`</i>
-for example, [https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=R10/2012-05-26/P1D](https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=R10/2012-05-26/P1D)
-
-
-Limitations: The name of the layer has to be known prior to entering the URL. The list of available layers can be found here.
-
-#### Usage (TWMS)
+#### Usage
 
 To run the World Wind client with TWMS capabilities, load the WMS Layer Manager demo application from either the standalone client or the online demo. In the layers menu, add the [TWMS endpoint](http://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi). This will load the list of layers available from TWMS and selecting a layer will allow it to be shown on the globe.
 
 Limitations: World Wind will continue to zoom and try to load images even if they're beyond the depth of the highest resolution tile. When this happens, the images will go blank. In addition, this interface does not allow the selection of variables such as time.
 
+
 ## Script-level Access
 
-### GDAL (Basic)
+### GDAL
 
 The Geospatial Data Abstraction Library ([GDAL](http://gdal.org/)) WMS driver supports several internal 'minidrivers' that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found on the [GDAL website](http://www.gdal.org/frmt_wms.html). Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers will be included below.
 
@@ -45,7 +33,8 @@ The Geospatial Data Abstraction Library ([GDAL](http://gdal.org/)) WMS driver su
 
 GDAL version 1.9.1 or greater with cURL support enabled. To check if cURL is enabled for GDAL, type "gdalinfo --format WMS". If cURL is enabled you will see information about the WMS format, if not, you will get an error message and you will need to reconfigure GDAL to support cURL.
 
-#### Sample Execution #1 - "TMS" Driver Configuration File Input
+#### Basic Usage
+##### #1 - "TMS" Driver Configuration File Input
 
 Create a local service description XML file and invoke gdal_translate. In this example, GIBS_Aqua_MODIS_true.xml is used to generate a true color JPEG image from Aqua MODIS of a smoke plume from western fires over the central United States. The contents of GIBS_Aqua_MODIS_true.xml would be:
 
@@ -78,7 +67,7 @@ Create a local service description XML file and invoke gdal_translate. In this e
 
 In very limited testing, our experience has been that better image quality is obtained by using the GeoTIFF output format from the GDAL WMS, then converting this to other formats, if desired, using a second gdal_translate command, or other programs such as ImageMagick convert.
 
-#### Sample Execution #2 - "TMS" Driver Command Line Input
+##### #2 - "TMS" Driver Command Line Input
 
 Invoke gdal_translate with the content of the local service description XML file embedded into the command. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as above:
 
@@ -119,7 +108,7 @@ Note that the values for <YOrigin\>, <BlockSizeX\>, and <BlockSizeY\> are consta
 
 More information can be found on [GDAL WMS site](http://www.gdal.org/frmt_wms.html) (note the "TMS" section).
 
-#### Sample Execution #3 - "TiledWMS" Driver Configuration File Input
+##### #3 - "TiledWMS" Driver Configuration File Input
 
 The TiledWMS GDAL minidriver relies on a simplified set of XML configuration from the user, pulling all other information from the TWMS *WMS_Tile_Service* document at runtime. The following example requests the same image as was requested in Sample Execution #1, but you will notice how much simpler the XML configuration is. The primary difference is that requests through TWMS utilize a *TiledGroupName* value instead of the *WMTS Identifier* utilized by WMTS requests. The *TiledGroupName* can be generated by replacing all underscores in a WMTS layer's *Identifier* with spaces and appending " tileset". For example, a WMTS Layer *Identifier* of SMAP_L1_Passive_Faraday_Rotation_Aft" becomes the TWMS *TiledGroupName* "SMAP L1 Passive Faraday Rotation Aft tileset".
 
@@ -138,7 +127,7 @@ gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MO
 gdal_translate -of JPEG GreatPlainsSmoke1.tif GreatPlainsSmoke1.jpg
 ```
 
-#### Sample Execution #4 - "TiledWMS" Driver Command Line Input
+##### #4 - "TiledWMS" Driver Command Line Input
 
 This example invokes gdal_translate with the content of the TileWMS local service description XML file embedded as a command line argument. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as above, run the following:
 
@@ -147,9 +136,8 @@ gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '<GDAL_WMS><
 gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg
 ```
 
-### GDAL (Advanced)
-
-#### Configuration File Input w/ Transparent PNG
+#### Advanced Usage
+##### Configuration File Input w/ Transparent PNG
 
 In this example, GIBS_OMI_AI.xml is used to generate a transparent PNG image from the OMI Aerosol Index over the same region as the first two examples. The "Layer Name on Server" and EPSG/resolution in <ServerURL\>, the <TileLevel\>, and the <BandsCount\> have changed from the first examples. The contents of GIBS_OMI_AI.xml would be:
 
@@ -180,7 +168,7 @@ gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_OMI_AI.
 gdal_translate -of PNG GreatPlainsSmokeAI.tif GreatPlainsSmokeAI.png
 ```
 
-#### Polar Imagery
+##### Polar Imagery
 
 In this example, GIBS_Terra_MODIS_Arctic.xml is used to generate a true color JPEG image from Terra MODIS of a phytoplankton bloom in the Barents Sea. The "Layer Name on Server" and EPSG/resolution in <ServerUrl\>, the <DataWindow\> elements, and the <Projection\> have changed from the first examples. The contents of GIBS_Terra_MODIS_Arctic.xml would be:
 
@@ -229,7 +217,7 @@ gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 gdal_translate -of JPEG -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.jpg
 ```
 
-#### Polar Layer w/ Reprojection
+##### Polar Layer w/ Reprojection
 
 In this example, GIBS_Aqua_MODIS_Arctic.xml is used to generate a true color JPEG image from Aqua MODIS of the Beaufort Sea reprojected to have 145W down. The "Layer Name on Server" and EPSG/resolution in <ServerUrl\>, the <DataWindow\> elements, and the <Projection\> have changed from the first examples. The contents of GIBS_Aqua_MODIS_Arctic.xml would be:
 
@@ -260,7 +248,7 @@ gdalwarp -t_srs '+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-145 +k=1 +x_0=0 +y_0=0
 gdal_translate -of JPEG Beaufort_neg145down_1km.tif Beaufort_neg145down_1km.jpg
 ```
 
-#### Reprojecting GIBS Geographic layer into Polar Stereographic
+##### Reprojecting GIBS Geographic layer into Polar Stereographic
 
 Only a subset of layers are available from GIBS in the polar projections. This is an example of how to project a geographic layer into a polar projection. The contents of GIBS_Terra_Cloud_Fraction.xml would be:
 
@@ -291,6 +279,33 @@ Only a subset of layers are available from GIBS in the polar projections. This i
 gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs" -ts 4096 4096 -te -4194304 -4194304 4194304 4194304 GIBS_Terra_Cloud_Fraction.xml Terra_Cloud_Fraction_Arctic.tif
 ```
 
-### GIS Client Access
 
-Geographic Information System (GIS) and Google Earth users: [go here for instructions](http://127.0.0.1:8000/gis-usage/).
+### Bulk Downloading
+
+A "Bulk Download" is defined as the planned retrieval of more than 1,000,000 imagery tiles within a 24 hour period. These activities are typically orchestrated through script-based access to the GIBS API, not user-based access through a client application. In order to ensure quality of service for all GIBS users, the GIBS team requests that bulk downloading activities be coordinated at least 48 hours in advance of the planned download. Prior to
+beginning your bulk downloading activities, please contact the GIBS support team at [support@earthdata.nasa.gov](support@earthdata.nasa.gov) with the subject "GIBS Bulk
+Download Request" and the following information:
+
+1. Purpose
+2. Primary POC (Email & Phone)
+3. Layers
+4. Zoom Level(s)
+5. Date(s)
+6. Expected Load Profile
+    * Start and End Times
+    * Request Volume per Hour
+    * Number of Concurrent Downloads
+7. Source IP Address(es)
+
+The GIBS utilization profile indicates that there is not a period of time within which "regular" usage drops. Therefore, bulk downloading activities are
+allowed to occur as is convenient for the downloading group or individual. The following guidelines should be taken into consider when designing a
+bulk download plan:
+
+1. Limit sustained download bandwidth to 50 Mbps.
+    * For GIBS overlay (PNG) layers, this is an approximate minimum of 150k tiles per hour due to the large size variation based on the image content density.
+    * For GIBS base (JPEG) layers, this is approximately 350k tiles per hour with limited variation in image size across products and geographic regions.
+2. Limit concurrent downloads to 500 threads
+3. Evenly distribute download requests across the entire bulk downloading period, avoiding significant spikes of activity.
+4. Start small with fewer concurrent threads and build to your proposed maximum download rate.
+
+[Subscribe to our mailing list](https://lists.nasa.gov/mailman/listinfo/eosdis-gibs-announce) and [follow our blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS) to stay up-to-date with new features and changes to existing services. Or contact us at [support@earthdata.nasa.gov](support@earthdata.nasa.gov) with feedback and questions.

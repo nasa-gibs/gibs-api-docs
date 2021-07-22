@@ -1,15 +1,28 @@
-# Vector Metadata Specification
-## Overview
+# Visualization Metadata
+
+
+
+## Raster Color Maps
+
+... Info here about colormaps
+
+```text
+Example from Capabilities response
+```
+
+
+## Vector Properties
+
 The Mapbox vector tile specification provides structure for including data values as properties associated with a feature, but no mechanism for interpreting the meaning or intended use.  As such, GIBS has developed a specification for defining each property contained within MVTs in its vector products. Each vector product has an associated JSON vector metadata file which provides the following information:
 
-* A unique identifier for the property, as found in the MVT data itself
-* Descriptive information such as a title, description, and the function of the property (e.g. identification vs styling)
-* The data type and optional units for the property
-* Valid values for the property
-* Additional flags for improved UI experience
+   * A unique identifier for the property, as found in the MVT data itself
+   * Descriptive information such as a title, description, and the function of the property (e.g. identification vs styling)
+   * The data type and optional units for the property
+   * Valid values for the property
+   * Additional flags for improved UI experience
 
 
-## Specification
+### Specification
 The following table outlines the fields in the GIBS vector metadata specification. A JSON schema representation may be found [here](https://gibs.earthdata.nasa.gov/schemas/VectorMetadata_v1.0.json).
 
 
@@ -188,38 +201,56 @@ The following table outlines the fields in the GIBS vector metadata specificatio
 
 All vector metadata file are validated against the following "business logic" rules that extend beyond the basic individual property constraints.
 
-1. A single, non-optional, property will be identified as the "label".
-2. A single, non-optional, property will have the "Identify" function, which acts as the primary key for properties.
-3. Properties are uniquely identified by their *Identifier* field.
-4. Items in the *ValueList* are unique.
-5. ValueRange is only supported for properties with a *DataType* of "int", "float", or "datetime."
-6. ValueRange is only supported for properties with a *DataType* of "int" or "string.
+   1. A single, non-optional, property will be identified as the "label".
+   2. A single, non-optional, property will have the "Identify" function, which acts as the primary key for properties.
+   3. Properties are uniquely identified by their *Identifier* field.
+   4. Items in the *ValueList* are unique.
+   5. ValueRange is only supported for properties with a *DataType* of "int", "float", or "datetime."
+   6. ValueRange is only supported for properties with a *DataType* of "int" or "string.
 
+
+### WMTS Capabilities Definition
+
+A vector product's vector metadata file is referenced in the WMTS Capabilities document as `Layer/ows:Metadata` elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector metadata* file and one for the versioned (e.g. '1.0') *vector metadata* file. This allows for the addition of future versions as enhancements are
+made to the GIBS vector product visualization capabilities, while retaining backwards compatibility.
+
+``` xml
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/layer" 
+              xlink:href="https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json"
+              xlink:title="Layer Metadata"/>
+
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/layer/1.0"
+              xlink:href="https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json" 
+              xlink:title="Layer Metadata"/>
+```
 
 ### Sample Content
-A vector metadata file is a list of content blocks defining each property. The following snippet shows an example of a single property's definition within the *vector metadata* file.
 
-**MVT Property Snippet**
+A *vector metadata* file is a list of content blocks defining each property. The following snippet shows an example of a single property's definition within the *vector metadata* file.
 
-```json
+**Metadata Snippet**
+
+``` json
 {
-  "Identifier" : "NumReactor",
-  "Title"      : "Number of Reactors",
-  "Description": "Number of Active Reactors at a given Plant",
-  "Units"      : "Reactors",
-  "DataType"   : "int",
-  "ValueRanges": [ { "Min": 1, "Max": 9 } ],
-  "Function"   : "Style",
-  "IsOptional" : false,
-  "IsLabel"    : false
+"Identifier" : "NumReactor",
+"Title" : "Number of Reactors",
+"Description": "Number of Active Reactors at a given Plant",
+"Units" : "Reactors",
+"DataType" : "int",
+"ValueRanges": [ { "Min": 1, "Max": 9 } ],
+"Function" : "Style",
+"IsOptional" : false,
+"IsLabel" : false
 }
 ```
 
 The following block provides a full example of a *vector metadata* file.
 
-**Sample Vector Metadata File**
+**Full Metadata File**
 
-```json
+``` json
 {
   "id": "Nuclear_Power_Plant_Locations",
   "mvt_properties": [
@@ -257,5 +288,61 @@ The following block provides a full example of a *vector metadata* file.
       "IsOptional" : false,
       "IsLabel"    : false
     }
+}
+```
+
+
+## Vector Styles
+
+As mentioned previously, a client is responsible for applying style to MVT tiles received from the GIBS WMTS service in order to represent the feature defined within the MVT. This is most simply done by utilizing the vector style file provided by GIBS for each vector product. These vector style files following the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). Here is a [live example](https://nasa-gibs.github.io/gibs-web-examples/examples/openlayers/vectors/geographic-epsg4326-vector-mapbox-styles.html) of how to use these styles with [OpenLayers](http://openlayers.org/).
+
+### WMTS Capabilities Definition
+
+A vector product's vector style file is referenced in the WMTS Capabilities document as Layer/ows:Metadata elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector style* file and one for the versioned (e.g. '1.0') *vector style* file. This allows for the addition of future versions as enhancements are made to the GIBS vector product visualization capabilities, while retaining retaining backwards compatibility.
+
+**WMTS Capabilities Layer Metadata**
+
+``` xml
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style"
+              xlink:href="https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json"
+              xlink:title="Mapbox GL Layer Styles"/>
+              
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style/1.0"
+              xlink:href="https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json"
+              xlink:title="Mapbox GL Layer Styles"/>
+```
+
+### Vector Style Contents
+
+The *vector style* file contains the necessary information to apply a default style to a GIBS vector product, as required by the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). The file may contain style information for more than one vector product, as this allows for simplified file management within the GIBS system. Unneeded information should be ignored by the display library (e.g. [OpenLayers](http://openlayers.org/)). The following block provides a full example of a *vector style* file.
+
+**Sample Vector Style File**
+
+``` json
+{
+  "version": 8,
+  "name": "SEDAC",
+  "sources": {
+    "GRanD_Reservoirs": {
+      "type": "vector",
+      "tiles": [
+        "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GRanD_Reservoirs/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.mvt"
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "GRanD_Reservoirs_v1.01_STD",
+      "source": "GRanD_Reservoirs",
+      "source-layer": "GRanD_Reservoirs_v1.01_STD",
+      "source-description": "Default",
+      "type": "fill",
+      "paint": {
+        "fill-color": "rgb(0, 77, 168)"
+      }
+    }
+  ]
 }
 ```

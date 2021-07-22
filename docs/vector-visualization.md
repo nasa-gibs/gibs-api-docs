@@ -73,7 +73,8 @@ Almost all raster layers in the GIBS WMS service provide a link to a pre-generat
 </Style>
 ```
 
-### Vector Metadata
+
+## Vector Metadata
 
 As mentioned previously, the Mapbox vector tile specification provides structure for representing these data, but no mechanism for interpreting the meaning or intended use. As such, GIBS has developed a [Vector Metadata Specification](/vector-metadata-specification) for defining each property contained within MVTs in its vector products. Each vector product has an associated JSON *vector metadata* file which provides the following information:
 
@@ -83,7 +84,7 @@ As mentioned previously, the Mapbox vector tile specification provides structure
 * Valid values for the property
 * Additional flags for improved UI experience
 
-#### WMTS Capabilities Definition
+### WMTS Capabilities Definition
 
 A vector product's vector metadata file is referenced in the WMTS Capabilities document as `Layer/ows:Metadata` elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector metadata* file and one for the versioned (e.g. '1.0') *vector metadata* file. This allows for the addition of future versions as enhancements are
 made to the GIBS vector product visualization capabilities, while retaining retaining backwards compatibility.
@@ -99,7 +100,7 @@ href="https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_A
 Layer Metadata"/>
 ```
 
-#### Vector Metadata Contents
+### Vector Metadata Contents
 
 A *vector metadata* file is a list of content blocks defining each property. The following snippet shows an example of a single property's definition within the *vector metadata* file.
 
@@ -162,8 +163,8 @@ The following block provides a full example of a *vector metadata* file.
       "IsLabel"    : false
     }
 }
-
 ```
+
 
 ### Vector Styling
 
