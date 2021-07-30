@@ -1,111 +1,21 @@
-.bs-sidebar {
-    padding: 0;
-    max-height:85vh;
-    overflow-y: auto;
+.tocbase .toctree-l3 {
+  padding-left: 14px;
 }
-.container a {
-    word-break: break-all;
-    white-space: normal;
-}
-/* Remove shadow from header */
-.md-header[data-md-state="shadow"] {
-    box-shadow: none;
-  }
-  
-/* Make tabs fixed */
-.md-tabs {
-  transition: background 0.25s, box-shadow 0.25s;
-  position: fixed;
-  left: 0;
-  top: 1.8rem;
-  width: 100%;
-  z-index: 1;
-}
-h1::before,
-h2::before,
-h3::before,
-h4::before,
-h5::before {
-    display: block; 
-    content: " "; 
-    margin-top: -100px; 
-    height: 100px; 
-    visibility: hidden; 
-    pointer-events: none;
-  
-}
-/* Add shadow to tabs */
-.md-header[data-md-state="shadow"] + .md-container > .md-tabs {
-  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
+.hljs {
+  overflow-x: auto !important;
+  padding: 0.5em !important;
+  color: #333 !important;
+  background: #f8f8f8 !important;
 }
 
-/* Tab links always visible */
-.md-tabs[data-md-state="hidden"] .md-tabs__link {
-  transform: none;
-  opacity: 1;
+code {
+  white-space: pre !important;
+  word-wrap: normal !important;
+  font-size: 12px !important;
 }
-
-/* Respect tabs height for main content (+ 4.8rem) */
-.md-main__inner {
-  padding-top: 1rem;
+.wy-nav-content {
+  max-width: 1200px;
 }
-
-/* Respect tabs height for sidebars (+ 4.8rem) */
-.md-sidebar[data-md-state="lock"] {
-  top: 9.6rem;
-  padding-bottom: 7.2rem;
-}
-.md-tabs[data-md-state="hidden"] .md-tabs__link--active,
-.md-tabs[data-md-state="hidden"] .md-tabs__link:hover {
-  opacity: 1;
-}
-.md-tabs[data-md-state="hidden"] {
-  pointer-events: auto;
-}
-
-.md-sidebar--primary {
-  padding: 50px 0;
-}
-.md-main__inner {
-  padding-top: 0;
-  margin-top: 0;
-}
-.md-header {
-  margin-bottom: 40px;
-}
-/* ***********  */
-/* Collapse TOC */
-/* ************ */
-.can-collapse {
-  position: relative;
-}
-.can-collapse .link-collapse {
-  max-width: 200px;
-}
-.link-collapse::before {
-  display: inline-block;
-  cursor: pointer;
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: .5em solid transparent;
-  border-left-color: gray;
-  transform-origin: 0 50%;
-  right: 0;
-  content: "";
-  transform: rotate(90deg);
-  transition: transform 500ms ease-in-out;
-}
-@media only screen and (max-width: 1200px) {
-  .link-collapse::before {
-    top: 13px;
-  }
-}
-
-.collapsed .link-collapse::before {
-  transform: rotate(0deg);
-  
-}
-.collapsed .md-nav__item {
-  display: none;
+th {
+  text-align: center;
 }
