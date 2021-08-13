@@ -190,9 +190,7 @@ The following table outlines the fields in the GIBS vector metadata specificatio
           Yes
         </td>
         <td colspan="1" style="text-align: center;">
-          <code>
-            <span>A measure of the rate of radiant heat output from a fire.</span>
-          </code>
+          <code>A measure of the rate of radiant heat output from a fire.</code>
         </td>
       </tr>
       <tr>
@@ -231,9 +229,7 @@ The following table outlines the fields in the GIBS vector metadata specificatio
           <p>Only one may be used </p>
         </td>
         <td colspan="1" style="text-align: center;">
-          <code>
-            <span>[ "Lake Ice", "Sea Ice", "Not Ice" ]</span>
-          </code>
+          <code>[ "Lake Ice", "Sea Ice", "Not Ice" ]</code>
         </td>
       </tr>
       <tr>
@@ -241,9 +237,7 @@ The following table outlines the fields in the GIBS vector metadata specificatio
         <td colspan="1">A listing of mutually exclusive min and max value pairs representing ranges of valid values for the 'Integer', 'float', and 'datetime' property types.</td>
         <td colspan="1" style="text-align: center;">Array of Objects</td>
         <td colspan="1" style="text-align: center;">
-          <code>
-            <span>[ { "Min": 0, "Max": 99999999 } ]</span>
-          </code>
+          <code>[ { "Min": 0, "Max": 99999999 } ]</code>
         </td>
       </tr>
       <tr>
@@ -252,9 +246,7 @@ The following table outlines the fields in the GIBS vector metadata specificatio
         </td>
         <td colspan="1" style="text-align: center;">Object</td>
         <td colspan="1" style="text-align: center;">
-          <code>
-            <span>{ 10 : “Processed Fire Pixel”,    20 : “Saturated Fire Pixel” }</span>
-          </code>
+          <code>{ 10 : “Processed Fire Pixel”,    20 : “Saturated Fire Pixel” }</code>
         </td>
       </tr>
       <tr>

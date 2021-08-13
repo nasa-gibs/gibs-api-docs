@@ -39,7 +39,7 @@ WMTS requests utilize the following components, which provided context for subse
 
 **RESTful Access**
 
-GIBS visualizations are accessed via the RESTful WMTS API with URLS that look like this:
+GIBS visualizations are accessed via the RESTful WMTS API with URLs that look like this:
 ``` html
 https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/{LayerIdentifier}/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.{FormatExt}
 ```
@@ -51,7 +51,7 @@ Sample URLs for the supported WMTS requests are provided here:
 
 **KVP Access**
 
-GIBS visualizations are accessed via the KVP WMTS API with URLS that look like this:
+GIBS visualizations are accessed via the KVP WMTS API with URLs that look like this:
 
 ``` html
 https://gibs.earthdata.nasa.gov/wmts/epsg{EPSG:Code}/best/wmts.cgi?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER={LayerIdentifier}&STYLE=&TIME={Time}&TILEMATRIXSET={TileMatrixSet}&TILEMATRIX={TileMatrix}&TILEROW={TileRow}&TILECOL={TileCol}&FORMAT={FormatMime}
