@@ -6,6 +6,26 @@ The Global Imagery Browse Services (GIBS) are designed to deliver global, full-r
 
 ![tile_pyramid](img/tile_pyramid.png)
 
+
+
+## Access
+
+GIBS visualization layers are made available through a standards-compliant
+
+set of defined endpoints based on the following characteristics:
+
+1. **Projection & Resolution** - Imagery layers are available in one or more projected coordinate systems (e.g. EPSG:4326 - "Geographic Lat/Lon") at a specific resolution (e.g. 2km/pixel)
+2. **Near Real-Time vs Standard Latency** - Imagery layers are available in a near real-time (e.g. within 3 hours of observation) or standard (e.g. within X days of observation) latency.
+3. **Data Version** - Imagery layers may be available for more than one version (e.g. MODIS v5 and v6) of the same science parameter.
+
+http://127.0.0.1:8000/imagery-api-services/#projections-resolution
+http://127.0.0.1:8000/imagery-api-services/#layer-naming-convention
+http://127.0.0.1:8000/imagery-api-services/#best-available-layers
+http://127.0.0.1:8000/imagery-api-services/#service-endpoints
+
+You will note in the list of [available GIBS products](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products), that there are columns for "Projection(s)" and "Resolution", which correspond to the information provided below. GIBS services additionally provide machine-readable documents (e.g. WMTS "Get Capabilities") that provide specific information regarding all available imagery layers.
+
+
 *An image tile pyramid (from [OGC WMTS 1.0.0 specification](http://www.opengeospatial.org/standards/wmts))*
 
 While the requests made to GIBS are for individual tiles, users generally work at a higher level and configure a [map library](http://127.0.0.1:8000/map-library-usage/), [GIS client](http://127.0.0.1:8000/gis-usage/), or [script](http://127.0.0.1:8000/#script-level-access-via-gdal) to

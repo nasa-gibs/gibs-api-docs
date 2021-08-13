@@ -1,6 +1,11 @@
-# Map Library Usage
+# Accessing via GIS Libraries
 
 There are several freely-available map libraries available to help in building your own interface to explore NASA's Earth imagery via the Global Imagery Browse Services (GIBS).
+
+   * [Web-based Libraries](#web-based-libraries)
+   * [Desktop-based Libraries](#desktop-based-libraries)
+   * [Script-level Access](#script-level-access)
+
 
 ## Web-based Libraries
 

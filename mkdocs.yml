@@ -1,16 +1,14 @@
 site_name: GIBS API for Developers
 
 nav:
-    - Visualization Layers: visualization-layers.md
-    - Visualization Services: visualization-services.md
-    - Visualization Metadata: metadata.md
-    - API Advanced Topics: imagery-api-services.md
-    - Map Library Usage: map-library-usage.md
-    - Geographic Information System (GIS) Usage: gis-usage.md
+    - Available Visualizations: visualization-layers.md
+    - Access Basics: visualization-services.md
+    - Access Advanced Topics: api-advanced-topics.md
+    - Accessing via GIS Applications: gis-usage.md
+    - Accessing via GIS Libraries: map-library-usage.md
 extra_css:
     - css/style.css
 extra_javascript:
     - javascript/overrides.js
 theme:
     name: 'rtd-dropdown'
-    
