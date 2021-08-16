@@ -3,7 +3,7 @@
    * ["Best Available" Layers](#best-available-layers)
    * [Layer Naming Convention](#layer-naming-convention)
    * [Domain Sharding](#domain-sharding)
-   * [Raster Color Maps](#raster-color-maps)
+   * [Raster Visualizations](#raster-visualizations)
    * [Vector Visualizations](#vector-visualizations)
 
 
@@ -42,33 +42,255 @@ The following are examples of visualization layer identifiers for the "Aerosol O
 
 
 ## Domain Sharding
-Browsers typically limit the number of concurrent requests to the same server, based on hostname. In order to ake tiles load more quickly, it often makes sense to distribute requests over multiple hostnames to achieve more concurrency. Typically, browsers perform best with 3 different hostnames -- your performance may vary. (For example, if your server can't handle more than 2 requests simultaneously, then additional hostnames will not help you.)
+The HTTP/1.1 specification limits the number of concurrent requests from a browser to the same server based on domain. When loading multiple map tiles in a user interface, this limitation results in a sub-optimal interaction.  The common workaround is to employ "domain sharding", which splits content across multiple subdomains. By doing so, browsers can download resources simultaneously, thus increasing the number of tiles loaded and improving the user experience. The HTTP/2 specification removed the limitation by allowing a browser to issue multiple simultaneous requests across a single connection.  Thus eliminating the need for domain sharding.
 
-HTTPS 2.0 vs 1.1... currently still 1.1... so additional DNS entries are available as a way to circumvent simultaneous connection limits of the web browser. The additional DNS entries are [https://gibs-a.earthdata.nasa.gov](https://gibs-a.earthdata.nasa.gov), [https://gibs-b.earthdata.nasa.gov](https://gibs-b.earthdata.nasa.gov), and [https://gibs-c.earthdata](https://gibs-c.earthdata).
-nasa.gov. Please note that these are not additional servers, simply aliases for the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.
+At present, GIBS infrastruction _does not_ support HTTP/2 connections.  Instead, clients must still utilize the HTTP/1.1 domain sharding approach to simultaneously download multiple tiles.  The available subdomains for the GIBS system are listed below:
+
+   * [https://gibs-a.earthdata.nasa.gov](https://gibs-a.earthdata.nasa.gov)
+   * [https://gibs-b.earthdata.nasa.gov](https://gibs-b.earthdata.nasa.gov)
+   * [https://gibs-c.earthdata.nasa.gov](https://gibs-c.earthdata.nasa.gov)
+     
+Note that these are simply aliases for the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.
 
 
-## Raster Color Maps
+## Raster Visualizations
+Raster visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/). WMTS responses are formatted as either PNG or JPEG image tiles, depending on the nature of the data being visualized.  WMS responses for raster products are available as PNG, JPEG, or GeoTIFF images, depending on the requested format.
 
-... Info here about colormaps
+Visualizations that represent scientific parameters (See [Visualization Categories](../visualization-layers/#visualization-categories)) map the following types of data to RGB values within GIBS visualizations, hereafter referred to as "data-to-image mapping":
 
-```text
-Example from Capabilities response
+   * **Continuous** - Data values are captured as continuous values between an implicit or explicit minimum and maximum. The capturing instrument or processing system may impose a consistent precision. For example, aerosol optical depth where any value between -0.70 and 5.00 are possible. The data-to-image mapping process will associate a range of values with a specific color.
+   * **Discrete** - Data values are captured as discrete values between an implicit or explicit minimum and maximum, though typically the latter. For example, percent cloud cover where only whole numbers between 0 and 100 are possible. The data-to-image mapping process will typically associate each discrete value with a specific color.
+   * **Classification** - Data values are captured and mapped to non-measured (i.e. unitless) values. For example, land cover type with values of "Forest", "Sand", etc... The data-to-image mapping process will associate each classification value with a specific color.
+
+Defining the mapping between data value(s) and an RGB value is essential for generating and interpreting GIBS visualizations. Existing specifications did not provide the functionality necessary to meet the requirements of the GIBS system. Therefore the "GIBS Colormap" specification was developed. The following section provides information regarding accessing and interpreting GIBS Colormap XML documents.
+
+### GIBS Colormap
+The GIBS Colormap *specification* outlines the format and content of GIBS Colormap *XML documents*. Each GIBS Colormap XML document contains the information required to document the mapping between data values and RGB colors in a raster visualization  Additionally, the Colormap contains information required to generate a legend graphic representation of the mapping.  The XML schema for the GIBS Colormap XML documents may be found [here](https://gibs.earthdata.nasa.gov/schemas/ColorMap_v1.3.xsd).
+
+
+#### WMTS Capabilities Definition
+
+A raster visualization's XML Colormap document is referenced in the WMTS Capabilities document as `Layer/ows:Metadata` elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are three entries listed. One is for the "default" file and the other two are for versioned (e.g. `1.3`) file. This allows for the addition of future versions as enhancements to the GIBS vector product visualization capabilities, while retaining backwards compatibility.  Case and point, the `v1.0` version is referenced to support legacy functionality.  Whereas `1.3` is the most recent, and default, version to be used.
+
+``` xml
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:title="GIBS Color Map: Data - RGB Mapping"/>
+              
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.0" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.0/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:title="GIBS Color Map: Data - RGB Mapping"/>
+
+<ows:Metadata xlink:type="simple" 
+              xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.3" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:title="GIBS Color Map: Data - RGB Mapping"/>
 ```
+
+
+#### Sample Content
+
+The following sections provide examples of GIBS Colormaps for each data-to-image mapping type, described previously, as well as a combined Colormap. In each example, a table containing the following information is provided to define the data-to-image mapping process:
+
+   * **Ref** - The unique reference id for the mapping entry that will be used when associating Colormap entries to the Legend entries.
+   * **RGB** - The visual color associated with the data value(s).
+   * **Transparent** - A boolean value designating whether the Colormap entry will be opaque or transparent
+   * **Raw Value(s)** - The associated data values contained within the source data file(s).
+   * **Scaled Value(s)** - The scaled data values to which units will be applied, if appropriate, for display to end users. If this is a classification, then the appropriate label is provided for reference.
+   * **No Data** - A boolean value designating whether the Colormap entry is the "no data" value or not.
+
+Additionally, each example contains a table with the following information to define the legend:
+
+   * **ID(s)** - The reference id(s) to which the Legend entry is associated.
+   * **RGB** - The visual color associated with the Legend entry.
+   * **Tooltip** - A unit-less human-readable label for the Legend entry.
+   * **Show Tick** - A boolean designating whether a tick mark should be used for this legend entry in a generated legend graphic.
+   * **Show Label** - A boolean designating whether a text label should be used for this legend entry in a generated legend graphic.
+
+Finally, as you review each example, you will see that they will all contain a no-data Colormap entry, as is required by the specification. This entry is always considered to be a "Classification" mapping type. As such, it will be contained within its own Colormap for necessity for the Discrete and Continuous mapping types.
+
+
+##### Discrete Colormaps
+In this example, the following data-to-image mapping and legend information will be used to generate the Colormap. As you will see, the data values are single, discrete, values from 70 to 110, inclusive. The units for the measured parameter are meters or "m".
+
+**Sample Data-To-Image Mapping**
+
+|  Ref |     RGB     | Transparent |   Raw Value(s)  | Scaled Value(s) | No Data |
+| ---- | ----------- | ----------- | --------------- | --------------- | --------|
+|   1  | 100,000,119 | False       | [7000]          | [70]            | False   |
+|   2  | 100,100,119 | False       | [8000]          | [80]            | False   |
+|   3  | 200,000,119 | False       | [9000]          | [90]            | False   |
+|   4  | 200,100,119 | False       | [10000]         | [100]           | False   |
+|   5  | 200,200,119 | False       | [11000]         | [110]           | False   |
+|   6  | 220,220,255 | True        | [-9999]         | N/A             | True   |
+
+**Sample Data-To-Image Legend**
+
+| ID(s) |     RGB     | Tooltip | Show Tick  | Show Label |
+| ----- | ----------- | ------- | ---------- | ---------- |
+|   1   | 100,000,119 | 70      | False      | False      |
+|   2   | 100,100,119 | 80      | False      | False      |
+|   3   | 200,000,119 | 90      | True       | True       |
+|   4   | 200,100,119 | 100     | False      | False      |
+|   5   | 200,200,119 | 110     | False      | False      |
+|   6   | 220,220,255 | "Fill"  | False      | False      |
+
+
+Using the information provided above, the following XML Colormap is generated:
+
+```xml
+<ColorMaps>
+  <ColorMap title="Discrete Example" units="m">
+    <Entries>
+      <ColorMapEntry rgb="100,000,119" transparent="false" sourceValue="[7000]" value="[70]" ref="1"/>
+      <ColorMapEntry rgb="100,100,119" transparent="false" sourceValue="[8000]" value="[80]" ref="2"/>
+      <ColorMapEntry rgb="200,000,119" transparent="false" sourceValue="[9000]" value="[90]" ref="3"/>
+      <ColorMapEntry rgb="200,100,119" transparent="false" sourceValue="[10000]" value="[100]" ref="4"/>
+      <ColorMapEntry rgb="200,200,119" transparent="false" sourceValue="[11000]" value="[110]" ref="5"/>
+    </Entries>
+    <Legend type="discrete" minLabel="70" maxLabel="90">
+      <LegendEntry rgb="100,000,119" tooltip="70" id="1"/>
+      <LegendEntry rgb="100,100,119" tooltip="80" id="2"/>
+      <LegendEntry rgb="200,000,119" tooltip="90" id="3" showTick="true" showLabel="true"/>
+      <LegendEntry rgb="200,100,119" tooltip="100" id="4"/>
+      <LegendEntry rgb="200,200,119" tooltip="110" id="5"/>
+    </Legend>
+  </ColorMap>
+
+  <ColorMap title="Fill">
+    <Entries>
+      <ColorMapEntry rgb="220,220,255" transparent="true" sourceValue="[-9999]" nodata="true" ref="6"/>
+    </Entries>
+    <Legend type="classification">
+      <LegendEntry rgb="220,220,255" tooltip="Fill" id="6"/>
+    </Legend>
+  </ColorMap>
+</ColorMaps>
+```
+
+##### Continuous Colormaps
+In this example, the following data-to-image mapping has been performed. As you can see, the data values are value ranges from < 10 to 70. The units for the measured parameter are meters or "m".
+
+**Sample Data-To-Image Mapping**
+
+|  Ref |     RGB     | Transparent |   Raw Value(s)  | Scaled Value(s) | No Data |
+| ---- | ----------- | ----------- | --------------- | --------------- | --------|
+|   1  | 50,010,255  | False       | (-INF,1000)     | (-INF,10)       | False   |
+|   2  | 102,000,119 | False       | [1000,2000)     | [10,20)         | False   |
+|   2  | 102,001,119 | False       | [2000,3000)     | [20,30)         | False   |
+|   3  | 183,015,141 | False       | [3000,4000)     | [30,40)         | False   |
+|   3  | 183,016,141 | False       | [4000,5000)     | [40,50)         | False   |
+|   4  | 220,220,255 | True        | [-9999]         | N/A             | True    |
+
+**Sample Data-To-Image Legend**
+
+| ID(s) |     RGB     | Tooltip | Show Tick  | Show Label |
+| ----- | ----------- | ------- | ---------- | ---------- |
+|   1   | 50,010,255  | &lt; 10 | False      | False      |
+|   2   | 100,100,119 | 10 - 30 | False      | False      |
+|   3   | 183,015,141 | 30 - 50 | False      | False      |
+|   4   | 220,220,255 | "Fill"  | False      | False      |
+
+Using the information provided above, the following XML Colormap is generated:
+
+```xml
+<ColorMaps>
+  <ColorMap title="Continuous Example" units="m">
+    <Entries>
+      <ColorMapEntry rgb="50,010,255" transparent="false" sourceValue="(-INF,1000)" value="(-INF,10)" ref="1"/>
+      <ColorMapEntry rgb="102,000,119" transparent="false" sourceValue="[1000,2000)" value="[10,20)" ref="2"/>
+      <ColorMapEntry rgb="102,001,119" transparent="false" sourceValue="[2000,3000)" value="[20,30)" ref="2"/>
+      <ColorMapEntry rgb="183,015,141" transparent="false" sourceValue="[3000,4000)" value="[40,40)" ref="3"/>
+      <ColorMapEntry rgb="183,016,141" transparent="false" sourceValue="[4000,5000)" value="[40,50)" ref="3"/>
+    </Entries>
+    <Legend type="continuous" minLabel="< 10" maxLabel="70">
+      <LegendEntry rgb="50,010,255" tooltip="< 10" id="1"/>
+      <LegendEntry rgb="102,000,119" tooltip="10 – 30" id="2"/>
+      <LegendEntry rgb="183,015,141" tooltip="30 – 50" id="3"/>
+    </Legend>
+  </ColorMap>
+  <ColorMap title="Fill">
+    <Entries>
+      <ColorMapEntry rgb="220,220,255" transparent="true" sourceValue="[-9999]" nodata="true" ref="4"/>
+    </Entries>
+    <Legend type="classification">
+      <LegendEntry rgb="220,220,255" tooltip="Fill" id="4"/>
+    </Legend>
+  </ColorMap>
+</ColorMaps>
+```
+
+Note: There are fewer entries in the Legend than there are ColorMap Entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:
+
+   * The rgb values utilized in the Color Map contain two sets of entries that have unperceptively different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elemetns.
+   * The two LegendEntry elements are each assigned a unique numerical id. At the same time, each of the ColorMapEntry elements is assigned a ref value. The ColorMapEntry ref attribute references the LegendEntry id attribute. This allows for a clear association between the LegendEntry and ColorMapEntry elements.
+
+
+
+##### Classification Colormaps
+In this example, the following data-to-image mapping and legend information will be used to generate the Colormap. As you will see, the data values are freeze/thaw classifications. There are no associated units.
+
+**Sample Data-To-Image Mapping**
+
+|  Ref |     RGB     | Transparent |   Raw Value(s)  | Scaled Value(s) | No Data |
+| ---- | ----------- | ----------- | --------------- | --------------- | --------|
+|   1  | 111,222,255 | False       | [200]           | N/A             | False   |
+|   2  | 222,220,255 | False       | [300]           | N/A             | False   |
+|   3  | 000,220,255 | False       | [400]           | N/A             | False   |
+|   4  | 220,220,255 | True        | [-9999]         | N/A             | True    |
+
+**Sample Data-To-Image Legend**
+
+| ID(s) |     RGB     |    Tooltip    | Show Tick  | Show Label |
+| ----- | ----------- | ------------- | ---------- | ---------- |
+|   1   | 111,222,255 | Frozen        | False      | False      |
+|   2   | 222,220,255 | Thawed        | False      | False      |
+|   3   | 000,220,255 | Transitional  | False      | False      |
+|   4   | 220,220,255 | Fill          | False      | False      |
+
+The XML representation of this color map is shown below:
+```xml
+<ColorMaps>
+  <ColorMap title="Classification">
+    <Entries>
+      <ColorMapEntry rgb="111,220,255" transparent="false" sourceValue="[200]" ref="1"/>
+      <ColorMapEntry rgb="222,220,255" transparent="false" sourceValue="[300]" ref="2"/>
+      <ColorMapEntry rgb="000,220,255" transparent="false" sourceValue="[400]" ref="3"/>
+    </Entries>
+    <Legend type="classification">
+      <LegendEntry rgb="111,220,255" label="Frozen" id="1"/>
+      <LegendEntry rgb="222,220,255" label="Thawed" id="2"/>
+      <LegendEntry rgb="000,220,255" label="Transitional" id="3"/>
+    </Legend>
+  </ColorMap>
+
+  <ColorMap title="Fill">
+    <Entries>
+      <ColorMapEntry rgb="220,220,255" transparent="true" sourceValue="[-9999]" nodata="true" ref="4"/>
+    </Entries>
+    <Legend type="classification">
+      <LegendEntry rgb="220,220,255" tooltip="Fill" id="4"/>
+    </Legend>
+  </ColorMap>
+</ColorMaps>
+```
+
 
 ## Vector Visualizations
 
-Vector products are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/). WMTS responses are formatted as gzip-compressed Mapbox vector tiles ([specification](https://docs.mapbox.com/vector-tiles/specification/)), or "MVTs", while WMS responses are available as raster images.
+Vector visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/). WMTS responses are formatted as gzip-compressed Mapbox vector tiles ([specification](https://docs.mapbox.com/vector-tiles/specification/)), or "MVTs", while WMS responses are available as raster images.
 
-The data behind the WMTS and WMS visualization services are the same, however the mechanism for styling differs. A client application is responsible for applying styling to MVTs when using the WMTS API. (See [Vector Styles](../metadata/#vector-styles)) Conversely, GIBS applies a default style when rendering vector data as a raster when using the WMS API.
+The data behind the WMTS and WMS visualization services are the same, however the mechanism for styling differs. A client application is responsible for applying styling to MVTs when using the WMTS API. (See [Vector Styles](#vector-styles)) Conversely, GIBS applies a default style when rendering vector data as a raster when using the WMS API.
 
-An MVT returned via the WMTS service contains information for a client to draw the features within the user interface, but also a set of properties that contain data associated with the feature. The Mapbox vector tile specification provides structure for representing these data, but no mechanism for interpreting the meaning or intended use. As such, additional metadata is required. GIBS has developed a specification for defining each property contained within MVTs in its vector products. (See [Vector Properties](../metadata/#vector-properties))
+An MVT returned via the WMTS service contains information for a client to draw the features within the user interface, but also a set of properties that contain data associated with the feature. The Mapbox vector tile specification provides structure for representing these data, but no mechanism for interpreting the meaning or intended use. As such, additional metadata is required. GIBS has developed a specification for defining each property contained within MVTs in its vector products. (See [Vector Properties](#vector-properties))
 
 
 ### Access
 #### WMTS
 
-Accessing a vector product through the WMTS service follows the same rules as raster products. The primary differences being the format specified in the request and of the response. When issuing a KVP WMTS request, the "format" value must be `application/vnd.mapbox-vector-tile`. When issuing a REST-ful WMTS request, the extension must be `.mvt`. See below for examples of each:
+Accessing a vector visualization through the WMTS service follows the same rules as raster visualizations. The primary differences being the format specified in the request and of the response. When issuing a KVP WMTS request, the "format" value must be `application/vnd.mapbox-vector-tile`. When issuing a REST-ful WMTS request, the extension must be `.mvt`. See below for examples of each:
 
 * REST Tile - [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01T00:00:00Z/500m/4/3/4.mvt](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01T00:00:00Z/500m/4/3/4.mvt)
 * KVP Tile - [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=2020-10-01T00:00:00Z&FORMAT=application/vnd.mapbox-vector-tile&layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&tilematrixset=500m&Service=WMTS&Request=GetTile&Version=1.0.0&TileMatrix=4&TileCol=4&TileRow=3](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=2020-10-01T00:00:00Z&FORMAT=application/vnd.mapbox-vector-tile&layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&tilematrixset=500m&Service=WMTS&Request=GetTile&Version=1.0.0&TileMatrix=4&TileCol=4&TileRow=3)
@@ -406,7 +628,7 @@ As mentioned previously, a client is responsible for applying style to MVT tiles
 
 #### WMTS Capabilities Definition
 
-A vector product's vector style file is referenced in the WMTS Capabilities document as Layer/ows:Metadata elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector style* file and one for the versioned (e.g. '1.0') *vector style* file. This allows for the addition of future versions as enhancements are made to the GIBS vector product visualization capabilities, while retaining retaining backwards compatibility.
+A vector product's vector style file is referenced in the WMTS Capabilities document as Layer/ows:Metadata elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector style* file and one for the versioned (e.g. '1.0') *vector style* file. This allows for the addition of future versions as enhancements to the GIBS vector product visualization capabilities, while retaining backwards compatibility.
 
 **WMTS Capabilities Layer Metadata**
 
