@@ -5,7 +5,7 @@ nav:
     - Access Basics: visualization-services.md
     - Access Advanced Topics: api-advanced-topics.md
     - Accessing via GIS Applications: gis-usage.md
-    - Accessing via GIS Libraries: map-library-usage.md
+    - Accessing via Map Libraries and Scripts: map-library-usage.md
 extra_css:
     - css/style.css
 extra_javascript:
