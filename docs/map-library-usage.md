@@ -8,14 +8,14 @@ There are several freely-available map libraries available to help in building y
 
 ## Web-based Map Libraries
 
-Please see our <a href="https://github.com/nasa-gibs/gibs-web-examples" target="_blank">"GIBS Web Examples" GitHub area</a> for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS. 
+Please see our ["GIBS Web Examples" GitHub area](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"} for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS. 
 
 
 ## Script-level Access
 
 ### GDAL
 
-The Geospatial Data Abstraction Library (<a href="https://gdal.org/" target="_blank">GDAL</a>) can be used as a basis to generate imagery from custom scripts.  Its WMS driver supports several internal 'minidrivers' that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found in the <a href="https://gdal.org/drivers/raster/wms.html" target="_blank">GDAL WMS documentation area.</a>. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers will be included below.
+The Geospatial Data Abstraction Library ([GDAL](https://gdal.org/){:target="_blank"}) can be used as a basis to generate imagery from custom scripts.  Its WMS driver supports several internal 'minidrivers' that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found in the [GDAL WMS documentation area](https://gdal.org/drivers/raster/wms.html){:target="_blank"}. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers will be included below.
 
 #### Requirements
 
@@ -94,7 +94,7 @@ Items that may need to be changed include:
 
 Note that the values for <YOrigin\>, <BlockSizeX\>, and <BlockSizeY\> are constant for all GIBS layers.
 
-More information can be found in the <a href="https://gdal.org/drivers/raster/wms.html" target="_blank">GDAL WMS documentation area.</a> (note the "TMS" section).
+More information can be found in the [GDAL WMS documentation area](https://gdal.org/drivers/raster/wms.html){:target="_blank"} (note the "TMS" section).
 
 ##### #3 - "TiledWMS" Driver Configuration File Input
 
@@ -189,9 +189,9 @@ gdal_translate -of GTiff -outsize 980 940 -a_srs "+proj=stere +lat_0=90 +lat_ts=
 gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 ```
 
-The projection string for the GIBS Antarctic projection is "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs". Here are the links for the <a href="http://spatialreference.org/ref/epsg/3413/proj4/" target="_blank">Arctic</a> and <a href="http://spatialreference.org/ref/epsg/3031/proj4/" target="_blank">Antarctic</a> PROJ4 definitions. Some other workarounds are:
+The projection string for the GIBS Antarctic projection is "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs". Here are the links for the [Arctic](http://spatialreference.org/ref/epsg/3413/proj4/){:target="_blank"} and [Antarctic](http://spatialreference.org/ref/epsg/3031/proj4/){:target="_blank"} PROJ4 definitions. Some other workarounds are:
 
-* Use a ".aux.xml" file with the ".tif" file. Download the sample <a href="/img/GIBS_Arctic_3413.tif.aux.xml" target="_blank">Arctic</a> or <a href="/img/GIBS_Antarctic_3031.tif.aux.xml" target="_blank">Antarctic</a> XML file and rename it to match the GeoTIFF file.
+* Use a ".aux.xml" file with the ".tif" file. Download the sample [Arctic](img/GIBS_Arctic_3413.tif.aux.xml){:target="_blank"} or [Antarctic](img/GIBS_Antarctic_3031.tif.aux.xml){:target="_blank"} XML file and rename it to match the GeoTIFF file.
 
 ```
 gdal_translate -of GTiff -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.tif
@@ -296,4 +296,4 @@ bulk download plan:
 3. Evenly distribute download requests across the entire bulk downloading period, avoiding significant spikes of activity.
 4. Start small with fewer concurrent threads and build to your proposed maximum download rate.
 
-Subscribe to our mailing list <a href="mailto:eosdis-gibs-announce-join@lists.nasa.gov" target="_blank">by sending an email to this address</a> (no subject or text in the body is needed) and <a href="https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS" target="_blank">follow our blog</a> to stay up-to-date with new features and changes to existing services. Or contact us at <a href="mailto:support@earthdata.nasa.gov" target="_blank">support@earthdata.nasa.gov</a>  with feedback and questions.
+Subscribe to our mailing list [by sending an email to this address](mailto:eosdis-gibs-announce-join@lists.nasa.gov) (no subject or text in the body is needed) and [follow our blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} to stay up-to-date with new features and changes to existing services. Or contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov) with feedback and questions.
