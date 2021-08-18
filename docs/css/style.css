@@ -19,3 +19,6 @@ code {
 th {
   text-align: center;
 }
+.tocbase .toctree-l3.current {
+  background: #bdbdbd;
+}
