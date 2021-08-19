@@ -10,6 +10,7 @@ There are several freely-available map libraries available to help in building y
 
 Please see our ["GIBS Web Examples" GitHub area](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"} for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS. 
 
+[![OpenLayers Example](img/web-based-map-library-ol.png)](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"}
 
 ## Script-level Access
 
