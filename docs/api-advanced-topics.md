@@ -6,7 +6,6 @@
    * [Raster Visualizations](#raster-visualizations)
    * [Vector Visualizations](#vector-visualizations)
 
-
 ## "Best Available" Layers
 
 Visualization layers representing the same science parameter from a specific instrument and platform may be available for multiple versions and/or data latencies. Direct access to those various flavors of the same visualization are directly available. However, many users are simply interested in seeing a consistent "best available" visualization. The details of what is "best" being determined by the GIBS team. Therefore, GIBS provides a unique set of "Best Available" visualization layers for all of its visualization layers, abstracting away the individual versions and latencies. A similar naming convention is used, as described in the previous section, but identifiers do not specify the version or latency (e.g. *MODIS_Terra_Aerosol_Optical_Depth*).
@@ -221,6 +220,7 @@ Using the information provided above, the following XML Colormap is generated:
   </ColorMap>
 </ColorMaps>
 ```
+
 
 Note: There are fewer entries in the Legend than there are ColorMap Entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:
 
