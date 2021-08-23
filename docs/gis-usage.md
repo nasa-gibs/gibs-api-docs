@@ -1,4 +1,4 @@
-# Geographic Information System (GIS) Usage
+# Accessing via GIS Applications
 
 Through the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), it's often possible to access imagery directly from NASA's Global Imagery Browse Services (GIBS) from your favorite Geographic Information System (GIS) client.
 

@@ -1,29 +1,20 @@
-site_name: NASA GIBS
+site_name: Global Imagery Browse Services (GIBS)
 
 nav:
-    - GIBS API for Developers: index.md
-    - Available Imagery Products: available-imagery.md
-    - Map Library Usage: map-library-usage.md
-    - Geographic Information System (GIS) Usage: gis-usage.md
+    - 'index.md'
+    - Available Visualizations: visualization-layers.md
+    - Access Basics: visualization-services.md
+    - Access Advanced Topics: api-advanced-topics.md
+    - Accessing via GIS Applications: gis-usage.md
+    - Accessing via GIS Libraries: map-library-usage.md
 extra_css:
     - css/style.css
 extra_javascript:
     - javascript/overrides.js
 theme:
-    name: material
-    features:
-      - toc.integrate
-      - navigation.tabs
-      - navigation.tabs.sticky
-    plugins:
-        - search
-    palette:
-        - scheme: default
-          toggle:
-            icon: material/toggle-switch-off-outline
-            name: Switch to dark mode
-        - scheme: slate
-          toggle:
-            icon: material/toggle-switch
-            name: Switch to light mode
-    
+    name: 'rtd-dropdown'
+markdown_extensions:
+    - admonition
+    - attr_list
+    - fenced_code
+    - footnotes

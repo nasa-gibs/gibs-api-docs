@@ -1,56 +1,38 @@
-function Collapse() {
-    var isCollapseable = false;
-    var eventListenerTargetArray = [];
-    var breakpoint = 1200;
 
-    function addClickListener(el) {
-        el.classList.add("can-collapse");
-        const link = el.querySelector(".md-nav__link")
-        link.classList.add("link-collapse");
-        eventListenerTargetArray.push(link);
-        link.onclick = function (e) {
-            el.classList.toggle('collapsed');
-            e.stopPropagation();
-        };
+$(document).ready(() => {
+    const toggleCurrent = function (elem) {
+        var parent_li = elem.closest('li');
+        var menu_li = parent_li.next();
+        var menu_ul = menu_li.children('ul');
+        parent_li.siblings('li').not(menu_li).removeClass('current').removeClass('with-children');
+        parent_li.siblings().find('> ul').not(menu_ul).removeClass('current').addClass('toc-hidden');
+        parent_li.toggleClass('current');
+        parent_li.toggleClass('with-children');
+        menu_li.toggleClass('current');
+        menu_ul.toggleClass('current').toggleClass('toc-hidden');
+        $('.with-children').each((i, obj) => {
+            console.log(obj)
+            if ($(obj).find('.toctree-expand').length === 0) {
+                $(obj).removeClass('with-children')
+            }
+        })
     }
-    function makeCollapse() {
-        var nav = document.querySelectorAll(".md-nav__item .md-nav__item");
-        for (var i = 0; i < nav.length; i++) {
-            const el = nav.item(i);
-            var hasChild = el.querySelector(".md-nav__item") != null;
-            if (hasChild) addClickListener(el)
-        }
-    }
-    function removeClassesForQuerySelection(querySelection, classNames) {
-        const els = document.querySelectorAll(querySelection);
-        for (var i = 0; i < els.length; i++) {
-            const el = els.item(i);
-            classNames.forEach(className => {
-                el.classList.remove(className);
-            });
-        }
-    }
-    function removeListeners() {
-        eventListenerTargetArray.forEach(target => {
-            target.onclick = null;
+    var thispage = document.location.hash;
+    var hash = thispage.replace(/^#/, '');
+    if (!hash) return;
+    var $linkEL = $(`.tocbase a[href="#${hash}"]`);
+    if ($linkEL && $linkEL[0]) {
+        $linkEL.parents('[class^="toctree-"]').each((i, obj) => {
+            if ($(obj).hasClass('toctree-l1')) {
+                return;
+            }
+            const $newLi = $(obj).prev('li')
+            if ($newLi.hasClass('current')) return;
+            const $newA = $newLi.children('a');
+            if ($newA && $newA[0]) {
+                toggleCurrent($newA)
+            }
         });
+        // toggleCurrent($linkEL);
     }
-    function removeCollapse() {
-        removeListeners();
-        removeClassesForQuerySelection('.can-collapse', ['can-collapse', 'collapsed'])
-        removeClassesForQuerySelection('.link-collapse', ['link-collapse'])
-    }
-    function updateForSize() {
-        const width = window.innerWidth;
-        if (width > breakpoint && !isCollapseable) {
-            makeCollapse();
-            isCollapseable = true;
-        } else if (width < breakpoint && isCollapseable) {
-            removeCollapse();
-            isCollapseable = false;
-        }
-    }
-    window.addEventListener('resize', updateForSize);
-    updateForSize();
-}
-document.addEventListener("DOMContentLoaded", Collapse);
+})
