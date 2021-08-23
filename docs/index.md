@@ -1,4 +1,4 @@
-# Global Imagery Browe Services (GIBS)
+# Introduction
 ## Overview
 The Global Imagery Browse Services (GIBS) provides visual access to NASA’s Earth observations through standardized web services. These services deliver global, full-resolution visualizations of satellite data to users in a highly responsive manner, enabling visual discovery of scientific phenomena, supporting timely decision-making for natural hazards, educating the next generation of scientists, and making imagery of the planet more accessible to the media and public. Browse all of these visualizations through our [Worldview](https://worldview.earthdata.nasa.gov) application.
 

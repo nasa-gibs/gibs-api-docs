@@ -1,6 +1,7 @@
-site_name: Global Imagery Browe Services (GIBS)
+site_name: Global Imagery Browse Services (GIBS)
 
 nav:
+    - 'index.md'
     - Available Visualizations: visualization-layers.md
     - Access Basics: visualization-services.md
     - Access Advanced Topics: api-advanced-topics.md
