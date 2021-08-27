@@ -65,17 +65,32 @@ gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '<GDAL_WMS><
 gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg
 ```
 
-For both options, the information needed to create the local service description XML can be found in the large table on the [GIBS Available Imagery Products](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products) page.
+For both options, the information needed to create the local service description XML can be found in the GIBS GetCapabilities documents:
+
+| Projection Name | GIBS WMTS "Best Available" GetCapabilities document |
+| --------------- | --------- |
+| Geographic | [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml) |
+| NSIDC Sea Ice Polar Stereographic North | [https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml) |
+| Antarctic Polar Stereographic | [https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml) |
+| Web Mercator | [https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml) |
 
 Items that may need to be changed include:
 
 1. <ServerUrl\>https://gibs.earthdata.nasa.gov/wmts/**epsgcode**/best/**layer_name**/default/**date**/**resolution**/${z}/${y}/${x}.**format**</ServerUrl\>
-    * **layer_name** - use "Layer Name on Server" from Products page. Note that only one layer can be retrieved per gdal_translate call.
+    * **layer_name** - use the layer's "Identifier" from the relevant GIBS WMTS GetCapabilities document. Note that only one layer can be retrieved per gdal_translate call.
     * **date** - use the desired date in YYYY-MM-DD format
-    * **epsgcode** - use "epsg" followed by the appropriate EPSG code from [Footnote 4](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products#GIBSAvailableImageryProducts-projection) on the [GIBS Available Imagery Products](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products) page
-    * **resolution** - use the "Resolution" in the format ####m from the "Imagery Resolution" column on the [GIBS Available Imagery Products](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products) page, or GoogleMapsCompatible_Level# resolution from table below
+    * **epsgcode** - use "epsg" followed by the appropriate EPSG code:
+
+        | Projection Name | EPSG code |
+        | --------------- | --------- |
+        | Geographic | 4326 |
+        | NSIDC Sea Ice Polar Stereographic North | 3413 |
+        | Antarctic Polar Stereographic | 3031 |
+        | Web Mercator | 3857 |
+
+    * **resolution** - use the layer's "TileMatrixSet" value from the relevant GIBS WMTS GetCapabilities document
     * **format** - use jpg or png extension based on the "Format"
-2. **Bounding box** - use -180.0, 90, 396.0, -198 for Geographic projection and -4194304, 4194304, 4194304, -4194304 for the Polar projections. This is the bounding box of the topmost tile, which matches the bounding box of the actual imagery for Polar but not for Geographic.
+2. **Bounding box** - use -180.0, 90, 396.0, -198 for Geographic projection and -4194304, 4194304, 4194304, -4194304 for the Polar projections
 3. **<TileLevel\>** - select from the table below based on "Resolution" and "Projection". Note that the TileLevel in the table below is the maximum for that resolution. You can specify a lower value of TileLevel to force GDAL to use coarser resolution input tiles. This can be used to speed up projection, for example during development and testing.
 
     | Resolution | TileLevel (Geographic) | TileLevel (Polar) | Resolution (Web Mercator) | Tile Level (Web Mercator) |
@@ -90,7 +105,7 @@ Items that may need to be changed include:
     | 15.625m | 12 | - | GoogleMapsCompatible_Level3 | 13 |
 
 4. **<TileCountX\><TileCountY\>** - use 2, 1 for Geographic projection and 2, 2 for Polar projections
-5. **<Projection\>** - use the appropriate EPSG code from Footnote 4 on the GIBS Available Imagery Products page.
+5. **<Projection\>** - use the appropriate EPSG code as described in the above "epsgcode" table
 6. **<Bands\>** - use 3 for .jpg (except use 1 for ASTER_GDEM_Greyscale_Shaded_Relief) and 4 for .png
 
 Note that the values for <YOrigin\>, <BlockSizeX\>, and <BlockSizeY\> are constant for all GIBS layers.
