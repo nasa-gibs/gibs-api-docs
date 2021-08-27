@@ -1,8 +1,10 @@
 # Accessing via GIS Applications
 
-Through the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), it's often possible to access imagery directly from NASA's Global Imagery Browse Services (GIBS) from your favorite Geographic Information System (GIS) client.
+Through the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), it's often possible to access NASA's Global Imagery Browse Services (GIBS) directly from your favorite Geographic Information System (GIS) client.
 
 Please note: some GIS applications do not currently handle time-varying imagery layers, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support. Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/){:target="_blank"} "image snapshot" tool (camera icon in upper right) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
+
+![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png)
 
 ## QGIS
 
@@ -16,7 +18,7 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 
 * In QGIS, open the "Layer | Add Layer | Add WMS / WMTS Layer" window
 * Add a "Name" such as "GIBS WMS (EPSG:4326, Best)"
-* Add a "URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, i.e. one of the following:
+* Add a "URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
 [https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
@@ -50,7 +52,7 @@ GIBS imagery layers can be directly loaded into ESRI ArcGIS Pro using the WMS pr
 1. After starting up ArcGIS Pro, select "Start without a template" from the home page
 1. Click the "Insert" tab, "Connections", "New WMS Server"<br>
 ![ArcGIS Pro New WMS Server](img/ArcGISPro-NewWMS.png){ width=50% }
-1. Add a "Server URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, i.e. one of the following:
+1. Add a "Server URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
 [https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
@@ -112,7 +114,7 @@ GIBS imagery layers can be directly loaded into ESRI ArcGIS/ArcMap using the WMS
 
 ![ArcMap, Time Slider](img/ArcMap-TimeSlider.png)
 
-* Add any additional layers in a similar manner.
+* Add any other layers in a similar manner.
 
 ![ArcMap, Time Panel](img/ArcMap-TimePanel.png)
 
