@@ -2,7 +2,6 @@
 
    * [Raster Color Maps](#raster-color-maps)
 
-
 ### Specification
 The GIBS Colormap specification outlines the format and content of GIBS Colormap XML documents. The GIBS Colormap XML document contains the information required to document the mapping between data values and RGB colors in a raster visualization, hereafter referred to as "data-to-image mapping."  Additionally, the Colormap contains information required to generate a legend graphic representation of the mapping. The following sections will provide information regarding the Colormap constructs, sample Colormap XML demonstrating the data-to-image mapping approaches, and specific considerations when developing the Colormap.
 
