@@ -1,10 +1,13 @@
 # Accessing via Map Libraries and Scripts
 
-There are several freely-available map libraries available to help in building your own interface to explore NASA's Earth imagery via the Global Imagery Browse Services (GIBS).
+There are several freely-available map libraries available to help build your own interface to explore NASA's Global Imagery Browse Services (GIBS) visualizations.  The information on this page provides instructions for the following libraries:
 
    * [Web-based Map Libraries](#web-based-libraries)
-   * [Script-level Access](#script-level-access)
+   * [GDAL](#gdal)
 
+Additionally, information regarding bulk downloading is also provided [here](#bulk-downloading).
+
+<hr style="border:2px solid gray"> </hr>
 
 ## Web-based Map Libraries
 
@@ -12,19 +15,156 @@ Please see our ["GIBS Web Examples" GitHub area](https://github.com/nasa-gibs/gi
 
 [![OpenLayers Example](img/web-based-map-library-ol.png)](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"}
 
-## Script-level Access
+<hr style="border:2px solid gray"> </hr>
 
-### GDAL
+## GDAL
 
-The Geospatial Data Abstraction Library ([GDAL](https://gdal.org/){:target="_blank"}) can be used as a basis to generate imagery from custom scripts.  Its WMS driver supports several internal 'minidrivers' that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found in the [GDAL WMS documentation area](https://gdal.org/drivers/raster/wms.html){:target="_blank"}. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers will be included below.
+The Geospatial Data Abstraction Library ([GDAL](https://gdal.org/){:target="_blank"}) can be used as a basis to generate imagery from custom scripts.  Its WMS driver supports several internal 'minidrivers' that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found in the [GDAL WMS documentation area](https://gdal.org/drivers/raster/wms.html){:target="_blank"}. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers are included below.
 
-#### Requirements
+### Requirements
 
-GDAL version 1.9.1 or greater with cURL support enabled. To check if cURL is enabled for GDAL, type "gdalinfo --format WMS". If cURL is enabled you will see information about the WMS format, if not, you will get an error message and you will need to reconfigure GDAL to support cURL.
+GDAL version 1.9.1 or greater with cURL support enabled. To check if cURL is enabled for GDAL, type `gdalinfo --format WMS`. If cURL is enabled, you will see information about the WMS format.  If not, you will get an error message and you will need to reconfigure GDAL to support cURL.
 
-#### Basic Usage
-##### #1 - "TMS" Driver Configuration File Input
+<hr style="border:1px solid gray"> </hr>
 
+### Basic Usage
+This section provides basic examples of both the TiledWMS and WMS GDAL drivers. The information needed to create the local service description XML can be found in the following GIBS Capabilities documents:
+
+| Projection Name | GIBS WMTS "Best Available" Capabilities document |
+| --------------- | --------- |
+| Geographic | [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml) |
+| NSIDC Sea Ice Polar Stereographic North | [https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml) |
+| Antarctic Polar Stereographic | [https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml) |
+| Web Mercator | [https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml) |
+
+
+!!! Note
+    In very limited testing, our experience has been that better image quality is obtained by using the GeoTIFF output format, then converting this to other formats, if desired, using a second gdal_translate command (seen below), or other programs such as ImageMagick convert.
+    ```
+    gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg
+    ```
+
+#### TiledWMS Driver
+The TiledWMS GDAL minidriver relies on a simple XML configuration block (see example below) from the user, pulling all other information from the GIBS Tiled Web Map Service ([TWMS](../visualization-services/#tiled-web-map-service-twms)) "Tile Service" document at runtime.
+
+``` xml
+<GDAL_WMS>
+  <Service name="TiledWMS">
+    <ServerUrl>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</ServerUrl>
+    <TiledGroupName>MODIS Aqua CorrectedReflectance TrueColor tileset</TiledGroupName>
+    <Change key="${time}">2013-08-21</Change>
+  </Service>
+</GDAL_WMS>
+```
+
+In the above XML block, the following values may be changed to meet your needs:
+
+* **Server Url** - Set the *ServerUrl* value to one of the following items, based on your projection of interest:
+
+  | Projection Name | GIBS TWMS "Best Available" Endpoint |
+     | --------------- | --------- |
+  | Geographic | https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi? |
+  | NSIDC Sea Ice Polar Stereographic North | https://gibs.earthdata.nasa.gov/twms/epsg3413/best/twms.cgi? |
+  | Antarctic Polar Stereographic | https://gibs.earthdata.nasa.gov/twms/epsg3031/best/twms.cgi? |
+  | Web Mercator | https://gibs.earthdata.nasa.gov/twms/epsg3857/best/twms.cgi? |
+
+* **Tiled Group Name** - When accessing visualizations through TWMS, the *TiledGroupName* value is utilized instead of the layers identifier. The *TiledGroupName* can be generated by replacing all underscores in a visualization's *Identifier* with spaces and appending " tileset". For example:
+    * **Identifier** - MODIS_Aqua_CorrectedReflectance_TrueColor
+    * **Tiled Group Name** - MODIS Aqua CorrectedReflectance TrueColor tileset
+* **Time** - Insert the date (e.g. 2013-08-21) or datetime (e.g. 2013-08-21T00:00:00Z) you are requesting.
+
+The following examples demonstrate how to invoke the GDAL TiledWMS driver.
+
+##### #1 - Configuration File Input
+In this example, the following XML file is created and saved to your local file system.  Then the `gdal_translate` command shown below is run with your desired area of interest and output dimensions.  
+
+``` xml
+<GDAL_WMS>
+  <Service name="TiledWMS">
+    <ServerUrl>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</ServerUrl>
+    <TiledGroupName>MODIS Aqua CorrectedReflectance TrueColor tileset</TiledGroupName>
+    <Change key="${time}">2013-08-21</Change>
+  </Service>
+</GDAL_WMS>
+```
+
+```
+gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MODIS_true.xml GreatPlainsSmoke1.tif
+```
+
+##### #2 - "TiledWMS" Driver Command Line Input
+This example invokes gdal_translate with the content of the TileWMS local service description XML file embedded as a command line argument. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as the previous example, run the following:
+
+```
+gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '<GDAL_WMS><Service name="TiledWMS"><ServerUrl>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</ServerUrl><TiledGroupName>MODIS Aqua CorrectedReflectance TrueColor tileset</TiledGroupName><Change key="${time}">2013-08-21</Change></Service></GDAL_WMS>' GreatPlainsSmoke2.tif
+```
+
+#### "TMS Driver"
+The TMS GDAL minidriver relies on a more complex XML configuration block (see example below) from the user that defines all information required for accessing a tiled visualization service.
+
+
+``` xml
+    <GDAL_WMS>
+        <Service name="TMS">
+        <ServerUrl>https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-08-21/250m/${z}/${y}/${x}.jpg</ServerUrl>
+        </Service>
+        <DataWindow>
+            <UpperLeftX>-180.0</UpperLeftX>
+            <UpperLeftY>90</UpperLeftY>
+            <LowerRightX>396.0</LowerRightX>
+            <LowerRightY>-198</LowerRightY>
+            <TileLevel>8</TileLevel>
+            <TileCountX>2</TileCountX>
+            <TileCountY>1</TileCountY>
+            <YOrigin>top</YOrigin>
+        </DataWindow>
+        <Projection>EPSG:4326</Projection>
+        <BlockSizeX>512</BlockSizeX>
+        <BlockSizeY>512</BlockSizeY>
+        <BandsCount>3</BandsCount>
+    </GDAL_WMS>
+```
+
+In the above XML block, the following values may be changed to meet your needs:
+
+* <ServerUrl\>https://gibs.earthdata.nasa.gov/wmts/**epsgcode**/best/**layer_name**/default/**date**/**resolution**/${z}/${y}/${x}.**format**</ServerUrl\>
+    * **layer_name** - use the layer's "Identifier" from the relevant GIBS WMTS GetCapabilities document. Note that only one layer can be retrieved per gdal_translate call.
+    * **date** - use the desired date in YYYY-MM-DD format
+    * **epsgcode** - use "epsg" followed by the appropriate EPSG code:
+
+      | Projection Name | EPSG code |
+              | --------------- | --------- |
+      | Geographic | 4326 |
+      | NSIDC Sea Ice Polar Stereographic North | 3413 |
+      | Antarctic Polar Stereographic | 3031 |
+      | Web Mercator | 3857 |
+
+    * **resolution** - use the layer's "TileMatrixSet" value from the relevant GIBS WMTS GetCapabilities document
+    * **format** - use jpg or png extension based on the "Format"
+* **Bounding box** - use -180.0, 90, 396.0, -198 for Geographic projection and -4194304, 4194304, 4194304, -4194304 for the Polar projections
+* **<TileLevel\>** - select from the table below based on "Resolution" and "Projection". Note that the TileLevel in the table below is the maximum for that resolution. You can specify a lower value of TileLevel to force GDAL to use coarser resolution input tiles. This can be used to speed up projection, for example during development and testing.
+
+   | Resolution | TileLevel (Geographic) | TileLevel (Polar) | Resolution (Web Mercator) | Tile Level (Web Mercator) |
+       | ---------- | ---------------------- | ----------------- | ------------------------- | ------------------------- |
+   | 2km | 5 | 2 | GoogleMapsCompatible_Level6 | 6 |
+   | 1km | 6 | 3 | GoogleMapsCompatible_Level7 | 7 |
+   | 500m | 7 | 4 | GoogleMapsCompatible_Level8 | 8 |
+   | 250m | 8 | 5 | GoogleMapsCompatible_Level9 | 9 |
+   | 125m | 9 | - | GoogleMapsCompatible_Level10 | 10 |
+   | 62.5m | 10 | - | GoogleMapsCompatible_Level11 | 11 |
+   | 31.25m | 11 | - | GoogleMapsCompatible_Level12 | 12 |
+   | 15.625m | 12 | - | GoogleMapsCompatible_Level3 | 13 |
+
+* **<TileCountX\><TileCountY\>** - use 2, 1 for Geographic projection and 2, 2 for Polar projections
+* **<Projection\>** - use the appropriate EPSG code as described in the above "epsgcode" table
+* **<Bands\>** - use 3 for .jpg (except use 1 for ASTER_GDEM_Greyscale_Shaded_Relief) and 4 for .png
+
+!!! note
+    The values for <YOrigin\>, <BlockSizeX\>, and <BlockSizeY\> are constant for all GIBS layers.
+
+The following examples demonstrate how to invoke the GDAL TMS driver.
+
+##### #1 - Configuration File Input
 Create a local service description XML file and invoke gdal_translate. In this example, GIBS_Aqua_MODIS_true.xml is used to generate a true color JPEG image from Aqua MODIS of a smoke plume from western fires over the central United States. The contents of GIBS_Aqua_MODIS_true.xml would be:
 
 ``` xml
@@ -51,97 +191,19 @@ Create a local service description XML file and invoke gdal_translate. In this e
 
 ```
     gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MODIS_true.xml GreatPlainsSmoke1.tif
-    gdal_translate -of JPEG GreatPlainsSmoke1.tif GreatPlainsSmoke1.jpg
 ```
 
-In very limited testing, our experience has been that better image quality is obtained by using the GeoTIFF output format from the GDAL WMS, then converting this to other formats, if desired, using a second gdal_translate command, or other programs such as ImageMagick convert.
-
 ##### #2 - "TMS" Driver Command Line Input
-
 Invoke gdal_translate with the content of the local service description XML file embedded into the command. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as above:
 
 ```
 gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '<GDAL_WMS><Service name="TMS"><ServerUrl>https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-08-21/250m/${z}/${y}/${x}.jpg</ServerUrl></Service><DataWindow><UpperLeftX>-180.0</UpperLeftX><UpperLeftY>90</UpperLeftY><LowerRightX>396.0</LowerRightX><LowerRightY>-198</LowerRightY><TileLevel>8</TileLevel><TileCountX>2</TileCountX><TileCountY>1</TileCountY><YOrigin>top</YOrigin></DataWindow><Projection>EPSG:4326</Projection><BlockSizeX>512</BlockSizeX><BlockSizeY>512</BlockSizeY><BandsCount>3</BandsCount></GDAL_WMS>' GreatPlainsSmoke2.tif
-gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg
 ```
 
-For both options, the information needed to create the local service description XML can be found in the GIBS GetCapabilities documents:
+<hr style="border:1px solid gray"> </hr>
 
-| Projection Name | GIBS WMTS "Best Available" GetCapabilities document |
-| --------------- | --------- |
-| Geographic | [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml) |
-| NSIDC Sea Ice Polar Stereographic North | [https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml) |
-| Antarctic Polar Stereographic | [https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml) |
-| Web Mercator | [https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml) |
-
-Items that may need to be changed include:
-
-1. <ServerUrl\>https://gibs.earthdata.nasa.gov/wmts/**epsgcode**/best/**layer_name**/default/**date**/**resolution**/${z}/${y}/${x}.**format**</ServerUrl\>
-    * **layer_name** - use the layer's "Identifier" from the relevant GIBS WMTS GetCapabilities document. Note that only one layer can be retrieved per gdal_translate call.
-    * **date** - use the desired date in YYYY-MM-DD format
-    * **epsgcode** - use "epsg" followed by the appropriate EPSG code:
-
-        | Projection Name | EPSG code |
-        | --------------- | --------- |
-        | Geographic | 4326 |
-        | NSIDC Sea Ice Polar Stereographic North | 3413 |
-        | Antarctic Polar Stereographic | 3031 |
-        | Web Mercator | 3857 |
-
-    * **resolution** - use the layer's "TileMatrixSet" value from the relevant GIBS WMTS GetCapabilities document
-    * **format** - use jpg or png extension based on the "Format"
-2. **Bounding box** - use -180.0, 90, 396.0, -198 for Geographic projection and -4194304, 4194304, 4194304, -4194304 for the Polar projections
-3. **<TileLevel\>** - select from the table below based on "Resolution" and "Projection". Note that the TileLevel in the table below is the maximum for that resolution. You can specify a lower value of TileLevel to force GDAL to use coarser resolution input tiles. This can be used to speed up projection, for example during development and testing.
-
-    | Resolution | TileLevel (Geographic) | TileLevel (Polar) | Resolution (Web Mercator) | Tile Level (Web Mercator) |
-    | ---------- | ---------------------- | ----------------- | ------------------------- | ------------------------- |
-    | 2km | 5 | 2 | GoogleMapsCompatible_Level6 | 6 |
-    | 1km | 6 | 3 | GoogleMapsCompatible_Level7 | 7 |
-    | 500m | 7 | 4 | GoogleMapsCompatible_Level8 | 8 |
-    | 250m | 8 | 5 | GoogleMapsCompatible_Level9 | 9 |
-    | 125m | 9 | - | GoogleMapsCompatible_Level10 | 10 |
-    | 62.5m | 10 | - | GoogleMapsCompatible_Level11 | 11 |
-    | 31.25m | 11 | - | GoogleMapsCompatible_Level12 | 12 |
-    | 15.625m | 12 | - | GoogleMapsCompatible_Level3 | 13 |
-
-4. **<TileCountX\><TileCountY\>** - use 2, 1 for Geographic projection and 2, 2 for Polar projections
-5. **<Projection\>** - use the appropriate EPSG code as described in the above "epsgcode" table
-6. **<Bands\>** - use 3 for .jpg (except use 1 for ASTER_GDEM_Greyscale_Shaded_Relief) and 4 for .png
-
-Note that the values for <YOrigin\>, <BlockSizeX\>, and <BlockSizeY\> are constant for all GIBS layers.
-
-More information can be found in the [GDAL WMS documentation area](https://gdal.org/drivers/raster/wms.html){:target="_blank"} (note the "TMS" section).
-
-##### #3 - "TiledWMS" Driver Configuration File Input
-
-The TiledWMS GDAL minidriver relies on a simplified set of XML configuration from the user, pulling all other information from the TWMS *WMS_Tile_Service* document at runtime. The following example requests the same image as was requested in Sample Execution #1, but you will notice how much simpler the XML configuration is. The primary difference is that requests through TWMS utilize a *TiledGroupName* value instead of the *WMTS Identifier* utilized by WMTS requests. The *TiledGroupName* can be generated by replacing all underscores in a WMTS layer's *Identifier* with spaces and appending " tileset". For example, a WMTS Layer *Identifier* of SMAP_L1_Passive_Faraday_Rotation_Aft" becomes the TWMS *TiledGroupName* "SMAP L1 Passive Faraday Rotation Aft tileset".
-
-``` xml
-<GDAL_WMS>
-  <Service name="TiledWMS">
-    <ServerUrl>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</ServerUrl>
-    <TiledGroupName>MODIS Aqua CorrectedReflectance TrueColor tileset</TiledGroupName>
-    <Change key="${time}">2013-08-21</Change>
-  </Service>
-</GDAL_WMS>
-```
-
-```
-gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MODIS_true.xml GreatPlainsSmoke1.tif
-gdal_translate -of JPEG GreatPlainsSmoke1.tif GreatPlainsSmoke1.jpg
-```
-
-##### #4 - "TiledWMS" Driver Command Line Input
-
-This example invokes gdal_translate with the content of the TileWMS local service description XML file embedded as a command line argument. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as above, run the following:
-
-```
-gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '<GDAL_WMS><Service name="TiledWMS"><ServerUrl>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</ServerUrl><TiledGroupName>MODIS Aqua CorrectedReflectance TrueColor tileset</TiledGroupName><Change key="${time}">2013-08-21</Change></Service></GDAL_WMS>' GreatPlainsSmoke2.tif
-gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg
-```
-
-#### Advanced Usage
-##### Configuration File Input w/ Transparent PNG
+### Advanced Usage
+#### TMS Driver Configuration File Input w/ Transparent PNG
 
 In this example, GIBS_OMI_AI.xml is used to generate a transparent PNG image from the OMI Aerosol Index over the same region as the first two examples. The "Layer Name on Server" and EPSG/resolution in <ServerURL\>, the <TileLevel\>, and the <BandsCount\> have changed from the first examples. The contents of GIBS_OMI_AI.xml would be:
 
@@ -169,10 +231,9 @@ In this example, GIBS_OMI_AI.xml is used to generate a transparent PNG image fro
 
 ```
 gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_OMI_AI.xml GreatPlainsSmokeAI.tif
-gdal_translate -of PNG GreatPlainsSmokeAI.tif GreatPlainsSmokeAI.png
 ```
 
-##### Polar Imagery
+#### TMS Driver Polar Imagery
 
 In this example, GIBS_Terra_MODIS_Arctic.xml is used to generate a true color JPEG image from Terra MODIS of a phytoplankton bloom in the Barents Sea. The "Layer Name on Server" and EPSG/resolution in <ServerUrl\>, the <DataWindow\> elements, and the <Projection\> have changed from the first examples. The contents of GIBS_Terra_MODIS_Arctic.xml would be:
 
@@ -221,7 +282,7 @@ gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 gdal_translate -of JPEG -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.jpg
 ```
 
-##### Polar Layer w/ Reprojection
+#### TMS Driver Polar Layer w/ Reprojection
 
 In this example, GIBS_Aqua_MODIS_Arctic.xml is used to generate a true color JPEG image from Aqua MODIS of the Beaufort Sea reprojected to have 145W down. The "Layer Name on Server" and EPSG/resolution in <ServerUrl\>, the <DataWindow\> elements, and the <Projection\> have changed from the first examples. The contents of GIBS_Aqua_MODIS_Arctic.xml would be:
 
@@ -252,7 +313,7 @@ gdalwarp -t_srs '+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-145 +k=1 +x_0=0 +y_0=0
 gdal_translate -of JPEG Beaufort_neg145down_1km.tif Beaufort_neg145down_1km.jpg
 ```
 
-##### Reprojecting GIBS Geographic layer into Polar Stereographic
+#### TMS Driver Reprojecting GIBS Geographic layer into Polar Stereographic
 
 Only a subset of layers are available from GIBS in the polar projections. This is an example of how to project a geographic layer into a polar projection. The contents of GIBS_Terra_Cloud_Fraction.xml would be:
 
@@ -284,7 +345,7 @@ gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere 
 ```
 
 
-### Bulk Downloading
+## Bulk Downloading
 
 A "Bulk Download" is defined as the planned retrieval of more than 1,000,000 imagery tiles within a 24 hour period. These activities are typically orchestrated through script-based access to the GIBS API, not user-based access through a client application. In order to ensure quality of service for all GIBS users, the GIBS team requests that bulk downloading activities be coordinated at least 48 hours in advance of the planned download. Prior to
 beginning your bulk downloading activities, please contact the GIBS support team at [support@earthdata.nasa.gov](support@earthdata.nasa.gov) with the subject "GIBS Bulk
