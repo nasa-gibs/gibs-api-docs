@@ -1,10 +1,19 @@
 # Accessing via GIS Applications
 
-Through the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), it's often possible to access NASA's Global Imagery Browse Services (GIBS) directly from your favorite Geographic Information System (GIS) client.
+NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through standards-compliant web services (See [Visualization Services](../visualization-services/#visualization-services)).  These services, specifically the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), allow you to access GIBS visualizations directly within many Geographic Information System (GIS) clients.  The information on this page provides instructions for accessing GIBS visualizations through these GIS clients:
 
-Please note: some GIS applications do not currently handle time-varying imagery layers, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support. Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/){:target="_blank"} "image snapshot" tool (camera icon in upper right) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
+* [QGIS](#qgis)
+* [ESRI ArcGIS Pro](#esri-arcgis-pro)
+* [ESRI ArcGIS/ArcMap](#esri-arcgisarcmap)
+* [ESRI ArcGIS Online](#esri-arcgis-online)
+* [Google Earth (Web / Pro)](#google-earth-web-pro)
 
-![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png)
+!!! Note
+    Some GIS applications do not currently handle time-varying visualizations, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support.
+    Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/){:target="_blank"} "image snapshot" tool (pictured below) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
+    ![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png)
+
+<hr style="border:2px solid gray"> </hr>
 
 ## QGIS
 
@@ -38,6 +47,8 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 * In the case of QGIS, the first field (i.e., leftmost) in the date range is what controls the imagery from GIBS.
 
 ![QGIS, Temporal Controller](img/TemporalController_QGIS.png)
+
+<hr style="border:2px solid gray"> </hr>
 
 ## ESRI ArcGIS Pro
 
@@ -85,7 +96,8 @@ Here are some common reasons why imagery isn't appearing:
 * The current time is not within the full extent period
 * The Span is not set to 0
 * The step interval of the dataset is not correctly set (e.g. 1 years set instead of 1 days)
- 
+
+<hr style="border:2px solid gray"> </hr>
 
 ## ESRI ArcGIS/ArcMap
 
@@ -118,6 +130,8 @@ GIBS imagery layers can be directly loaded into ESRI ArcGIS/ArcMap using the WMS
 
 ![ArcMap, Time Panel](img/ArcMap-TimePanel.png)
 
+<hr style="border:2px solid gray"> </hr>
+
 ## ESRI ArcGIS Online
 
 GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgis.com/){:target="_blank"} in one of two ways: through the GIBS WMS or as a predefined layer from ESRI.
@@ -145,6 +159,8 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 * To change the currently-displayed date, go to the "Details" pane, then click the small down arrow next to the layer name. Click "Enable Time Animation", then adjust the date at the bottom of the page.
 
 ![ArcGIS Online, Enable Time](img/AGOL-EnableTime.png)
+
+<hr style="border:2px solid gray"> </hr>
 
 ## Google Earth (Web / Pro)
 
