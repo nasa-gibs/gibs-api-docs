@@ -11,9 +11,9 @@ Additionally, information regarding bulk downloading is also provided [here](#bu
 
 ## Web-based Map Libraries
 
-Please see our ["GIBS Web Examples" GitHub area](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"} for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS. 
+Please see our ["GIBS Web Examples" GitHub area](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"} for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS.  Below is a screen capture of a barebones GIBS client based on the OpenLayers mapping library.
 
-[![OpenLayers Example](img/web-based-map-library-ol.png)](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"}
+[![OpenLayers Example](img/web-based-map-library-ol.png){ width=70% }](https://github.com/nasa-gibs/gibs-web-examples){:target="_blank"}
 
 <hr style="border:2px solid gray"> </hr>
 

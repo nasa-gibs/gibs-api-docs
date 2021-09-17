@@ -11,7 +11,8 @@ NASA's Global Imagery Browse Services (GIBS) visualizations are accessible throu
 !!! Note
     Some GIS applications do not currently handle time-varying visualizations, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support.
     Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/){:target="_blank"} "image snapshot" tool (pictured below) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
-    ![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png)
+
+    ![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png){ width=70% }
 
 <hr style="border:2px solid gray"> </hr>
 
@@ -33,26 +34,33 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
 
-![QGIS, Add WTMS Connection](img/CreateWMTSConnection_QGIS.png)
+![QGIS, Add WTMS Connection](img/CreateWMSConnection_QGIS.png)
 
 * Click the "Connect" button to list all available layers for that map projection, select a layer of interest, and "Add" it to the map:
 
-![QGIS, Connect to WTMS Connection](img/ConnectWMTS_QGIS.png)
+![QGIS, Connect to WMS Connection](img/ConnectWMS_QGIS.png)
 
 * This should result in a map and legend with your selected layer:
 
-![QGIS, WMTS Layer added](img/WMTSlayer_QGIS.png)
+![QGIS, WMS Layer added](img/WMSlayer_QGIS.png)
 
 * At this point, you'll need to enable temporal navigation in QGIS to change the currently-displayed date; just above the map area, you can enable either a fixed temporal range or an animated one. For this example, we'll enable a fixed one by clicking the ![QGIS, Temporal Controller Button](img/TemporalControllerbutton_QGIS.png) button.
 * In the case of QGIS, the first field (i.e., leftmost) in the date range is what controls the imagery from GIBS.
 
 ![QGIS, Temporal Controller](img/TemporalController_QGIS.png)
 
+* Note that each time-enabled layer also has a "clock" button which helpfully takes you to a temporal properties panel for that particular layer.
+
+![QGIS, Temporal Info Button](img/TemporalInfoButton_QGIS.png){ width=50% }
+
+![QGIS, Temporal Info Panel](img/TemporalInfoPanel_QGIS.png){ width=70% }
+
+
 <hr style="border:2px solid gray"> </hr>
 
 ## ESRI ArcGIS Pro
 
-GIBS imagery layers can be directly loaded into ESRI ArcGIS Pro using the WMS protocol.
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview) using the WMS protocol.
 
 ### Requirements
 
@@ -99,9 +107,9 @@ Here are some common reasons why imagery isn't appearing:
 
 <hr style="border:2px solid gray"> </hr>
 
-## ESRI ArcGIS/ArcMap
+## ESRI ArcGIS Desktop/ArcMap
 
-GIBS imagery layers can be directly loaded into ESRI ArcGIS/ArcMap using the WMS protocol.
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview) using the WMS protocol.
 
 ### Requirements
 
@@ -149,7 +157,7 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 ![ArcGIS Online, Add Layer from web](img/AGOL-AddLayer2.png)
 
 * For each layer that you've loaded, click on the three small dots below "NASA Global Imagery Browse Services for EOSDIS", then "WMS OGC options"
-* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date
+* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date; note that this is currently a workaround and should be more directly supported in the future
 
 ![ArcGIS Online, Adjust Time](img/AGOL-TimeAdjust2.png)
 
