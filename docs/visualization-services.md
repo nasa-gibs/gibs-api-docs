@@ -7,11 +7,11 @@
 
 ## Visualization Services
 
-The Global Imagery Browse Services (GIBS) provides visualizations through the following APIs/services, further described on this page:
+NASA's Global Imagery Browse Services (GIBS) provides visualizations through the following APIs/services, further described on this page:
 
   * [OGC Web Map Tile Service (WMTS)](#ogc-web-map-tile-service-wmts)
   * [OGC Web Map Service (WMS)](#ogc-web-map-service-wms)
-  * [Tiled Web Map Service (TWMS)](#ogc-web-map-service-wms)
+  * [Tiled Web Map Service (TWMS)](#tiled-web-map-service-twms)
   * [Generic XYZ Tile Service (TMS)](#generic-xyz-tile-access-tms)
 
 Each service is publicly available through endpoints specific to the service, projection, and category (e.g. Near Real-Time vs "Best Available") hosted on the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain. (See [here](../api-advanced-topics/#service-endpoints) for more details)

@@ -15,7 +15,7 @@ Visit the following content areas within this documentation site to learn more a
 * **Available Visualizations** - Learn more about what visualizations are available to you
 * **Access Basics** - Learn the basics about accessing visualizations through GIBS services
 * **Access Advanced Topics** - Take a deeper dive into advanced topics related to accessing and interpreting GIBS visualizations  
-* **?**
-* **?**
+* **Accessing via GIS Applications** - Learn how to access GIBS imagery via Geographic Information System (GIS) applications
+* **Accessing via Map Libraries and Scripts** - Learn how to access GIBS imagery from interactive mapping libraries and GDAL-based scripts
 
 Contact us at [mailto:support@earthdata.nasa.gov](support@earthdata.nasa.gov) if you have additional questions.

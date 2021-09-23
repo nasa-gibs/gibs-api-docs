@@ -1,45 +1,115 @@
 # Accessing via GIS Applications
 
-Through the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), it's often possible to access imagery directly from NASA's Global Imagery Browse Services (GIBS) from your favorite Geographic Information System (GIS) client.
+NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through standards-compliant web services (See [Visualization Services](../visualization-services/#visualization-services)).  These services, specifically the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), allow you to access GIBS visualizations directly within many Geographic Information System (GIS) clients.  The information on this page provides instructions for accessing GIBS visualizations through these GIS clients:
 
-Please note: some existing GIS applications do not currently handle time-varying imagery layers, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support. Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/) "image capture" tool (camera icon in upper right) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
+* [QGIS](#qgis)
+* [ESRI ArcGIS Pro](#esri-arcgis-pro)
+* [ESRI ArcGIS/ArcMap](#esri-arcgisarcmap)
+* [ESRI ArcGIS Online](#esri-arcgis-online)
+* [Google Earth (Web / Pro)](#google-earth-web-pro)
+
+!!! Note
+    Some GIS applications do not currently handle time-varying visualizations, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support.
+    Alternatively, [Worldview's](https://worldview.earthdata.nasa.gov/){:target="_blank"} "image snapshot" tool (pictured below) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.
+
+    ![Worldview, Capture Image Snapshot](img/Worldview-snapshot2.png){ width=70% }
+
+<hr style="border:2px solid gray"> </hr>
 
 ## QGIS
 
-The [QGIS application](https://qgis.org/) supports GIBS' time-varying layers using the WMS protocol.
+The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-varying layers using the WMS protocol.
 
 ### Requirements
 
-* QGIS [version 3.14](https://qgis.org/en/site/forusers/visualchangelog314/#temporal) or later
+* QGIS [version 3.14](https://qgis.org/en/site/forusers/visualchangelog314/#temporal){:target="_blank"} or later
 
 ### Instructions
 
 * In QGIS, open the "Layer | Add Layer | Add WMS / WMTS Layer" window
 * Add a "Name" such as "GIBS WMS (EPSG:4326, Best)"
-* Add a "URL" for the [GIBS WMS endpoint](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+API+for+Developers#GIBSAPIforDevelopers-OGCWebMapService(WMS)) of your desired map projection, e.g. one of the following:
+* Add a "URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
 [https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
 
-![QGIS, Add WTMS Connection](img/CreateWMTSConnection_QGIS.png)
+![QGIS, Add WTMS Connection](img/CreateWMSConnection_QGIS.png)
 
 * Click the "Connect" button to list all available layers for that map projection, select a layer of interest, and "Add" it to the map:
 
-![QGIS, Connect to WTMS Connection](img/ConnectWMTS_QGIS.png)
+![QGIS, Connect to WMS Connection](img/ConnectWMS_QGIS.png)
 
 * This should result in a map and legend with your selected layer:
 
-![QGIS, WMTS Layer added](img/WMTSlayer_QGIS.png)
+![QGIS, WMS Layer added](img/WMSlayer_QGIS.png)
 
 * At this point, you'll need to enable temporal navigation in QGIS to change the currently-displayed date; just above the map area, you can enable either a fixed temporal range or an animated one. For this example, we'll enable a fixed one by clicking the ![QGIS, Temporal Controller Button](img/TemporalControllerbutton_QGIS.png) button.
 * In the case of QGIS, the first field (i.e., leftmost) in the date range is what controls the imagery from GIBS.
 
 ![QGIS, Temporal Controller](img/TemporalController_QGIS.png)
 
-## ESRI ArcGIS/ArcMap
+* Note that each time-enabled layer also has a "clock" button which helpfully takes you to a temporal properties panel for that particular layer.
 
-GIBS imagery layers can be directly imported into ESRI ArcGIS/ArcMap 10.2.1 or later using the WMS protocol.
+![QGIS, Temporal Info Button](img/TemporalInfoButton_QGIS.png){ width=50% }
+
+![QGIS, Temporal Info Panel](img/TemporalInfoPanel_QGIS.png){ width=70% }
+
+
+<hr style="border:2px solid gray"> </hr>
+
+## ESRI ArcGIS Pro
+
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview) using the WMS protocol.
+
+### Requirements
+
+* ESRI ArcGIS Pro 2.7 or later
+
+### Instructions
+
+1. After starting up ArcGIS Pro, select "Start without a template" from the home page
+1. Click the "Insert" tab, "Connections", "New WMS Server"<br>
+![ArcGIS Pro New WMS Server](img/ArcGISPro-NewWMS.png){ width=50% }
+1. Add a "Server URL" for the [GIBS WMS endpoint](/visualization-services/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
+[https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
+[https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
+[https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
+[https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
+1. If the "Catalog" pane isn't already open, click the "View" tab and then the "Catalog Pane" button
+1. In the Catalog pane, click the triangle next to the "Servers" item which should reveal the "NASA Global Imagery Browse Services (GIBS)" entry; note that you can now add this entry as a favorite by right-clicking on it and "Add to Favorites" which will then allow it to appear in the favorites tab<br>
+![ArcGIS Pro Catalog Pane](img/ArcGISPro-CatalogPane.png){ width=30% }
+1. Right-click on a GIBS layer of your choosing ("Aerosol Index (OMPS, Suomi NPP)" is selected above), select "Add To New" and then "Map"; 
+1. At this point and depending on the layer you've selected, you should see imagery on the map!  
+    * A legend may also be available for your selected layer if you expand the layer item in the Contents pane.  
+    * If you don't see imagery yet, you may need to zoom out to see if it's available in another part of the world and/or adjust the currently-selected time as described in the next steps.<br>
+![ArcGIS Pro Map Imagery](img/ArcGISPro-MapImagery.png){ width=60% }
+1. Since most GIBS imagery is available over many different points in time, you'll now need to enable the time controls to select your date/time of interest.  So once you add a time-varying layer into ArcGIS Pro, a "Time" tab in the top ribbon should now be visible.
+![ArcGIS Pro Map Imagery](img/ArcGISPro-TimePanel.png){ width=100% }
+    * On the right side, notice the “Full Extent” group; the dates listed show the start and stop dates available
+    * On the left side in the “Current Time” group:
+        * Enter the Start date - this will be the date that you want to display
+        * Set the Span to 0
+        * The End date should match the Start date after the Span is set to 0
+    * In the "Step" group
+        * If the "Step Interval" area is grayed out, click the clock icon to the right of the selection
+        * Ensure that the radio button next to "Step Interval" is selected and choose your desired time adjustment increment; for most GIBS layers this is set to "1 Days".  That said, there are many other types of layers including geostationary which is generally on a 10 minute interval.  Other layer intervals include 8 days, 1 month, or one year.  You can often deduce this from the GIBS layer name itself which often includes its interval (e.g., "8-day") if it's not a daily product.<br>
+1. Hover over the time display in the top right of the main display area. The times in blue contain data for that period. If the area is white, there is no data available. To advance the time one step, click on the smaller right arrow on the time display or in the “Playback” group. To show an animation, click on the larger right arrow. The control the pace of the animation, in the “Playback” tab adjust the slider labeled “slower – faster”. To reset the time to the current start, move the time icon all the way to the left with your mouse. Note – If you use the mouse to reposition the time icon, be careful to clear the time in “Start” and “End” current time or the data may not display.
+![ArcGIS Pro Map Imagery](img/ArcGISPro-TimeController.png){ width=60% }
+
+### Troubleshooting
+
+Here are some common reasons why imagery isn't appearing:
+
+* The current time is not within the full extent period
+* The Span is not set to 0
+* The step interval of the dataset is not correctly set (e.g. 1 years set instead of 1 days)
+
+<hr style="border:2px solid gray"> </hr>
+
+## ESRI ArcGIS Desktop/ArcMap
+
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview) using the WMS protocol.
 
 ### Requirements
 
@@ -48,7 +118,7 @@ GIBS imagery layers can be directly imported into ESRI ArcGIS/ArcMap 10.2.1 or l
 ### Instructions
 
 * Open the "Catalog" window (far right pane) in ArcMap and select "Add WMS Server"
-* Paste one of the [GIBS WMS endpoints](http://127.0.0.1:8000/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)) into the "URL" field and press the "Get Layers" button to validate the connection.
+* Paste one of the [GIBS WMS endpoints](http://127.0.0.1:8000/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) or [Web Mercator](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)) into the "URL" field and press the "Get Layers" button to validate the connection.
 
 ![ArcMap, Add WMS Server](img/ArcMap-CatWindow.png)
 
@@ -64,13 +134,15 @@ GIBS imagery layers can be directly imported into ESRI ArcGIS/ArcMap 10.2.1 or l
 
 ![ArcMap, Time Slider](img/ArcMap-TimeSlider.png)
 
-* Add any additional layers in a similar manner.
+* Add any other layers in a similar manner.
 
 ![ArcMap, Time Panel](img/ArcMap-TimePanel.png)
 
+<hr style="border:2px solid gray"> </hr>
+
 ## ESRI ArcGIS Online
 
-GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgis.com/) in one of two ways: through the GIBS WMS or as a predefined layer from ESRI.
+GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgis.com/){:target="_blank"} in one of two ways: through the GIBS WMS or as a predefined layer from ESRI.
 
 ### Adding GIBS layers via WMS
 
@@ -85,58 +157,44 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 ![ArcGIS Online, Add Layer from web](img/AGOL-AddLayer2.png)
 
 * For each layer that you've loaded, click on the three small dots below "NASA Global Imagery Browse Services for EOSDIS", then "WMS OGC options"
-* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date
+* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date; note that this is currently a workaround and should be more directly supported in the future
 
 ![ArcGIS Online, Adjust Time](img/AGOL-TimeAdjust2.png)
 
 ### Adding GIBS layers from a list of ones predefined by ESRI
 
-* Search for ["Global Imagery Browse Services"](http://www.arcgis.com/home/search.html?q=Global%20Imagery%20Browse%20Services&t=content) in ArcGIS Online and add individual results to your map, such as [Aqua/MODIS Corrected Reflectance (True Color)](http://www.arcgis.com/home/item.html?id=10739eefdc9743a2b884bebe4b3476d7).
+* Search for ["Global Imagery Browse Services"](http://www.arcgis.com/home/search.html?q=Global%20Imagery%20Browse%20Services&t=content){:target="_blank"} in ArcGIS Online and add individual results to your map, such as [Aqua/MODIS Corrected Reflectance (True Color)](http://www.arcgis.com/home/item.html?id=10739eefdc9743a2b884bebe4b3476d7){:target="_blank"}.
 * To change the currently-displayed date, go to the "Details" pane, then click the small down arrow next to the layer name. Click "Enable Time Animation", then adjust the date at the bottom of the page.
 
 ![ArcGIS Online, Enable Time](img/AGOL-EnableTime.png)
 
-## Google Earth (Web)
+<hr style="border:2px solid gray"> </hr>
 
-The [web-based Google Earth](https://earth.google.com/web/) experimentally supports loading of KML/KMZ files which allows you to import GIBS imagery via Worldview's KMZ download capability.
+## Google Earth (Web / Pro)
 
-### Usage (Generate/Download KMZ file)
+The [web-based Google Earth](https://earth.google.com/web/){:target="_blank"} and [desktop Google Earth Pro](https://www.google.com/earth/versions/#earth-pro){:target="_blank"} support loading of KML/KMZ files which allows you to import GIBS imagery via Worldview's KMZ download capability.
 
-* Start in [Worldview](https://worldview.earthdata.nasa.gov/) to find your imagery of interest.
+### Generate/Download KMZ file from Worldview
+
+* Start in [Worldview](https://worldview.earthdata.nasa.gov/){:target="_blank"} to find your imagery of interest.
     * Use Worldview's "camera tool" in the upper right corner to select an image to download and choose the "KMZ" format
     * Click "Download" and save the KMZ file to your computer
 
 ![Worldview, image snapshot](img/Worldview-snapshot.png)
 
-* Open [Google Earth](https://earth.google.com/web/)
-    * Click the "hamburger" button (three horizontal lines in the upper left), and go to Settings; turn on the "Enable KML File Import" setting
-    * Click the "hamburger" button again, and go to "My Places"; click the "Import KML File" button and "Open File..."
+### Loading a KMZ into Google Earth (Web)
+
+* Open [Google Earth (Web)](https://earth.google.com/web/){:target="_blank"}
+    * Click the "hamburger" button (three horizontal lines in the upper left), go to Projects, and click "Import KML from computer"
     * Select the KMZ file that you just downloaded from Worldview
 
 ![Google Earth, Worldview KMZ](img/GoogleEarth-WorldviewKMZ.png)
 
-#### Limitations
 
-As of this writing, the KML files generated by GIBS aren't supported by the web-based version of Google Earth.
+### Loading a KMZ into Google Earth Pro (Desktop)
 
-## Google Earth Pro (Desktop)
+* Launch [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro){:target="_blank"}
+    * Go the the "File" menu and click "Open..." 
+    * Select the KMZ file that you just downloaded from Worldview
 
-GIBS can generate KML files to be used with Google Earth Pro. Those KMLs include pointers to GIBS imagery via the NetworkLink keyword. Users have two options on loading KML files into Google Earth Pro as described below.
-
-### Requirements
-
-* [Google Earth Pro standalone client](https://www.google.com/earth/versions/#earth-pro)
-
-### Usage (Generate/Download KML file)
-
-Using the [information on generating KMLs](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+API+for+Developers#GIBSAPIforDevelopers-GoogleEarthKMLAccess), you can load that downloaded file from within Google Earth (File | Open) or usually by simply double-clicking on the KML file itself. The layer will show up in the "Temporary Places" within the "Places" window.
-
-### Usage (Load from within Google Earth Pro)
-
-After launching Google Earth Pro, choose the "Network Link" item from the "Add" menu. Choose whatever Name you wish and in the "Link" field, insert the appropriate link (e.g., [https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=2012-06-21](https://gibs.earthdata.nasa.gov/twms/epsg4326/best/kmlgen.cgi?layers=MODIS_Terra_CorrectedReflectance_TrueColor&time=2012-06-21)). Check the [list of available layers](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+Available+Imagery+Products). Find more details on how to compose a proper [KML generation request from the GIBS server](https://wiki.earthdata.nasa.gov/display/GIBS/GIBS+API+for+Developers#GIBSAPIforDevelopers-GoogleEarthKMLAccess).
-
-#### Limitations (both methods)
-
-Due to the way NetworkLink is handled in Google Earth Pro for global datasets, you may need to zoom out to a more "global" view before imagery begins loading.
-
-When using a KML that contains multiple time steps, the time slider by default usually attempts to display the entire time range simultaneously; this can cause a Z-fighting problem where all time steps are fighting to be shown. To correct the problem, narrow the range of currently-shown time to a single day using the time widget.
+![Google Earth Pro, Worldview KMZ](img/GoogleEarthPro-WorldviewKMZ.png)
