@@ -55,14 +55,10 @@ th {
   color: #666;
 }
 
-.source-container {
-  margin: 5px;
-  padding: 10px;
-}
-
 .layer-table.docutils {
   border-collapse: collapse;
   width: 100%;
+  margin: 5px;
 }
 .layer-table.docutils tr td {
   padding: 6px;
