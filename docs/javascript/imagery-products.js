@@ -266,7 +266,7 @@ const app = new Vue({
 });
 
 const requestSettings = {
-  url: "https://worldview.sit.earthdata.nasa.gov/config/wv.json",
+  url: "../wv.json",
   type: "GET",
   crossDomain: true,
   dataType: "json",
