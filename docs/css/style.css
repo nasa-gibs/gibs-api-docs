@@ -22,3 +22,54 @@ th {
 .tocbase .toctree-l3.current {
   background: #bdbdbd;
 }
+
+.source {
+  border: 1px solid #ccc;
+}
+
+/* Imagery Products Styles */
+#page-container h2 {
+  margin: 10px 10px 20px 0;
+}
+#page-container h3 {
+  margin: 10px 10px 10px 0;
+}
+#page-container h4 {
+  margin: 0px 10px 10px 0;
+}
+
+.category-selector {
+  margin: 15px 0;
+}
+.category-selector select {
+  font-size: 16px;
+}
+
+.measurement-container h3 {
+  cursor: pointer;
+}
+.measurement-container h3:hover {
+  color: #666;
+}
+
+.source-container {
+  margin: 5px;
+  padding: 10px;
+}
+
+.layer-table.docutils {
+  border-collapse: collapse;
+  width: 100%;
+}
+.layer-table.docutils tr td {
+  padding: 6px;
+}
+
+.layer-table td, .layer-table th {
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+
+.monospace {
+  font-family:'Courier New', Courier, monospace;
+}
