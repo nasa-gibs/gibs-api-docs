@@ -1,3 +1,12 @@
+const store = {
+  loading: true,
+  allMeasurements: undefined,
+  allLayers: undefined,
+  measurements: undefined,
+  categories: undefined, 
+  selectedCategory: 'All',
+}
+
 Vue.component('category-selector', {
   props: ['categories', 'selectCategory'],
   template: `
@@ -22,6 +31,8 @@ Vue.component('layer-row', {
       <td> {{ layer.instrument }} </td>
       <td> {{ layer.title }} <br/> <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a> </td>
       <td> {{ layer.period }} </td>
+      <td> <span v-for="proj in layer.projections"> {{ proj }} <br/> </span> </td>
+      <td> <span v-for="res in layer.resolution"> {{ res }} <br/> </span> </td>
       <td> {{ layer.format }} </td>
       <td> {{ layer.startDate }} - {{layer.endDate}} </td>
       <td class="monospace"> {{ layer.product }}</td>
@@ -34,20 +45,104 @@ Vue.component('layer-row', {
 })
 
 Vue.component('layer-table', {
-  props: ['layers'],
+  props: ['measurement'],
   template: `
     <table class="layer-table docutils">
       <thead>
-        <tr> <th v-for="title in columnTitles"> {{title}} </th> </tr>
+        <tr> 
+          <th v-for="col in columns" v-on:click="sortBy(col)"> 
+            {{col.title}} 
+            <span class="sort" v-if="col.sortable && col.sorted === 'ASC'"> &uarr; </span>
+            <span class="sort" v-else-if="col.sortable && col.sorted === 'DESC'"> &darr; </span>
+            <span class="sort unsorted" v-else-if="col.sortable"> &varr; </span>
+          </th> 
+        </tr>
       </thead>
       <tbody>
         <layer-row v-for="layer in layers" :layer="layer"></layer-row>
       </tbody>
     </table>`,
   data: function () {
-    return { 
-      columnTitles: [ 'Platform', 'Instrument', 'Name / Identifier', 'Period', 'Format', 'Temporal Range', 'Product'] 
+    return {
+      layers: [
+        ...this.measurement.layers,
+      ],
+      columns: [
+        {
+          title: 'Platform',
+          property: 'platform',
+          sortable: true,
+          sorted: 'ASC',
+        },
+        {
+          title: 'Instrument',
+          property: 'instrument',
+          sortable: true,
+          sorted: false,
+        },
+        {
+          title: 'Name / Identifier',
+          property: 'title',
+          sortable: true,
+          sorted: false,
+        },
+        {
+          title: 'Period',
+          property: 'period',
+          sortable: true,
+          sorted: false,
+        },
+        {
+          title: 'Projections',
+          property: 'projections',
+          sortable: false,
+        },
+        {
+          title: 'Resolution',
+          property: 'resolution',
+          sortable: true,
+          sorted: false,
+        },
+        {
+          title: 'Format',
+          property: 'format', 
+          sortable: true,
+          sorted: false,
+        },
+        {
+          title: 'Temporal Range',
+          sortable: false,
+        },
+        {
+          title: 'Product',
+          property: 'product',
+          sortable: true,
+          sorted: false,
+        },
+      ],
     }
+  },
+  methods: {
+    sortBy: function (col) {
+      const { property } = col;
+      const getVal = (obj) => obj[property] ? obj[property] : ' ';
+      if (col.sorted === 'ASC') {
+        this.layers = this.layers.sort((a, b) => getVal(a) < getVal(b) ? -1 : getVal(a) > getVal(b) ? 1 : 0);
+        col.sorted = 'DESC'
+      } else {
+        this.layers = this.layers.sort((a, b) => getVal(a) < getVal(b) ? 1 : getVal(a) > getVal(b) ? -1 : 0);
+        col.sorted = 'ASC'
+      }
+      this.columns.forEach(column => {
+        if (column.property !== col.property) {
+          column.sorted = false;
+        }
+      });
+    }
+  },
+  mounted: function () {
+    // TODO check initial sort
+    this.sortBy(this.columns.find(({sorted}) => sorted));
   }
 })
 
@@ -57,7 +152,7 @@ Vue.component('measurement-container', {
     <div class="measurement-container">
       <h3 v-on:click="toggleExpanded()"> {{expandSymbol}} {{ measurement.title }} </h3>
       <div v-if="isExpanded">
-        <layer-table :layers="measurement.layers"> </layer-table>
+        <layer-table :measurement="measurement"> </layer-table>
       </div>
     </div>`,
   data: function () {
@@ -83,9 +178,19 @@ function formatLayers (layers) {
     const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
     return (key === 'endDate' && !inactive) ? 'Present' : date;
   }
+  const getResolution = (projections) => {
+    const resObj = {};
+    Object.keys(projections).forEach(key => {
+      const { matrixSet } = projections[key];
+      resObj[matrixSet] = resObj[matrixSet] ? resObj[matrixSet] += `, ${key}` : key 
+    });
+    const resKeys = Object.keys(resObj)
+    return resKeys.length === 1 ? [resKeys[0]] : resKeys.map(res => `${res} (${resObj[res]})`);
+  }
   Object.keys(layers).map(id => {
     const layer = layers[id];
     const projections = Object.keys(layer.projections);
+    const resolution = getResolution(layer.projections);
     const startDate = getDate(layer, 'startDate');
     const endDate = getDate(layer, 'endDate');
     const format = (layer.format || ' / ').split('/')[1];
@@ -95,12 +200,13 @@ function formatLayers (layers) {
     layers[id] = {
       ...layer,
       projections,
-      format,
+      format: format && format.trim(),
       product,
       startDate,
       endDate,
-      platform,
-      instrument,
+      platform: platform && platform.trim(),
+      instrument: instrument && instrument.trim(),
+      resolution,
     }
   });
   return layers;
@@ -108,14 +214,7 @@ function formatLayers (layers) {
 
 const app = new Vue({
   el: '#page-container',
-  data: {
-    loading: true,
-    allMeasurements: undefined,
-    allLayers: undefined,
-    measurements: undefined,
-    categories: undefined, 
-    selectedCategory: 'All',
-  },
+  data: store,
   methods: {
     selectCategory: function(event) {
       const category = event.target.options[event.target.options.selectedIndex].text

@@ -72,3 +72,10 @@ th {
 .monospace {
   font-family:'Courier New', Courier, monospace;
 }
+
+.sort {
+  cursor: pointer;
+}
+.unsorted {
+  color: #666;
+}
