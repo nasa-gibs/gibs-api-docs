@@ -3,6 +3,7 @@ site_name: Global Imagery Browse Services (GIBS)
 nav:
     - 'index.md'
     - Available Visualizations: visualization-layers.md
+    - Available Imagery Products: available-imagery-products.md
     - Access Basics: visualization-services.md
     - Access Advanced Topics: api-advanced-topics.md
     - Accessing via GIS Applications: gis-usage.md
@@ -10,7 +11,9 @@ nav:
 extra_css:
     - css/style.css
 extra_javascript:
+    - https://cdn.jsdelivr.net/npm/vue@2
     - javascript/overrides.js
+    - javascript/imagery-products.js
 theme:
     name: 'rtd-dropdown'
 markdown_extensions:
