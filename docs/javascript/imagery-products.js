@@ -76,105 +76,101 @@ Vue.component('measurement-container', {
   }
 })
 
-$(document).ready(() => { 
 
-  let allLayers = {};
-  let allMeasurements = {};
-  let allCategories = {};
-  let selectedCategory = 'All';
+function getMeasurementsForCategory(category, allCategories, allLayers, allMeasurements) { 
+  const keys = allCategories[category].measurements;
+  const mForCategory = {}
+  keys.forEach(key => {
+    const measurement = allMeasurements[key]
+    measurement.layers = [];
+    mForCategory[key] = measurement;
+  });
 
-  function getMeasurementsForCategory(category) { 
-    const keys = allCategories[category].measurements;
-    const mForCategory = {}
-    keys.forEach(key => {
-      const measurement = allMeasurements[key]
-      measurement.layers = [];
-      mForCategory[key] = measurement;
-    });
-
-    Object.keys(allLayers).forEach(key => {
-      const layer = allLayers[key];
-      let { layergroup } = layer; 
-      if (!layergroup) {
-        layergroup = 'Other';
-      }
-      if (layergroup === 'Reference') {
-        layergroup = 'Reference Map'
-      }
-      if (!mForCategory[layergroup]) {
-        console.error(layergroup);
-        return;
-      }
-      mForCategory[layergroup].layers.push(layer); 
-    });
-
-    return Object.keys(mForCategory).map(key => mForCategory[key]);
-  }
-
-  function getDate (layer, key) {
-    if (!layer[key]) {
-      return key === 'endDate' && layer['startDate'] ? 'Present' : '';
+  Object.keys(allLayers).forEach(key => {
+    const layer = allLayers[key];
+    let { layergroup } = layer; 
+    if (!layergroup) {
+      layergroup = 'Other';
     }
-    const { period, inactive } = layer;
-    const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
-    return (key === 'endDate' && !inactive) ? 'Present' : date;
+    if (layergroup === 'Reference') {
+      layergroup = 'Reference Map'
+    }
+    if (!mForCategory[layergroup]) {
+      console.error(layergroup);
+      return;
+    }
+    mForCategory[layergroup].layers.push(layer); 
+  });
+
+  return Object.keys(mForCategory).map(key => mForCategory[key]);
+}
+
+function getDate (layer, key) {
+  if (!layer[key]) {
+    return key === 'endDate' && layer['startDate'] ? 'Present' : '';
   }
+  const { period, inactive } = layer;
+  const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
+  return (key === 'endDate' && !inactive) ? 'Present' : date;
+}
 
-  function formatLayers (layers) {
-    Object.keys(layers).map(id => {
-      const layer = layers[id];
-      const projections = Object.keys(layer.projections);
-      const startDate = getDate(layer, 'startDate');
-      const endDate = getDate(layer, 'endDate');
-      const format = (layer.format || ' / ').split('/')[1];
-      const product = (layer.conceptIds || []).map(({shortName}) => shortName).join(', ');
-      const [ platform, instrument ] = (layer.subtitle || ' / ').split('/');
-      
-      layers[id] = {
-        ...layer,
-        projections,
-        format,
-        product,
-        startDate,
-        endDate,
-        platform,
-        instrument,
-      }
-    });
-    return layers;
+function formatLayers (layers) {
+  Object.keys(layers).map(id => {
+    const layer = layers[id];
+    const projections = Object.keys(layer.projections);
+    const startDate = getDate(layer, 'startDate');
+    const endDate = getDate(layer, 'endDate');
+    const format = (layer.format || ' / ').split('/')[1];
+    const product = (layer.conceptIds || []).map(({shortName}) => shortName).join(', ');
+    const [ platform, instrument ] = (layer.subtitle || ' / ').split('/');
+    
+    layers[id] = {
+      ...layer,
+      projections,
+      format,
+      product,
+      startDate,
+      endDate,
+      platform,
+      instrument,
+    }
+  });
+  return layers;
+}
+
+const app = new Vue({
+  el: '#page-container',
+  data: {
+    loading: true,
+    allMeasurements: undefined,
+    allLayers: undefined,
+    measurements: undefined,
+    categories: undefined, 
+    selectedCategory: 'All',
+  },
+  methods: {
+    selectCategory: function(event) {
+      const category = event.target.options[event.target.options.selectedIndex].text
+      this.measurements = getMeasurementsForCategory(category, this.categories, this.allLayers, this.allMeasurements);
+      this.selectedCategory = category;
+    },
   }
+});
 
-  function main( data ) {
-    allLayers = formatLayers(data.layers);
-    allMeasurements = data.measurements;
-    allCategories = data.categories["science disciplines"];
-    const measurements = getMeasurementsForCategory(selectedCategory);
-
-    const app = new Vue({
-      el: '#page-container',
-      data: {
-        measurements: measurements,
-        categories: allCategories, 
-        selectedCategory: selectedCategory,
-      },
-      methods: {
-        selectCategory: function(event) {
-          const category = event.target.options[event.target.options.selectedIndex].text
-          this.measurements = getMeasurementsForCategory(category);
-          this.selectedCategory = category;
-        }
-      }
-    });
-
+const requestSettings = {
+  url: "https://worldview.sit.earthdata.nasa.gov/config/wv.json",
+  type: "GET",
+  crossDomain: true,
+  dataType: "json",
+  success: function (data) {
+    app.loading = false;
+    app.allMeasurements = data.measurements;
+    app.allLayers = formatLayers(data.layers);
+    app.categories = data.categories['science disciplines'];
+    app.measurements = getMeasurementsForCategory(app.selectedCategory, app.categories, app.allLayers, app.allMeasurements)
   }
+}
 
-  const requestSettings = {
-    url: "https://worldview.sit.earthdata.nasa.gov/config/wv.json",
-    type: "GET",
-    crossDomain: true,
-    dataType: "json",
-    success: main
-  }
+$(document).ready(() => { 
   $.ajax(requestSettings);
-
 });

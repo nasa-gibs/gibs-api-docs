@@ -10,6 +10,7 @@ nav:
     - Accessing via Map Libraries and Scripts: map-library-usage.md
 extra_css:
     - css/style.css
+    - css/loading-spinner.css
 extra_javascript:
     - https://cdn.jsdelivr.net/npm/vue@2
     - javascript/overrides.js

@@ -14,7 +14,7 @@ code {
   font-size: 12px !important;
 }
 .wy-nav-content {
-  max-width: 1200px;
+  max-width: 1400px;
 }
 th {
   text-align: center;
@@ -28,6 +28,9 @@ th {
 }
 
 /* Imagery Products Styles */
+#page-container {
+  min-height: 600px;
+}
 #page-container h2 {
   margin: 10px 10px 20px 0;
 }
