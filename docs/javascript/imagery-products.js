@@ -169,6 +169,11 @@ Vue.component('measurement-container', {
   }
 })
 
+/**
+ * Build an array of all layers with display properties formatted as needed for docs
+ * @param {*} layers 
+ * @returns 
+ */
 function formatLayers (layers) {
   const getDate = (layer, key) => {
     if (!layer[key]) {
@@ -248,7 +253,8 @@ const app = new Vue({
           layergroup = 'Reference Map'
         }
         if (!mForCategory[layergroup]) {
-          console.error(layergroup);
+          // TODO handle this
+          // console.error(layergroup);
           return;
         }
         mForCategory[layergroup].layers.push(layer); 
