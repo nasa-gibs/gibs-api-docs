@@ -33,19 +33,17 @@ Vue.component('layer-row', {
   }
 })
 
-Vue.component('source-container', {
+Vue.component('layer-table', {
   props: ['layers'],
   template: `
-    <div class="source-container">
-      <table class="layer-table docutils">
-        <thead>
-          <tr> <th v-for="title in columnTitles"> {{title}} </th> </tr>
-        </thead>
-        <tbody>
-          <layer-row v-for="layer in layers" :layer="layer"></layer-row>
-        </tbody>
-      </table>
-    </div>`,
+    <table class="layer-table docutils">
+      <thead>
+        <tr> <th v-for="title in columnTitles"> {{title}} </th> </tr>
+      </thead>
+      <tbody>
+        <layer-row v-for="layer in layers" :layer="layer"></layer-row>
+      </tbody>
+    </table>`,
   data: function () {
     return { 
       columnTitles: [ 'Platform', 'Instrument', 'Name / Identifier', 'Period', 'Format', 'Temporal Range', 'Product'] 
@@ -59,7 +57,7 @@ Vue.component('measurement-container', {
     <div class="measurement-container">
       <h3 v-on:click="toggleExpanded()"> {{expandSymbol}} {{ measurement.title }} </h3>
       <div v-if="isExpanded">
-        <source-container :layers="measurement.layers"> </source-container>
+        <layer-table :layers="measurement.layers"> </layer-table>
       </div>
     </div>`,
   data: function () {
@@ -76,45 +74,15 @@ Vue.component('measurement-container', {
   }
 })
 
-
-function getMeasurementsForCategory(category, allCategories, allLayers, allMeasurements) { 
-  const keys = allCategories[category].measurements;
-  const mForCategory = {}
-  keys.forEach(key => {
-    const measurement = allMeasurements[key]
-    measurement.layers = [];
-    mForCategory[key] = measurement;
-  });
-
-  Object.keys(allLayers).forEach(key => {
-    const layer = allLayers[key];
-    let { layergroup } = layer; 
-    if (!layergroup) {
-      layergroup = 'Other';
-    }
-    if (layergroup === 'Reference') {
-      layergroup = 'Reference Map'
-    }
-    if (!mForCategory[layergroup]) {
-      console.error(layergroup);
-      return;
-    }
-    mForCategory[layergroup].layers.push(layer); 
-  });
-
-  return Object.keys(mForCategory).map(key => mForCategory[key]);
-}
-
-function getDate (layer, key) {
-  if (!layer[key]) {
-    return key === 'endDate' && layer['startDate'] ? 'Present' : '';
-  }
-  const { period, inactive } = layer;
-  const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
-  return (key === 'endDate' && !inactive) ? 'Present' : date;
-}
-
 function formatLayers (layers) {
+  const getDate = (layer, key) => {
+    if (!layer[key]) {
+      return key === 'endDate' && layer['startDate'] ? 'Present' : '';
+    }
+    const { period, inactive } = layer;
+    const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
+    return (key === 'endDate' && !inactive) ? 'Present' : date;
+  }
   Object.keys(layers).map(id => {
     const layer = layers[id];
     const projections = Object.keys(layer.projections);
@@ -151,8 +119,43 @@ const app = new Vue({
   methods: {
     selectCategory: function(event) {
       const category = event.target.options[event.target.options.selectedIndex].text
-      this.measurements = getMeasurementsForCategory(category, this.categories, this.allLayers, this.allMeasurements);
+      this.measurements = this.getMeasurementsForCategory(category);
       this.selectedCategory = category;
+    },
+    init: function (data) {
+      const { measurements, layers, categories } = data; 
+      this.loading = false;
+      this.allMeasurements = measurements;
+      this.allLayers = formatLayers(layers);
+      this.categories = categories['science disciplines'];
+      this.measurements = this.getMeasurementsForCategory(this.selectedCategory);
+    },
+    getMeasurementsForCategory: function getMeasurementsForCategory(category) { 
+      const keys = this.categories[category].measurements;
+      const mForCategory = {}
+      keys.forEach(key => {
+        const measurement = this.allMeasurements[key]
+        measurement.layers = [];
+        mForCategory[key] = measurement;
+      });
+    
+      Object.keys(this.allLayers).forEach(key => {
+        const layer = this.allLayers[key];
+        let { layergroup } = layer; 
+        if (!layergroup) {
+          layergroup = 'Other';
+        }
+        if (layergroup === 'Reference') {
+          layergroup = 'Reference Map'
+        }
+        if (!mForCategory[layergroup]) {
+          console.error(layergroup);
+          return;
+        }
+        mForCategory[layergroup].layers.push(layer); 
+      });
+    
+      return Object.keys(mForCategory).map(key => mForCategory[key]);
     },
   }
 });
@@ -162,13 +165,7 @@ const requestSettings = {
   type: "GET",
   crossDomain: true,
   dataType: "json",
-  success: function (data) {
-    app.loading = false;
-    app.allMeasurements = data.measurements;
-    app.allLayers = formatLayers(data.layers);
-    app.categories = data.categories['science disciplines'];
-    app.measurements = getMeasurementsForCategory(app.selectedCategory, app.categories, app.allLayers, app.allMeasurements)
-  }
+  success: app.init
 }
 
 $(document).ready(() => { 
