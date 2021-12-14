@@ -76,6 +76,9 @@ th {
 .sort {
   cursor: pointer;
 }
+.sort:hover {
+  color: #666;
+}
 .unsorted {
   color: #666;
 }
