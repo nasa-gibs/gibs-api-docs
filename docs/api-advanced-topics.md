@@ -1,26 +1,13 @@
 # Access Advanced Topics
 
-   * ["Best Available" Layers](#best-available-layers)
    * [Layer Naming Convention](#layer-naming-convention)
+   * ["Best Available" Layers](#best-available-layers)
    * [Domain Sharding](#domain-sharding)
+   * [Tiled Access Resolutions](#tiled-access-resolutions)
    * [Raster Visualizations](#raster-visualizations)
    * [Vector Visualizations](#vector-visualizations)
 
-## "Best Available" Layers
-
-Visualization layers representing the same science parameter from a specific instrument and platform may be available for multiple versions and/or data latencies. Direct access to those various flavors of the same visualization are directly available. However, many users are simply interested in seeing a consistent "best available" visualization. The details of what is "best" being determined by the GIBS team. Therefore, GIBS provides a unique set of "Best Available" visualization layers for all of its visualization layers, abstracting away the individual versions and latencies. A similar naming convention is used, as described in the previous section, but identifiers do not specify the version or latency (e.g. *MODIS_Terra_Aerosol_Optical_Depth*).
-
-For each "best available" layer, the "best" image will be determined based on the evaluation of availability for following imagery products:
-
-1. Latest Version Standard Product
-2. Latest Version NRT
-3. Previous Version Standard Product
-4. Previous Version NRT
-
-![versions](img/versions.png)
-
-See the image above for a visual example. The top four bars show the temporal coverage of related imagery products. The bottom bar shows the visualization products that will be returned based on the "best available" determination.
-
+<hr style="border:2px solid gray"> </hr>
 
 ## Layer Naming Convention
 GIBS visualization layer identifiers follow a human-readable convention (e.g. *MODIS_Terra_Aerosol_Optical_Depth_v6_STD*) to simplify situations where manual parsing of service documentation (e.g. WMTS GetCapabilities) is performed. Identifiers include uniquely identifying information like the following items:
@@ -32,13 +19,31 @@ GIBS visualization layer identifiers follow a human-readable convention (e.g. *M
 * **Data Version** - The version of the associated data product (e.g. "v6")
 * **Data Latency** - The latency of the associated data product (e.g. "STD" or "NRT")
 
-The following are examples of visualization layer identifiers for the "Aerosol Optical Depth" science parameter collected by the MODIS instrument on the Terra platform. In this example, visualization layers exist for a combination of data versions and latencies. The first item is considered the "Best Available" layer, which is described further in the following section.
+The following are examples of visualization identifiers for the "Aerosol Optical Depth" science parameter collected by the MODIS instrument on the Terra platform. In this example, visualization layers exist for a combination of data versions and latencies. The first item is considered the "Best Available" layer, which is described further in the following section.
 
 * MODIS_Terra_Aerosol_Optical_Depth
 * MODIS_Terra_Aerosol_Optical_Depth_v6_NRT
 * MODIS_Terra_Aerosol_Optical_Depth_v6_STD
 * MODIS_Terra_Aerosol_Optical_Depth_v5_NRT
 
+<hr style="border:2px solid gray"> </hr>
+
+## "Best Available" Layers
+
+Visualizations representing the same science parameter from a specific instrument and platform may be available for multiple versions and/or data latencies. Direct access to those various flavors of the same visualization are available. However, many users are simply interested in seeing a consistent "best available" visualization. Where the decision of what is "best" being determined by the GIBS team in cooperation with the visualiation provider. Therefore, GIBS provides a unique set of "Best Available" visualization layers for all of its visualization layers, abstracting away the individual versions and latencies.
+
+In most cases, the determination for what is considered "best" follows the following priority:
+
+1. Latest Version Standard Product
+2. Latest Version NRT
+3. Previous Version Standard Product
+4. Previous Version NRT
+
+![versions](img/versions.png)
+
+See the image above for a visual example. The top four bars show the temporal coverage of related visualizations. The bottom bar shows the visualization that will be returned based on the "best available" determination.
+
+<hr style="border:2px solid gray"> </hr>
 
 ## Domain Sharding
 The HTTP/1.1 specification limits the number of concurrent requests from a browser to the same server based on domain. When loading multiple map tiles in a user interface, this limitation results in a sub-optimal interaction.  The common workaround is to employ "domain sharding", which splits content across multiple subdomains. By doing so, browsers can download resources simultaneously, thus increasing the number of tiles loaded and improving the user experience. The HTTP/2 specification removed the limitation by allowing a browser to issue multiple simultaneous requests across a single connection.  Thus eliminating the need for domain sharding.
@@ -51,9 +56,58 @@ At present, GIBS infrastruction _does not_ support HTTP/2 connections.  Instead,
      
 Note that these are simply aliases for the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.
 
+<hr style="border:2px solid gray"> </hr>
+
+## Tiled Access Resolutions
+GIBS visualizations are fundamentally a set of pre-generated raster or vector tiles that comply with a known gridding structure and resolution (a.k.a. "TileMatrixSet"). These tiles are made available through tiled services (e.g. WMTS and TWMS) or non-tiled services (e.g. WMS).  The latter reads the native tiles and then slices and stitches as needed to create the requested output.  When developing visualizations, GIBS coordinates with the data owners to determine the "appropriate" resolution.
+
+The following subsections provide details regarding each projection's supported resolutions:
+
+### WGS 84 / Lat-lon / Geographic (EPSG:4326)
+| Resolution (per pixel) | Tile Matrix Set (WMTS) | # Zoom Levels | Max Resolution (deg/pixel) | Min Resolution (deg/pixel) |
+| ---------------------- | ---------------------- | ------------- | -------------------------- | -------------------------- |
+| 15.125m | 15.125m | 13 | 0.5625 | 0.0001373291015625 |
+| 31.25m | 31.25m | 12 | 0.5625 | 0.000274658203125 |
+| 250m | 250m | 9 | 0.5625 | 0.002197265625 |
+| 500m | 500m | 8 | 0.5625 | 0.00439453125 |
+| 1km | 1km | 7 | 0.5625 | 0.0087890625 |
+| 2km | 2km | 6 | 0.5625 | 0.017578125 |
+
+
+### NSIDC Sea Ice Polar Stereographic North (EPSG:3413)
+| Resolution (per pixel) | Tile Matrix Set (WMTS) | # Zoom Levels | Max Resolution (deg/pixel) | Min Resolution (deg/pixel) |
+| ---------------------- | ---------------------- | ------------- | -------------------------- | -------------------------- |
+| 250m | 250m | 6 | 8192.0 | 256.0 |
+| 500m | 500m | 5 | 8192.0 | 512.0 |
+| 1km | 1km | 4 | 8192.0 | 1024.0 |
+| 2km | 2km | 3 | 8192.0 | 2048.0 |
+
+### Antarctic Polar Stereographic (EPSG:3031)
+| Resolution (per pixel) | Tile Matrix Set (WMTS) | # Zoom Levels | Max Resolution (deg/pixel) | Min Resolution (deg/pixel) |
+| ---------------------- | ---------------------- | ------------- | -------------------------- | -------------------------- |
+| 250m | 250m | 6 | 8192.0 | 256.0 |
+| 500m | 500m | 5 | 8192.0 | 512.0 |
+| 1km | 1km | 4 | 8192.0 | 1024.0 |
+| 2km | 2km | 3 | 8192.0 | 2048.0 |
+
+### Web Mercator (EPSG:3857)
+!!! Note
+    GIBS does not store visualizations in this projection. Instead, tiles are reprojected on-the-fly from Geographic (EPSG:4326) sources.
+
+
+| Resolution (per pixel) | Tile Matrix Set (WMTS) | # Zoom Levels | Max Resolution (deg/pixel) | Min Resolution (deg/pixel) |
+| ---------------------- | ---------------------- | ------------- | -------------------------- | -------------------------- |
+| 19.10925707129405m | GoogleMapsCompatible_Level13 | 13 | 156543.03390625 | 19.10925707129405 |
+| 38.21851414258810m | GoogleMapsCompatible_Level12 | 12 | 156543.03390625 | 38.21851414258810 |
+| 305.7481131407048m | GoogleMapsCompatible_Level9 | 9 | 156543.03390625 | 305.7481131407048 |
+| 611.4962262814100m | GoogleMapsCompatible_Level8 | 8 | 156543.03390625 | 611.4962262814100 |
+| 1222.992452562820m | GoogleMapsCompatible_Level7 | 7 | 156543.03390625 | 1222.992452562820 |
+| 2445.984905125640m | GoogleMapsCompatible_Level6 | 6 | 156543.03390625 | 2445.984905125640 |
+
+<hr style="border:2px solid gray"> </hr>
 
 ## Raster Visualizations
-Raster visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/). WMTS responses are formatted as either PNG or JPEG image tiles, depending on the nature of the data being visualized.  WMS responses for raster products are available as PNG, JPEG, or GeoTIFF images, depending on the requested format.
+Raster visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/#visualization-services)). WMTS responses are formatted as either PNG or JPEG image tiles, depending on the nature of the data being visualized.  WMS responses for raster products are available as PNG, JPEG, or GeoTIFF images, depending on the requested format.
 
 Visualizations that represent scientific parameters (See [Visualization Categories](../visualization-layers/#visualization-categories)) map the following types of data to RGB values within GIBS visualizations, hereafter referred to as "data-to-image mapping":
 
@@ -88,7 +142,6 @@ A raster visualization's XML Colormap document is referenced in the WMTS Capabil
               xlink:title="GIBS Color Map: Data - RGB Mapping"/>
 ```
 
-
 #### Sample Content
 
 The following sections provide examples of GIBS Colormaps for each data-to-image mapping type, described previously, as well as a combined Colormap. In each example, a table containing the following information is provided to define the data-to-image mapping process:
@@ -110,7 +163,7 @@ Additionally, each example contains a table with the following information to de
 
 Finally, as you review each example, you will see that they will all contain a no-data Colormap entry, as is required by the specification. This entry is always considered to be a "Classification" mapping type. As such, it will be contained within its own Colormap for necessity for the Discrete and Continuous mapping types.
 
-
+<hr style="border:1px solid gray"> </hr>
 ##### Discrete Colormaps
 In this example, the following data-to-image mapping and legend information will be used to generate the Colormap. As you will see, the data values are single, discrete, values from 70 to 110, inclusive. The units for the measured parameter are meters or "m".
 
@@ -168,7 +221,7 @@ Using the information provided above, the following XML Colormap is generated:
   </ColorMap>
 </ColorMaps>
 ```
-
+<hr style="border:1px solid gray"> </hr>
 ##### Continuous Colormaps
 In this example, the following data-to-image mapping has been performed. As you can see, the data values are value ranges from < 10 to 70. The units for the measured parameter are meters or "m".
 
@@ -221,13 +274,13 @@ Using the information provided above, the following XML Colormap is generated:
 </ColorMaps>
 ```
 
+!!! Note
+    There are fewer entries in the Legend than there are ColorMap Entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:
+      
+       * The rgb values utilized in the Color Map contain two sets of entries that have unperceptively different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elements.
+       * The two LegendEntry elements are each assigned a unique numerical id. At the same time, each of the ColorMapEntry elements is assigned a ref value. The ColorMapEntry ref attribute references the LegendEntry id attribute. This allows for a clear association between the LegendEntry and ColorMapEntry elements.
 
-Note: There are fewer entries in the Legend than there are ColorMap Entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:
-
-   * The rgb values utilized in the Color Map contain two sets of entries that have unperceptively different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elemetns.
-   * The two LegendEntry elements are each assigned a unique numerical id. At the same time, each of the ColorMapEntry elements is assigned a ref value. The ColorMapEntry ref attribute references the LegendEntry id attribute. This allows for a clear association between the LegendEntry and ColorMapEntry elements.
-
-
+<hr style="border:1px solid gray"> </hr>
 
 ##### Classification Colormaps
 In this example, the following data-to-image mapping and legend information will be used to generate the Colormap. As you will see, the data values are freeze/thaw classifications. There are no associated units.
@@ -277,15 +330,17 @@ The XML representation of this color map is shown below:
 </ColorMaps>
 ```
 
+<hr style="border:2px solid gray"> </hr>
 
 ## Vector Visualizations
 
-Vector visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/). WMTS responses are formatted as gzip-compressed Mapbox vector tiles ([specification](https://docs.mapbox.com/vector-tiles/specification/)), or "MVTs", while WMS responses are available as raster images.
+Vector visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see [Visualization Services](../visualization-services/#visualization-services)). WMTS responses are formatted as gzip-compressed Mapbox vector tiles ([specification](https://docs.mapbox.com/vector-tiles/specification/)), or "MVTs", while WMS responses are available as raster images.
 
-The data behind the WMTS and WMS visualization services are the same, however the mechanism for styling differs. A client application is responsible for applying styling to MVTs when using the WMTS API. (See [Vector Styles](#vector-styles)) Conversely, GIBS applies a default style when rendering vector data as a raster when using the WMS API.
+The data behind the WMTS and WMS visualization services are the same, however the mechanism for styling differs. A client application is responsible for applying styling to MVTs when using the WMTS service. (See [Vector Styles](#vector-styles)) Conversely, GIBS applies a default style when rendering vector data as a raster when using the WMS service.
 
 An MVT returned via the WMTS service contains information for a client to draw the features within the user interface, but also a set of properties that contain data associated with the feature. The Mapbox vector tile specification provides structure for representing these data, but no mechanism for interpreting the meaning or intended use. As such, additional metadata is required. GIBS has developed a specification for defining each property contained within MVTs in its vector products. (See [Vector Properties](#vector-properties))
 
+<hr style="border:1px solid gray"> </hr>
 
 ### Access
 #### WMTS
@@ -321,19 +376,19 @@ for key in decoded_data:
    print(key + " Feature Count: " + str(len(decoded_data[key]["features"])))
 ```
 
-**NOTE** - Vector products are not natively provided in the EPSG:3857 projection through the WMTS service. At present there is no workaround.
+**NOTE** - Vector products are not provided in the EPSG:3857 projection through the WMTS service. At present there is no workaround.
 
 
 #### WMS
 
-Accessing a vector product through the WMS service follows the same rules as raster products. Both version 1.1.1 and 1.3.0 WMS GetMap requests will return rasterized representations of the vector product. See below for an example request and response:
+Accessing a vector visualization through the WMS service follows the same rules as raster products. Both version 1.1.1 and 1.3.0 WMS GetMap requests will return rasterized representations. See below for an example request and response:
 
 * Request: [https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?/wms/epsg4326/best/wms.cgi?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&TIME=2020-10-01T00:00:00Z&LAYERS=VIIRS_NOAA20_Thermal_Anomalies_375m_All &FORMAT=image/png&STYLES=&HEIGHT=240&SRS=epsg:4326&WIDTH=480&BBOX=-180,-90,180,90&TRANSPARENT=TRUE](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?/wms/epsg4326/best/wms.cgi?TIME=2020-10-01T00:00:00Z&LAYERS=VIIRS_NOAA20_Thermal_Anomalies_375m_All&REQUEST=GetMap&SERVICE=WMS&FORMAT=image/png&STYLES=&HEIGHT=240&VERSION=1.1.1&SRS=epsg:4326&WIDTH=480&BBOX=-180,-90,180,90&TRANSPARENT=TRUE)
 * Response: (See Below)
 
 ![wms_response](img/wms_response.png)
 
-Almost all raster layers in the GIBS WMS service provide a link to a pre-generated legend image as the LegendURL associated with the default style. This image is generated from the associated XML colormap. However, for vector products, the GIBS WMS service utilizes the `GetLegendGraphic` request as the basis for a layer's LegendURL. The following snippet shows how this is defined in the WMS Capabilities document. 
+Almost all raster visualizations in the GIBS WMS service provide a link to a pre-generated legend image as the LegendURL associated with the default style. This image is generated from the associated XML colormap. However, for vector visualizations, the GIBS WMS service utilizes the `GetLegendGraphic` request as the basis for a layer's LegendURL. The following snippet shows how this is defined in the WMS Capabilities document. 
 
 ``` xml
 <Style>
@@ -348,7 +403,9 @@ Issuing the sample request returns the following image.
 
 ![thermal_anomaly](img/thermal_anomaly.png)
 
-**NOTE** - Vector products are not natively provided in the EPSG:3857 projection through the WMS services  A workaround is to utilize the EPSG:4326 endpoint with EPSG:3857-based SRS and BBOX query parameters ([example](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?service=WMS&request=GetMap&version=1.1.1&layers=VIIRS_SNPP_Thermal_Anomalies_375m_All&styles=&format=image%2Fpng&transparent=false&srs=EPSG:3857&width=480&height=480&bbox=-20037508,-20037508,20037508,20037508&time=2020-01-01)).
+**NOTE** - Vector visualizations are not provided in the EPSG:3857 projection through the WMS service.  A workaround is to utilize the EPSG:4326 endpoint with EPSG:3857-based SRS and BBOX query parameters ([example](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?service=WMS&request=GetMap&version=1.1.1&layers=VIIRS_SNPP_Thermal_Anomalies_375m_All&styles=&format=image%2Fpng&transparent=false&srs=EPSG:3857&width=480&height=480&bbox=-20037508,-20037508,20037508,20037508&time=2020-01-01)).
+
+<hr style="border:1px solid gray"> </hr>
 
 ### Vector Properties
 
@@ -621,14 +678,15 @@ The following block provides a full example of a *vector metadata* file.
 }
 ```
 
+<hr style="border:1px solid gray"> </hr>
 
 ### Vector Styles
 
-As mentioned previously, a client is responsible for applying style to MVT tiles received from the GIBS WMTS service in order to represent the feature defined within the MVT. This is most simply done by utilizing the vector style file provided by GIBS for each vector product. These vector style files following the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). Here is a [live example](https://nasa-gibs.github.io/gibs-web-examples/examples/openlayers/vectors/geographic-epsg4326-vector-mapbox-styles.html) of how to use these styles with [OpenLayers](http://openlayers.org/).
+As mentioned previously, a client is responsible for applying style to MVT tiles received from the GIBS WMTS service in order to represent the feature defined within the MVT. This is most simply done by utilizing the *vector style* file provided by GIBS for each vector visualization. These *vector style* file following the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). Here is a [live example](https://nasa-gibs.github.io/gibs-web-examples/examples/openlayers/vectors/geographic-epsg4326-vector-mapbox-styles.html) of how to use these styles with [OpenLayers](http://openlayers.org/).
 
 #### WMTS Capabilities Definition
 
-A vector product's vector style file is referenced in the WMTS Capabilities document as Layer/ows:Metadata elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector style* file and one for the versioned (e.g. '1.0') *vector style* file. This allows for the addition of future versions as enhancements to the GIBS vector product visualization capabilities, while retaining backwards compatibility.
+A vector visualization's *vector style* file is referenced in the WMTS Capabilities document as Layer/ows:Metadata elements. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" *vector style* file and one for the versioned (e.g. '1.0') *vector style* file. This allows for the addition of future versions as enhancements to the GIBS vector product visualization capabilities, while retaining backwards compatibility.
 
 **WMTS Capabilities Layer Metadata**
 
@@ -646,7 +704,7 @@ A vector product's vector style file is referenced in the WMTS Capabilities docu
 
 #### Vector Style Contents
 
-The *vector style* file contains the necessary information to apply a default style to a GIBS vector product, as required by the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). The file may contain style information for more than one vector product, as this allows for simplified file management within the GIBS system. Unneeded information should be ignored by the display library (e.g. [OpenLayers](http://openlayers.org/)). The following block provides a full example of a *vector style* file.
+The *vector style* file contains the necessary information to apply a default style to a GIBS vector visualization, as required by the [Mapbox style specification](https://docs.mapbox.com/mapbox-gl-js/style-spec/). The file may contain style information for more than one vector product, as this allows for simplified file management within the GIBS system. Unneeded information should be ignored by the display library (e.g. [OpenLayers](http://openlayers.org/)). The following block provides a full example of a *vector style* file.
 
 **Sample Vector Style File**
 
