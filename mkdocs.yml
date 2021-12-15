@@ -12,7 +12,7 @@ extra_css:
     - css/style.css
     - css/loading-spinner.css
 extra_javascript:
-    - https://cdn.jsdelivr.net/npm/vue@2
+    - javascript/vue@2.js
     - javascript/overrides.js
     - javascript/imagery-products.js
     - javascript/components.js
