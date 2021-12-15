@@ -73,7 +73,7 @@ The following clients support the GIBS WMTS visualization services:
 The [Open Geospatial Consortium (OGC) Web Map Service (WMS)](http://www.opengeospatial.org/standards/wms/) provides a way for clients to receive a customized WMS response based on request parameters such as a custom bounding box, dimensions, layer(s) and format. Unlike the rigidity enforced through tiled interfaces (e.g. WMTS and TWMS), WMS responses are more flexible and may contain multiple composited layers in a single output. Two WMS specifications are currently available and supported by GIBS: 1.1.1 and 1.3.0. Both WMS specifications support a single method of image retrieval, Key-Value Pair (KVP).
 
 #### Service Endpoints
-The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.a0 WMS specification versions.
+The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.0 WMS specification versions.
 
 |        Projection      |  Endpoint Root  | GetCapabilities | GetMap |
 | ---------------------- | --------------- | --------------- | --------------- |

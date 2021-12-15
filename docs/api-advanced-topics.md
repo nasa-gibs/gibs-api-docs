@@ -337,8 +337,8 @@ Using the information provided above, the following XML Colormap and legend are 
 #### Continuous Data (Reduced Legend)
 In this example, the following Colormap and Legend entries define a mapping for value ranges from < 10 to 50 (exclusive). The units for the measured parameter are meters or "m".  Note, however, that there are fewer Legend entries than ColorMap entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:
 
-       * The rgb values utilized in the Color Map contain two sets of entries that have unperceptively different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elements.
-       * The two Legend entries are each assigned a unique numerical id. At the same time, each of the Colormap entries is assigned a ref value. The Colormap entry's `ref` attribute references the Legend entry's `id` attribute. 
+   * The rgb values utilized in the Color Map contain two sets of entries that have unperceptively different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elements.
+   * The two Legend entries are each assigned a unique numerical id. At the same time, each of the Colormap entries is assigned a ref value. The Colormap entry's `ref` attribute references the Legend entry's `id` attribute. 
 
 
 **Colormap Entries**
