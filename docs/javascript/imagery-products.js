@@ -16,10 +16,20 @@ function formatLayers (layers) {
     const resObj = {};
     Object.keys(projections).forEach(key => {
       const { matrixSet } = projections[key];
-      resObj[matrixSet] = resObj[matrixSet] ? resObj[matrixSet] += `, ${key}` : key 
+      if (matrixSet)
+        resObj[matrixSet] = resObj[matrixSet] ? resObj[matrixSet] += `, ${key}` : key 
     });
     const resKeys = Object.keys(resObj)
-    return resKeys.length === 1 ? [resKeys[0]] : resKeys.map(res => `${res} (${resObj[res]})`);
+    switch (resKeys.length) {
+      case 0: {
+        return [];
+      }
+      case 1: {
+        return [resKeys[0]];
+      }
+      default: 
+        return resKeys.map(res => `${res} (${resObj[res]})`);
+    }
   }
   Object.keys(layers).map(id => {
     const layer = layers[id];
@@ -70,39 +80,26 @@ const app = new Vue({
       this.categories = categories['science disciplines'];
       this.measurements = this.getMeasurementsForCategory(this.selectedCategory);
     },
-    getMeasurementsForCategory: function getMeasurementsForCategory(category) { 
-      const keys = this.categories[category].measurements;
-      const mForCategory = {}
-      keys.forEach(key => {
-        const measurement = this.allMeasurements[key]
-        measurement.layers = [];
-        mForCategory[key] = measurement;
-      });
-    
-      Object.keys(this.allLayers).forEach(key => {
-        const layer = this.allLayers[key];
-        let { layergroup } = layer; 
-        if (!layergroup) {
-          layergroup = 'Other';
-        }
-        if (layergroup === 'Reference') {
-          layergroup = 'Reference Map'
-        }
-        if (!mForCategory[layergroup]) {
-          // TODO handle this
-          // console.error(layergroup);
-          return;
-        }
-        mForCategory[layergroup].layers.push(layer); 
-      });
-    
-      return Object.keys(mForCategory).map(key => mForCategory[key]);
+    getMeasurementsForCategory: function (category) { 
+      const { measurements } = this.categories[category];
+      return measurements.map((key) => {
+        const m = this.allMeasurements[key];
+        m.layers = Object.keys(m.sources)
+          .flatMap((source) => {
+            const { settings } = m.sources[source];
+            return settings.map((id) => this.allLayers[id])
+          })
+          .filter(({ layergroup }) => {
+            return key === 'Orbital Track' ? true : layergroup !== 'Orbital Track'
+          });
+        return m;
+      })
     },
   }
 });
 
 const requestSettings = {
-  url: "../wv.json",
+  url: "https://worldview.earthdata.nasa.gov/config/wv.json",
   type: "GET",
   crossDomain: true,
   dataType: "json",

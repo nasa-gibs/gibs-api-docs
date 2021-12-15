@@ -33,24 +33,13 @@ Vue.component('layer-table', {
       <tbody>
         <tr v-for="layer in layers">
           <td v-for="col in visibleColumns">
-            <span v-if="col.property === 'title'"> 
-              {{ layer.title }} <br/> <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a>
-            </span>
-            <span v-else-if="col.property === 'projections'">
-              <span v-for="proj in layer.projections"> {{ proj }} <br/> </span>
-            </span>
-            <span v-else-if="col.property === 'resolution'">
-              <span v-for="res in layer.resolution"> {{ res }} <br/> </span>
-            </span>
-            <span v-else-if="col.property === 'temporalRange'">
-              {{ layer.startDate }} - {{ layer.endDate }} 
-            </span>
-            <span v-else-if="col.property === 'product'" class="monospace">
-              {{ layer.product }}
-            </span>
-            <span v-else>
-              {{ layer[col.property] }}
-            </span>
+              <component 
+                :is="col.renderer" 
+                :layer="layer" 
+                :property="col.property"
+                :getUrl="getUrl"
+              >
+              </component>
           </td>
         </tr>
       </tbody>
@@ -62,6 +51,10 @@ Vue.component('layer-table', {
   },
   data: function () {
     const { layers } = this.measurement;
+    const defaultRenderer = {
+      props: ['layer', 'property', 'getUrl'],
+      template: `<span> {{ layer[property] }} </span>`
+    }
     return {
       layers: [
         ...layers,
@@ -72,14 +65,16 @@ Vue.component('layer-table', {
           property: 'platform',
           sortable: true,
           sorted: 'ASC',
-          visible: (() => layers.some(({ platform }) => platform ))()
+          visible: (() => layers.some(({ platform }) => platform ))(),
+          renderer: defaultRenderer
         },
         {
           title: 'Instrument',
           property: 'instrument',
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ instrument }) => instrument ))()
+          visible: (() => layers.some(({ instrument }) => instrument ))(),
+          renderer: defaultRenderer
         },
         {
           title: 'Name / Identifier',
@@ -87,53 +82,80 @@ Vue.component('layer-table', {
           sortable: true,
           sorted: false,
           visible: true,
+          renderer: {
+            ...defaultRenderer,
+            template: `
+              <span> 
+                {{ layer.title }} <br/> <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a> 
+              </span>
+            `
+          }
         },
         {
           title: 'Period',
           property: 'period',
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ period }) => period ))()
+          visible: (() => layers.some(({ period }) => period ))(),
+          renderer: defaultRenderer
         },
         {
           title: 'Projections',
           property: 'projections',
           sortable: false,
-          visible: (() => layers.some(({ projections }) => projections.length ))()
+          visible: (() => layers.some(({ projections }) => projections.length ))(),
+          renderer: {
+            ...defaultRenderer,
+            template: `<div><span v-for="proj in layer.projections"> {{proj}} <br/> </span></div>`
+          }
         },
         {
           title: 'Resolution',
           property: 'resolution',
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ resolution }) => resolution.length ))()
+          visible: (() => layers.some(({ resolution }) => resolution.length ))(),
+          renderer: {
+            ...defaultRenderer,
+            template: `<div><span v-for="res in layer.resolution"> {{res}} <br/> </span><div>`
+          }
         },
         {
           title: 'Format',
           property: 'format', 
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ format }) => format ))()
+          visible: (() => layers.some(({ format }) => format ))(),
+          renderer: defaultRenderer
         },
         {
           title: 'Temporal Range',
           property: 'temporalRange',
           sortable: false,
-          visible: (() => layers.some(({ startDate }) => startDate ))()
+          visible: (() => layers.some(({ startDate }) => startDate ))(),
+          renderer: {
+            ...defaultRenderer,
+            template: `<span> {{ layer.startDate }} - {{ layer.endDate }} </span>`
+          }
         },
         {
           title: 'Product',
           property: 'product',
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ product }) => product ))()
+          visible: (() => layers.some(({ product }) => product ))(),
+          renderer: {
+            ...defaultRenderer,
+            template: `<span class="monospace"> {{ layer.product }} </span>`
+          }
         },
       ],
     }
   },
   methods: {
     sortBy: function (col) {
-      const { property } = col;
+      const { property, sortable } = col;
+      if (!sortable) return;
       const getVal = (obj) => obj[property] ? obj[property] : ' ';
       if (col.sorted === 'ASC') {
         this.layers = this.layers.sort((a, b) => getVal(a) < getVal(b) ? -1 : getVal(a) > getVal(b) ? 1 : 0);
