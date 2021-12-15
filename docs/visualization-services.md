@@ -73,7 +73,7 @@ The following clients support the GIBS WMTS visualization services:
 The [Open Geospatial Consortium (OGC) Web Map Service (WMS)](http://www.opengeospatial.org/standards/wms/) provides a way for clients to receive a customized WMS response based on request parameters such as a custom bounding box, dimensions, layer(s) and format. Unlike the rigidity enforced through tiled interfaces (e.g. WMTS and TWMS), WMS responses are more flexible and may contain multiple composited layers in a single output. Two WMS specifications are currently available and supported by GIBS: 1.1.1 and 1.3.0. Both WMS specifications support a single method of image retrieval, Key-Value Pair (KVP).
 
 #### Service Endpoints
-The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.30 WMS specification versions.
+The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.a0 WMS specification versions.
 
 |        Projection      |  Endpoint Root  | GetCapabilities | GetMap |
 | ---------------------- | --------------- | --------------- | --------------- |
@@ -96,11 +96,20 @@ The following clients support the GIBS WMS visualization services:
 Tiled WMS offers fast response to a limited number of WMS access patterns - specifically those access patterns which provide geographic
 bounds which fall along the edges of pregenerated tiles.
 
-Those patterns are described in the TWMS [GetTileService request](https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService). The response is an XML encoded list of available WMS access patterns. A TiledPattern access pattern is a set gridded WMS requests, where parameter order, case and content are constant, with the exception of the bbox values. Using this pattern allows fast access to tiles for a given combination of layers and associated styles at a given resolution over a defined area. All the information about a pattern can be extracted form the provided WMS call, using these rules:
+Those patterns are described in the TWMS [GetTileService request](https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService). The response is an XML encoded list of available WMS access patterns. A TiledPattern access pattern is a set gridded WMS requests, where parameter order, case and content are constant, with the exception of the bounding box (bbox) values. Using this pattern allows fast access to tiles for a given combination of layers and associated styles at a given resolution over a defined area. All the information about a pattern can be extracted form the provided WMS call, using these rules:
 
-Server prefix is defined in the OnlineResource tag Area covered is defined in the LatLonBoundingBox Tile size is provided by the *width* and *height* parameters values Tile format is provided by the *format* parameter value Tile coverage can be computed as *(Lon1-Lon0)* and *(Lat1-Lat0)*, where *Lon1,Lon0,Lat1 and Lat0* are the arguments of the *bbox* parameter. The Grid alignment results from the *bbox* argument and the tile coverage. The *bbox* argument values provided in the pattern are for the top-left tile, the other tile locations can be computed based on the tile coverage. Other metadata that might be of interest to a user is contained in the *Name*, *Title* and *Abstract* tags.
-
-Multiple WMS patterns in a single *TilePattern* are equivalent. *TilePattern* tags that have something in common are grouped in a hierarchical structure build using *TiledGroup* tags. The innermost level refers to the same exact data, possible differences being the image size, image format, resolution, and alignment. Higher level *TiledGroup* are used to group together related datasets.
+   - Server prefix is defined in the OnlineResource tag
+   - Area covered is defined in the LatLonBoundingBox 
+   - Tile size is provided by the *width* and *height* parameters values 
+   - Tile format is provided by the *format* parameter value
+   - Tile coverage can be computed as *(Lon1-Lon0)* and *(Lat1-Lat0)*, where *Lon1,Lon0,Lat1 and Lat0* are the arguments of the *bbox* parameter. 
+   - The Grid alignment results from the *bbox* argument and the tile coverage. 
+   - The *bbox* argument values provided in the pattern are for the top-left tile, the other tile locations can be computed based on the tile coverage. 
+   - Other metadata that might be of interest to a user is contained in the *Name*, *Title* and *Abstract* tags. 
+   - Multiple WMS patterns in a single *TilePattern* are equivalent.
+   - *TilePattern* tags that have something in common are grouped in a hierarchical structure build using *TiledGroup* tags. 
+   - The innermost level refers to the same exact data, possible differences being the image size, image format, resolution, and alignment. 
+   - Higher level *TiledGroup* are used to group together related datasets.
 
 A client application is expected to request this information only if it is defined as a request in the WMS server Capabilities. Once obtained, the application needs to analyze the patterns, decide which ones can be used and then issue only WMS requests that match the pattern to the normal WMS server, requests that can be built by modifying the *bbox* argument in a *TiledPattern* and prefixing the resulting string with the content of the *OnlineResource* tag.
 
