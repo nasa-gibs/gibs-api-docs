@@ -14,7 +14,8 @@ code {
   font-size: 12px !important;
 }
 .wy-nav-content {
-  max-width: 1400px;
+  max-width: 1800px;
+  padding: 1.5em;
 }
 th {
   text-align: center;
@@ -40,16 +41,30 @@ th {
 #page-container h4 {
   margin: 0px 10px 10px 0;
 }
-
+.categories-header {
+  display: inline;
+}
 .category-selector {
-  margin: 15px 0;
+  margin: 10px auto;
+  text-align: center;
+  border: 1px solid #333;
+  background: #eee;
+  border-radius: 10px;
 }
 .category-selector select {
   font-size: 16px;
+  display: inline;
+  background: #fff;
+  cursor: pointer;
+}
+
+.imagery-products {
+  margin: 10px;
 }
 
 .measurement-container h3 {
   cursor: pointer;
+  margin-bottom: 8px;
 }
 .measurement-container h3:hover {
   color: #666;

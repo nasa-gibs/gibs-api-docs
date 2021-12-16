@@ -28,38 +28,45 @@ function formatLayers (layers) {
         return [resKeys[0]];
       }
       default: 
-        return resKeys.map(res => `${res} (${resObj[res]})`);
+        return resKeys.map(res => `${res} - ${resObj[res]}`);
     }
   }
-  Object.keys(layers).map(id => {
+  const getProducts = (conceptIds) => {
+    return (conceptIds || []).map((obj) => {
+      return {
+        ...obj,
+        url: `https://cmr.earthdata.nasa.gov/search/concepts/${obj.value}.html`,
+      }
+    })
+  }
+  Object.keys(layers).forEach(id => {
     const layer = layers[id];
-    const projections = Object.keys(layer.projections);
-    const resolution = getResolution(layer.projections);
-    const startDate = getDate(layer, 'startDate');
-    const endDate = getDate(layer, 'endDate');
+    const { period, title, layergroup } = layer;
     const format = (layer.format || ' / ').split('/')[1];
-    const product = (layer.conceptIds || []).map(({shortName}) => shortName).join(', ');
     const [ platform, instrument ] = (layer.subtitle || ' / ').split('/');
-    
     layers[id] = {
-      ...layer,
-      projections,
+      id,
+      period,
+      title,
+      layergroup,
+      projections: projections = Object.keys(layer.projections),
+      resolution: getResolution(layer.projections),
       format: format && format.trim(),
-      product,
-      startDate,
-      endDate,
+      products: getProducts(layer.conceptIds),
+      startDate: getDate(layer, 'startDate'),
+      endDate: getDate(layer, 'endDate'),
       platform: platform && platform.trim(),
       instrument: instrument && instrument.trim(),
-      resolution,
     }
   });
   return layers;
 }
 
 const app = new Vue({
-  el: '#page-container',
+  el: '#app-container',
   data: {
     loading: true,
+    errorLoading: false,
     allMeasurements: undefined,
     allLayers: undefined,
     measurements: undefined,
@@ -79,6 +86,10 @@ const app = new Vue({
       this.allLayers = formatLayers(layers);
       this.categories = categories['science disciplines'];
       this.measurements = this.getMeasurementsForCategory(this.selectedCategory);
+    },
+    error: function () {
+      this.loading = false;
+      this.errorLoading = true;
     },
     getMeasurementsForCategory: function (category) { 
       const { measurements } = this.categories[category];
@@ -103,7 +114,8 @@ const requestSettings = {
   type: "GET",
   crossDomain: true,
   dataType: "json",
-  success: app.init
+  success: app.init,
+  error: app.error,
 }
 
 $(document).ready(() => { 

@@ -2,6 +2,7 @@ Vue.component('category-selector', {
   props: ['categories', 'selectCategory'],
   template: `
     <div class="category-selector">
+      <h3 class="categories-header"> Categories: &nbsp; </h3>
       <select class="category-selector" v-on:change="selectCategory($event)">
         <option 
           v-for="category in categories" 
@@ -22,7 +23,7 @@ Vue.component('layer-table', {
         <tr> 
           <th v-for="col in visibleColumns">
             <span v-on:click="sortBy(col)" v-bind:class="{ sort: col.sortable }"> 
-              {{col.title}} 
+              <span v-html="col.title"></span>
               <span v-if="col.sortable && col.sorted === 'ASC'"> &uarr; </span>
               <span v-else-if="col.sortable && col.sorted === 'DESC'"> &darr; </span>
               <span class="unsorted" v-else-if="col.sortable"> &varr; </span>
@@ -86,9 +87,9 @@ Vue.component('layer-table', {
             ...defaultRenderer,
             template: `
               <span> 
-                {{ layer.title }} <br/> <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a> 
-              </span>
-            `
+                {{ layer.title }} <br/> 
+                <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a> 
+              </span>`
           }
         },
         {
@@ -100,24 +101,40 @@ Vue.component('layer-table', {
           renderer: defaultRenderer
         },
         {
-          title: 'Projections',
+          title: `
+            <span>
+              Projections
+              <sup> [<a href="#footnote-1">1</a>] </sup>
+            </span>
+          `,
           property: 'projections',
           sortable: false,
           visible: (() => layers.some(({ projections }) => projections.length ))(),
           renderer: {
             ...defaultRenderer,
-            template: `<div><span v-for="proj in layer.projections"> {{proj}} <br/> </span></div>`
+            template: `
+              <div>
+                <span v-for="proj in layer.projections"> {{proj}} <br/> </span>
+              </div>`
           }
         },
         {
-          title: 'Resolution',
+          title: `
+            <span>
+              Imagery <sup> [<a href="#footnote-2">2</a>] </sup>
+              <br/> Resolution
+            </span>
+          `,
           property: 'resolution',
           sortable: true,
           sorted: false,
           visible: (() => layers.some(({ resolution }) => resolution.length ))(),
           renderer: {
             ...defaultRenderer,
-            template: `<div><span v-for="res in layer.resolution"> {{res}} <br/> </span><div>`
+            template: `
+              <div>
+                <span v-for="res in layer.resolution"> {{res}} <br/> </span>
+              </div>`
           }
         },
         {
@@ -140,13 +157,17 @@ Vue.component('layer-table', {
         },
         {
           title: 'Product',
-          property: 'product',
-          sortable: true,
-          sorted: false,
-          visible: (() => layers.some(({ product }) => product ))(),
+          property: 'products',
+          visible: (() => layers.some(({ products }) => products.length ))(),
           renderer: {
             ...defaultRenderer,
-            template: `<span class="monospace"> {{ layer.product }} </span>`
+            template: `
+              <div>
+                <div v-for="prod in layer.products"> 
+                  {{prod.type}}: &nbsp; <a :href="prod.url" target="_blank"  class="monospace"> {{ prod.shortName }} {{prod.version}} </a>
+                </div>
+              </div>
+            `
           }
         },
       ],
