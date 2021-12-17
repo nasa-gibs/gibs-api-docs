@@ -78,10 +78,14 @@ th {
 .layer-table.docutils tr td {
   padding: 6px;
 }
-
 .layer-table td, .layer-table th {
   border: 1px solid #ddd;
   padding: 4px;
+}
+.measurement-container .layer-table tr td ul {
+  margin-bottom: 2px;
+  line-height: inherit;
+  list-style: square;
 }
 
 .monospace {

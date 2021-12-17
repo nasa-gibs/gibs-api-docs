@@ -1,44 +1,68 @@
 /**
+ * 
+ * @param {*} layer 
+ * @param {*} key 
+ * @returns 
+ */
+const getDate = (layer, key) => {
+  if (!layer[key]) {
+    return key === 'endDate' && layer['startDate'] ? 'Present' : '';
+  }
+  const { period, inactive } = layer;
+  const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
+  return (key === 'endDate' && !inactive) ? 'Present' : date;
+}
+
+/**
+ * 
+ * @param {*} projections 
+ * @returns 
+ */
+const getResolution = ({ projections, type }) => {
+  const resObj = {};
+  Object.keys(projections).forEach(key => {
+    const res = projections[key].matrixSet;
+    if (res) {
+      resObj[res] = resObj[res] ? resObj[res].concat([key]) : [key]
+      if (key === "geographic" && type !== "vector")
+        resObj[res].push("web mercator")
+    }
+  });
+  return resObj;
+}
+
+/**
+ * 
+ * @param {*} layer 
+ * @returns 
+ */
+const getProjections = (layer) => {
+  const projections = Object.keys(layer.projections);
+  if (layer.type !== "vector")
+    projections.unshift("web mercator");
+  return projections;
+}
+
+/**
+ * 
+ * @param {*} conceptIds 
+ * @returns 
+ */
+const getProducts = (conceptIds) => {
+  return (conceptIds || []).map((obj) => {
+    return {
+      ...obj,
+      url: `https://cmr.earthdata.nasa.gov/search/concepts/${obj.value}.html`,
+    }
+  })
+}
+
+/**
  * Build an array of all layers with display properties formatted as needed for docs
  * @param {*} layers 
  * @returns 
  */
 function formatLayers (layers) {
-  const getDate = (layer, key) => {
-    if (!layer[key]) {
-      return key === 'endDate' && layer['startDate'] ? 'Present' : '';
-    }
-    const { period, inactive } = layer;
-    const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
-    return (key === 'endDate' && !inactive) ? 'Present' : date;
-  }
-  const getResolution = (projections) => {
-    const resObj = {};
-    Object.keys(projections).forEach(key => {
-      const { matrixSet } = projections[key];
-      if (matrixSet)
-        resObj[matrixSet] = resObj[matrixSet] ? resObj[matrixSet] += `, ${key}` : key 
-    });
-    const resKeys = Object.keys(resObj)
-    switch (resKeys.length) {
-      case 0: {
-        return [];
-      }
-      case 1: {
-        return [resKeys[0]];
-      }
-      default: 
-        return resKeys.map(res => `${res} - ${resObj[res]}`);
-    }
-  }
-  const getProducts = (conceptIds) => {
-    return (conceptIds || []).map((obj) => {
-      return {
-        ...obj,
-        url: `https://cmr.earthdata.nasa.gov/search/concepts/${obj.value}.html`,
-      }
-    })
-  }
   Object.keys(layers).forEach(id => {
     const layer = layers[id];
     const { period, title, layergroup } = layer;
@@ -49,8 +73,8 @@ function formatLayers (layers) {
       period,
       title,
       layergroup,
-      projections: projections = Object.keys(layer.projections),
-      resolution: getResolution(layer.projections),
+      projections: getProjections(layer),
+      resolution: getResolution(layer),
       format: format && format.trim(),
       products: getProducts(layer.conceptIds),
       startDate: getDate(layer, 'startDate'),

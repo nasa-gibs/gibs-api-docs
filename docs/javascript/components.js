@@ -21,8 +21,8 @@ Vue.component('layer-table', {
     <table class="layer-table docutils">
       <thead>
         <tr> 
-          <th v-for="col in visibleColumns">
-            <span v-on:click="sortBy(col)" v-bind:class="{ sort: col.sortable }"> 
+          <th v-for="col in visibleColumns" :style="col.style">
+            <span v-on:click="sortBy(col)" :class="{ sort: col.sortable }"> 
               <span v-html="col.title"></span>
               <span v-if="col.sortable && col.sorted === 'ASC'"> &uarr; </span>
               <span v-else-if="col.sortable && col.sorted === 'DESC'"> &darr; </span>
@@ -107,15 +107,16 @@ Vue.component('layer-table', {
               <sup> [<a href="#footnote-1">1</a>] </sup>
             </span>
           `,
+          style: 'min-width: 125px;',
           property: 'projections',
           sortable: false,
           visible: (() => layers.some(({ projections }) => projections.length ))(),
           renderer: {
             ...defaultRenderer,
             template: `
-              <div>
-                <span v-for="proj in layer.projections"> {{proj}} <br/> </span>
-              </div>`
+              <ul>
+                <li v-for="proj in layer.projections"> {{proj}} <br/> </li>
+              </ul>`
           }
         },
         {
@@ -125,15 +126,24 @@ Vue.component('layer-table', {
               <br/> Resolution
             </span>
           `,
+          style: 'min-width: 125px;',
           property: 'resolution',
           sortable: true,
           sorted: false,
-          visible: (() => layers.some(({ resolution }) => resolution.length ))(),
+          visible: (() => layers.some(({ resolution }) => resolution ))(),
           renderer: {
             ...defaultRenderer,
             template: `
-              <div>
-                <span v-for="res in layer.resolution"> {{res}} <br/> </span>
+              <div> 
+                <span v-if="Object.keys(layer.resolution).length === 1">
+                  {{Object.keys(layer.resolution)[0]}}
+                </span>
+                <span v-else v-for="(projections, resolution) in layer.resolution"> 
+                  {{resolution}}
+                  <ul>
+                    <li v-for="proj in projections"> {{proj}} </li>
+                  </ul>
+                </span>
               </div>`
           }
         },
