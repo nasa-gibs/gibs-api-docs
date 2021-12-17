@@ -22,7 +22,7 @@ Vue.component('layer-table', {
       <thead>
         <tr> 
           <th v-for="col in visibleColumns" :style="col.style">
-            <span v-on:click="sortBy(col)" :class="{ sort: col.sortable }"> 
+            <span v-on:click="sort(col)" :class="{ sort: col.sortable }"> 
               <span v-html="col.title"></span>
               <span v-if="col.sortable && col.sorted === 'ASC'"> &uarr; </span>
               <span v-else-if="col.sortable && col.sorted === 'DESC'"> &darr; </span>
@@ -73,7 +73,6 @@ Vue.component('layer-table', {
           title: 'Instrument',
           property: 'instrument',
           sortable: true,
-          sorted: false,
           visible: (() => layers.some(({ instrument }) => instrument ))(),
           renderer: defaultRenderer
         },
@@ -81,7 +80,6 @@ Vue.component('layer-table', {
           title: 'Name / Identifier',
           property: 'title',
           sortable: true,
-          sorted: false,
           visible: true,
           renderer: {
             ...defaultRenderer,
@@ -96,7 +94,6 @@ Vue.component('layer-table', {
           title: 'Period',
           property: 'period',
           sortable: true,
-          sorted: false,
           visible: (() => layers.some(({ period }) => period ))(),
           renderer: defaultRenderer
         },
@@ -109,7 +106,6 @@ Vue.component('layer-table', {
           `,
           style: 'min-width: 125px;',
           property: 'projections',
-          sortable: false,
           visible: (() => layers.some(({ projections }) => projections.length ))(),
           renderer: {
             ...defaultRenderer,
@@ -128,8 +124,6 @@ Vue.component('layer-table', {
           `,
           style: 'min-width: 125px;',
           property: 'resolution',
-          sortable: true,
-          sorted: false,
           visible: (() => layers.some(({ resolution }) => resolution ))(),
           renderer: {
             ...defaultRenderer,
@@ -151,18 +145,18 @@ Vue.component('layer-table', {
           title: 'Format',
           property: 'format', 
           sortable: true,
-          sorted: false,
           visible: (() => layers.some(({ format }) => format ))(),
           renderer: defaultRenderer
         },
         {
           title: 'Temporal Range',
           property: 'temporalRange',
-          sortable: false,
+          sortable: true,
+          sortFn: this.sortDate,
           visible: (() => layers.some(({ startDate }) => startDate ))(),
           renderer: {
             ...defaultRenderer,
-            template: `<span> {{ layer.startDate }} - {{ layer.endDate }} </span>`
+            template: `<span> {{ layer.startDate }} - <br/> {{ layer.endDate }} </span>`
           }
         },
         {
@@ -188,9 +182,15 @@ Vue.component('layer-table', {
     }
   },
   methods: {
-    sortBy: function (col) {
-      const { property, sortable } = col;
-      if (!sortable) return;
+    resetSortCol: function (col) {
+      this.columns.forEach(column => {
+        if (column.property !== col.property) {
+          column.sorted = false;
+        }
+      });
+    },
+    sortAlpha: function (col) {
+      const { property } = col;
       const getVal = (obj) => obj[property] ? obj[property] : ' ';
       if (col.sorted === 'ASC') {
         this.layers = this.layers.sort((a, b) => getVal(a) < getVal(b) ? -1 : getVal(a) > getVal(b) ? 1 : 0);
@@ -199,19 +199,29 @@ Vue.component('layer-table', {
         this.layers = this.layers.sort((a, b) => getVal(a) < getVal(b) ? 1 : getVal(a) > getVal(b) ? -1 : 0);
         col.sorted = 'ASC'
       }
-      this.columns.forEach(column => {
-        if (column.property !== col.property) {
-          column.sorted = false;
-        }
-      });
+      this.resetSortCol(col);
+    },
+    sortDate: function (col) {
+      if (col.sorted === 'ASC') {
+        this.layers.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+        col.sorted = 'DESC'
+      } else {
+        this.layers.sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+        col.sorted = 'ASC'
+      }
+      this.resetSortCol(col);
+    },
+    sort: function (col) {
+      if (!col.sortable) return;
+      if (col.sortFn) col.sortFn(col)
+      else this.sortAlpha(col)
     },
     getUrl: function (id) {
       return `https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),Reference_Features_15m(hidden),Coastlines_15m,${id},MODIS_Terra_CorrectedReflectance_TrueColor&lg=true`
     } 
   },
   mounted: function () {
-    // TODO check initial sort
-    this.sortBy(this.columns.find(({sorted}) => sorted));
+    this.sort(this.columns.find(({sorted}) => sorted));
   }
 })
 
