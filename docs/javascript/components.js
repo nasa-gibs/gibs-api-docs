@@ -166,7 +166,11 @@ Vue.component('layer-table', {
           }
         },
         {
-          title: 'Product',
+          title: `
+            <span>
+              Product <sup> [<a href="#footnote-3">3</a>] </sup>
+            </span>
+          `,
           property: 'products',
           visible: (() => layers.some(({ products }) => products.length ))(),
           renderer: {
