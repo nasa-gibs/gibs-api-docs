@@ -61,7 +61,7 @@ Utility visualizations are provided to improve imagery viewability.  These layer
         <sup>[3]</sup> The Sensor Resolution, also known as native resolution, is provided as a reference not to be confused with the imagery resolution explained in [1]. This is the resolution of the source product elements which went into making the imagery product served in GIBS.
       </p>
       <p id="footnote-3">
-        <sup>[4]</sup> NRT - Near Real-Time: The imagery product is generated within 3.5 hours of observation. STD - Standard: The imagery product is generated within 24 hours of observation.
+        <sup>[3]</sup> NRT - Near Real-Time: The imagery product is generated within 3.5 hours of observation. STD - Standard: The imagery product is generated within 24 hours of observation.
       </p>
       
     </div>

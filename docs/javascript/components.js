@@ -36,9 +36,9 @@ Vue.component('layer-table', {
           <td v-for="col in visibleColumns">
               <component 
                 :is="col.renderer" 
-                :layer="layer" 
                 :property="col.property"
-                :getUrl="getUrl"
+                :layer="layer" 
+                :url="getUrl(layer)"
               >
               </component>
           </td>
@@ -53,7 +53,7 @@ Vue.component('layer-table', {
   data: function () {
     const { layers } = this.measurement;
     const defaultRenderer = {
-      props: ['layer', 'property', 'getUrl'],
+      props: ['layer', 'property', 'url'],
       template: `<span> {{ layer[property] }} </span>`
     }
     return {
@@ -86,7 +86,7 @@ Vue.component('layer-table', {
             template: `
               <span> 
                 {{ layer.title }} <br/> 
-                <a v-bind:href="getUrl(layer.id)" target="_blank"> {{layer.id}} </a> 
+                <a v-bind:href="url" target="_blank"> {{layer.id}} </a> 
               </span>`
           }
         },
@@ -216,8 +216,29 @@ Vue.component('layer-table', {
       if (col.sortFn) col.sortFn(col)
       else this.sortAlpha(col)
     },
-    getUrl: function (id) {
-      return `https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),Reference_Features_15m(hidden),Coastlines_15m,${id},MODIS_Terra_CorrectedReflectance_TrueColor&lg=true`
+    getUrl: function (layer) {
+      const { id, startDate } = layer;
+      let date;
+      const addDays = (date, days) => {
+        let newDate = new Date(date.valueOf());
+        newDate.setDate(newDate.getDate() + days);
+        return newDate;
+      }
+      if (startDate) {
+        const newStartDate = addDays(startDate, 1);
+        date = newStartDate.toISOString().split('T')[0]
+      }
+      const layers = [
+        `Reference_Labels_15m(hidden)`,
+        `Reference_Features_15m(hidden)`,
+        `Coastlines_15m`,
+        id,
+        `MODIS_Terra_CorrectedReflectance_TrueColor`
+      ]
+      const layerString = layers.join(',');
+      const baseUrl = `https://worldview.earthdata.nasa.gov/?l=${layerString}`
+      const params = startDate ? `&t=${date}` : ``
+      return baseUrl + params;
     } 
   },
   mounted: function () {
