@@ -118,8 +118,7 @@ Vue.component('layer-table', {
         {
           title: `
             <span>
-              Imagery <sup> [<a href="#footnote-2">2</a>] </sup>
-              <br/> Resolution
+              Resolution <sup> [<a href="#footnote-2">2</a>] </sup>
             </span>
           `,
           style: 'min-width: 125px;',
