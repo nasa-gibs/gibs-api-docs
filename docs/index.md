@@ -12,9 +12,9 @@ GIBS services are built atop the open source [OnEarth](https://github.com/nasa-g
 ## More Information
 Visit the following content areas within this documentation site to learn more about GIBS visualizations and how to integrate them into your applications or utilities.
 
-* [**Available Visualizations**](../visualization-layers/) - Learn more about what visualizations are available to you
-* [**Access Basics**](../visualization-services/) - Learn the basics about accessing visualizations through GIBS services
-* [**Access Advanced Topics**](../api-advanced-topics/) - Take a deeper dive into advanced topics related to accessing and interpreting GIBS visualizations  
+* [**Available Visualizations**](../available-visualizations/) - Learn more about what visualizations are available to you
+* [**Access Basics**](../access-basics/) - Learn the basics about accessing visualizations through GIBS services
+* [**Access Advanced Topics**](../access-advanced-topics/) - Take a deeper dive into advanced topics related to accessing and interpreting GIBS visualizations  
 * [**Accessing via GIS Applications**](../gis-usage/) - Learn how to access GIBS imagery via Geographic Information System (GIS) applications
 * [**Accessing via Map Libraries and Scripts**](../map-library-usage/) - Learn how to access GIBS imagery from interactive mapping libraries and GDAL-based scripts
 

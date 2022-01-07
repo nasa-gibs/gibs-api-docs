@@ -4,7 +4,7 @@ NASA's Global Imagery Browse Services (GIBS) visualizations are accessible throu
 
 The information on this page covers the following topics related to accessing GIBS visualizations:
 
-   * [Visualization Services](#visualization-services)
+   * [Visualization Services](#access-basics)
    * [Geographic Projections](#map-projections)
    * [Time Dimension](#time-dimension)
 
@@ -20,7 +20,7 @@ NASA's Global Imagery Browse Services (GIBS) provides visualizations through the
   * [Generic XYZ Tile Service (TMS)](#generic-xyz-tile-access-tms)
 
 !!! Note
-    In the following content, service endpoints for the "Best Available" (See [Best Available Layers](../api-advanced-topics/#best-available-layers)) are provided. For example: `https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/`.  However, the following endpoints also exist and may be accessed by simply replacing the `best` component of the provided service endpoints:
+    In the following content, service endpoints for the "Best Available" (See [Best Available Layers](../access-advanced-topics/#best-available-layers)) are provided. For example: `https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/`.  However, the following endpoints also exist and may be accessed by simply replacing the `best` component of the provided service endpoints:
 
      * *std* - Standard-/science-quality visualizations only
      * *nrt* - Near real-time visualizations only
@@ -160,7 +160,7 @@ GIBS visualizations are available in one or more of the following map projection
 | Web Mercator / "Google Projection" | [3857](https://epsg.io/3857){:target="_blank"} | **Native Coordinates**<br/>Lower Left: -20037508.34278925,-20037508.34278925 <br/> Upper Right: 20037508.34278925,20037508.34278925 <br/><br/> **WGS84 Coordinates**<br/>Lower Left: -180,-85.051129 <br/> Upper Right: 180,85.051129 | ![webmerc](img/webmerc-sm.png) |
 
 !!! Note
-    The spatial extents of the GIBS Geographic and Web Mercator projections match the full extents of the official projection definition. However, the GIBS spatial extents of the north and south polar projections are a subset of the official projection's extents. The GIBS' extents were selected to a) cover the main land/ice masses at each pole and b) to facilitate a "power of two" extent expansion between zoom levels as required for tiled access.  See [here](../api-advanced-topics/#tiled-access-resolutions) for more on GIBS tiled access resolutions.
+    The spatial extents of the GIBS Geographic and Web Mercator projections match the full extents of the official projection definition. However, the GIBS spatial extents of the north and south polar projections are a subset of the official projection's extents. The GIBS' extents were selected to a) cover the main land/ice masses at each pole and b) to facilitate a "power of two" extent expansion between zoom levels as required for tiled access.  See [here](../access-advanced-topics/#tiled-access-resolutions) for more on GIBS tiled access resolutions.
 
 <hr style="border:2px solid gray"> </hr>
 
