@@ -60,7 +60,7 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 
 ## ESRI ArcGIS Pro
 
-GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview) using the WMS protocol.
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview){:target="_blank"} using the WMS protocol.
 
 ### Requirements
 
@@ -109,7 +109,7 @@ Here are some common reasons why imagery isn't appearing:
 
 ## ESRI ArcGIS Desktop/ArcMap
 
-GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview) using the WMS protocol.
+GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview){:target="_blank"} using the WMS protocol.
 
 ### Requirements
 

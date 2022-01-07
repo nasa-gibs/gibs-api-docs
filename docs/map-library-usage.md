@@ -32,10 +32,10 @@ This section provides basic examples of both the TiledWMS and WMS GDAL drivers. 
 
 | Projection Name | GIBS WMTS "Best Available" Capabilities document |
 | --------------- | --------- |
-| Geographic | [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml) |
-| NSIDC Sea Ice Polar Stereographic North | [https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml) |
-| Antarctic Polar Stereographic | [https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml) |
-| Web Mercator | [https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml) |
+| Geographic | [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml){:target="_blank"} |
+| NSIDC Sea Ice Polar Stereographic North | [https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml){:target="_blank"} |
+| Antarctic Polar Stereographic | [https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml){:target="_blank"} |
+| Web Mercator | [https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml](https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml){:target="_blank"} |
 
 
 !!! Note
@@ -124,7 +124,7 @@ In the above XML block, the following values may be changed to meet your needs:
 * <ServerUrl\>https://gibs.earthdata.nasa.gov/wmts/**epsgcode**/best/**layer_name**/default/**date**/**resolution**/${z}/${y}/${x}.**format**</ServerUrl\>
     * **layer_name** - use the layer's "Identifier" from the relevant GIBS WMTS GetCapabilities document. Note that only one layer can be retrieved per gdal_translate call.
     * **date** - use the desired date in YYYY-MM-DD format
-    * **epsgcode** - use "epsg" followed by the appropriate EPSG code as defined in [this](../visualization-services/#geographic-projections) table.
+    * **epsgcode** - use "epsg" followed by the appropriate EPSG code as defined in [this](../visualization-services/#map-projections) table.
     * **resolution** - use the layer's "TileMatrixSet" value from the relevant GIBS WMTS GetCapabilities document
     * **format** - use jpg or png extension based on the "Format"
 * **Bounding box** - use `-180.0, 90, 396.0, -198` for Geographic projection and `-4194304, 4194304, 4194304, -4194304` for the Polar projections
