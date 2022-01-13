@@ -16,7 +16,7 @@ GIBS visualization layer identifiers follow a human-readable convention (e.g. *M
 * **Science Parameter** - The science parameter that is being visualized (e.g. "Aerosol Optical Depth")
 * **Processing Level** - The processing level of the associated data (e.g. "L3" or "L2")
 * **Data Period** - The period of the available visualization products (e.g. "Monthly")
-  * If not included, it is implied that the visualization has a "Daily" period 
+    * If not included, it is implied that the visualization has a "Daily" period 
 * **Data Version** - The version of the associated data product (e.g. "v6")
 * **Data Latency** - The latency of the associated data product (e.g. "STD" or "NRT")
 

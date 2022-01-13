@@ -28,7 +28,7 @@ GDAL version 1.9.1 or greater with cURL support enabled. To check if cURL is ena
 <hr style="border:1px solid gray"> </hr>
 
 ### Basic Usage
-This section provides basic examples of both the TiledWMS and WMS GDAL drivers. The information needed to create the local service description XML can be found in the following GIBS Capabilities documents:
+This section provides basic examples of both the TiledWMS and WMS GDAL drivers. The information needed to create the local service description XML can be found in the following GIBS WMTS Capabilities documents:
 
 | Projection Name | GIBS WMTS "Best Available" Capabilities document |
 | --------------- | --------- |
@@ -335,7 +335,7 @@ gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere 
 ## Bulk Downloading
 
 A "Bulk Download" is defined as the planned retrieval of more than 1,000,000 imagery tiles within a 24 hour period. These activities are typically orchestrated through script-based access to the GIBS API, not user-based access through a client application. In order to ensure quality of service for all GIBS users, the GIBS team requests that bulk downloading activities be coordinated at least 48 hours in advance of the planned download. Prior to
-beginning your bulk downloading activities, please contact the GIBS support team at [support@earthdata.nasa.gov](support@earthdata.nasa.gov) with the subject "GIBS Bulk
+beginning your bulk downloading activities, please contact the GIBS support team at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov) with the subject "GIBS Bulk
 Download Request" and the following information:
 
 1. Purpose

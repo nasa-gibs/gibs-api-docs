@@ -20,7 +20,7 @@ Visit the following content areas within this documentation site to learn more a
 
 Contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov) if you have additional questions. 
 
-You may also visit and subscribe to the [GIBS blog](https://earthdata.nasa.gov/gibs){:target="_blank"} for periodic updates on new Worldview features, GIBS service enhancements, and visualization layers.
+You may also visit the [GIBS landing page](https://earthdata.nasa.gov/gibs){:target="_blank"} for high-level information and the [GIBS blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} for periodic updates on new Worldview features, GIBS service enhancements, and visualization layers.
 
 ## Data Use Policy and Acknowledgements
 

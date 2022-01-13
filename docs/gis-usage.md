@@ -118,7 +118,7 @@ GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](htt
 ### Instructions
 
 * Open the "Catalog" window (far right pane) in ArcMap and select "Add WMS Server"
-* Paste one of the [GIBS WMS endpoints](http://127.0.0.1:8000/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) or [Web Mercator](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)) into the "URL" field and press the "Get Layers" button to validate the connection.
+* Paste one of the [GIBS WMS endpoints](/access-basics/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) or [Web Mercator](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)) into the "URL" field and press the "Get Layers" button to validate the connection.
 
 ![ArcMap, Add WMS Server](img/ArcMap-CatWindow.png)
 
@@ -151,7 +151,7 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 ![ArcGIS Online, Add Layer](img/AGOL-AddLayer.png)
 
 * Change the data type to a WMS OGC Web Service
-* Paste one of the GIBS WMS endpoints (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) into the "URL" field and press the "Get Layers" button
+* Paste one of the [GIBS WMS endpoints](/access-basics/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) into the "URL" field and press the "Get Layers" button
 * Deselect all of the layers (upper left "square") and select a layer you'd like to add
 
 ![ArcGIS Online, Add Layer from web](img/AGOL-AddLayer2.png)
