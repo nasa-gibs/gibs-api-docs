@@ -34,6 +34,10 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
 
+!!! Note
+    If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.
+
+
 ![QGIS, Add WTMS Connection](img/CreateWMSConnection_QGIS.png)
 
 * Click the "Connect" button to list all available layers for that map projection, select a layer of interest, and "Add" it to the map:
@@ -68,23 +72,27 @@ GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.es
 
 ### Instructions
 
-1. After starting up ArcGIS Pro, select "Start without a template" from the home page
-1. Click the "Insert" tab, "Connections", "New WMS Server"<br>
+* After starting up ArcGIS Pro, select "Start without a template" from the home page
+* Click the "Insert" tab, "Connections", "New WMS Server"<br>
 ![ArcGIS Pro New WMS Server](img/ArcGISPro-NewWMS.png){ width=50% }
-1. Add a "Server URL" for the [GIBS WMS endpoint](/access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
+* Add a "Server URL" for the [GIBS WMS endpoint](/access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
 [https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
 [https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
-1. If the "Catalog" pane isn't already open, click the "View" tab and then the "Catalog Pane" button
-1. In the Catalog pane, click the triangle next to the "Servers" item which should reveal the "NASA Global Imagery Browse Services (GIBS)" entry; note that you can now add this entry as a favorite by right-clicking on it and "Add to Favorites" which will then allow it to appear in the favorites tab<br>
+
+!!! Note
+    If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.
+
+* If the "Catalog" pane isn't already open, click the "View" tab and then the "Catalog Pane" button
+* In the Catalog pane, click the triangle next to the "Servers" item which should reveal the "NASA Global Imagery Browse Services (GIBS)" entry; note that you can now add this entry as a favorite by right-clicking on it and "Add to Favorites" which will then allow it to appear in the favorites tab<br>
 ![ArcGIS Pro Catalog Pane](img/ArcGISPro-CatalogPane.png){ width=30% }
-1. Right-click on a GIBS layer of your choosing ("Aerosol Index (OMPS, Suomi NPP)" is selected above), select "Add To New" and then "Map"; 
-1. At this point and depending on the layer you've selected, you should see imagery on the map!  
+* Right-click on a GIBS layer of your choosing ("Aerosol Index (OMPS, Suomi NPP)" is selected above), select "Add To New" and then "Map"; 
+* At this point and depending on the layer you've selected, you should see imagery on the map!  
     * A legend may also be available for your selected layer if you expand the layer item in the Contents pane.  
     * If you don't see imagery yet, you may need to zoom out to see if it's available in another part of the world and/or adjust the currently-selected time as described in the next steps.<br>
 ![ArcGIS Pro Map Imagery](img/ArcGISPro-MapImagery.png){ width=60% }
-1. Since most GIBS imagery is available over many different points in time, you'll now need to enable the time controls to select your date/time of interest.  So once you add a time-varying layer into ArcGIS Pro, a "Time" tab in the top ribbon should now be visible.
+* Since most GIBS imagery is available over many different points in time, you'll now need to enable the time controls to select your date/time of interest.  So once you add a time-varying layer into ArcGIS Pro, a "Time" tab in the top ribbon should now be visible.
 ![ArcGIS Pro Map Imagery](img/ArcGISPro-TimePanel.png){ width=100% }
     * On the right side, notice the “Full Extent” group; the dates listed show the start and stop dates available
     * On the left side in the “Current Time” group:
@@ -94,7 +102,7 @@ GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.es
     * In the "Step" group
         * If the "Step Interval" area is grayed out, click the clock icon to the right of the selection
         * Ensure that the radio button next to "Step Interval" is selected and choose your desired time adjustment increment; for most GIBS layers this is set to "1 Days".  That said, there are many other types of layers including geostationary which is generally on a 10 minute interval.  Other layer intervals include 8 days, 1 month, or one year.  You can often deduce this from the GIBS layer name itself which often includes its interval (e.g., "8-day") if it's not a daily product.<br>
-1. Hover over the time display in the top right of the main display area. The times in blue contain data for that period. If the area is white, there is no data available. To advance the time one step, click on the smaller right arrow on the time display or in the “Playback” group. To show an animation, click on the larger right arrow. The control the pace of the animation, in the “Playback” tab adjust the slider labeled “slower – faster”. To reset the time to the current start, move the time icon all the way to the left with your mouse. Note – If you use the mouse to reposition the time icon, be careful to clear the time in “Start” and “End” current time or the data may not display.
+* Hover over the time display in the top right of the main display area. The times in blue contain data for that period. If the area is white, there is no data available. To advance the time one step, click on the smaller right arrow on the time display or in the “Playback” group. To show an animation, click on the larger right arrow. The control the pace of the animation, in the “Playback” tab adjust the slider labeled “slower – faster”. To reset the time to the current start, move the time icon all the way to the left with your mouse. Note – If you use the mouse to reposition the time icon, be careful to clear the time in “Start” and “End” current time or the data may not display.
 ![ArcGIS Pro Map Imagery](img/ArcGISPro-TimeController.png){ width=60% }
 
 ### Troubleshooting
