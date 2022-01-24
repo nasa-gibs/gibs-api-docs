@@ -1,11 +1,11 @@
 # Access Basics
 
-NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through public standards-compliant web services, hosted on the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.  Each service is accessed through service endpoints specific to the service and geographic projection.  Visualizations within these services are available in pre-determined resolutions. 
+NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through public standards-compliant web services, hosted on the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.  Each service is accessed through service endpoints specific to the service and map projection.  Visualizations within these services are available in pre-determined resolutions. 
 
 The information on this page covers the following topics related to accessing GIBS visualizations:
 
    * [Visualization Services](#access-basics)
-   * [Geographic Projections](#map-projections)
+   * [Map Projections](#map-projections)
    * [Time Dimension](#time-dimension)
 
 <hr style="border:2px solid gray"> </hr>
@@ -52,7 +52,7 @@ The above elements may be found in examples of both RESTful and KVP access patte
       - *Example* - [https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0 &layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=36&TileRow=13&style=default&TIME=2012-07-09&Format=image%2Fjpeg](https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&Request=GetTile&Version=1.0.0&layer=MODIS_Terra_CorrectedReflectance_TrueColor&tilematrixset=250m&TileMatrix=6&TileCol=36&TileRow=13&TIME=2012-07-09&style=default&Format=image%2Fjpeg){:target="_blank"}
 
 #### Service Endpoints
-The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMTS GetCapabilities and GetTile requests via both RESTful and KVP access methods.
+The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the WMTS GetCapabilities and GetTile requests via both RESTful and KVP access methods.
 
 |        Projection      |  Endpoint Root  | GetCapabilities |     GetTile     |
 | ---------------------- | --------------- | --------------- | --------------- |
@@ -74,7 +74,7 @@ The following clients support the GIBS WMTS visualization services:
 The [Open Geospatial Consortium (OGC) Web Map Service (WMS)](http://www.opengeospatial.org/standards/wms/){:target="_blank"} provides a way for clients to receive a customized response (e.g. raster image) based on request parameters such as a custom bounding box, dimensions, layer(s) and format. Unlike the rigidity enforced through tiled interfaces (e.g. WMTS and TWMS), WMS responses are more flexible and may contain multiple composited layers in a single output. Two WMS specifications are currently available and supported by GIBS: 1.1.1 and 1.3.0. Both WMS specifications support a single method of image retrieval, Key-Value Pair (KVP).
 
 #### Service Endpoints
-The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.0 WMS specification versions.
+The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.0 WMS specification versions.
 
 |        Projection      |  Endpoint Root  | GetCapabilities | GetMap |
 | ---------------------- | --------------- | --------------- | --------------- |
@@ -115,7 +115,7 @@ Those patterns are described in the TWMS [GetTileService request](https://gibs.e
 A client application is expected to request this information only if it is defined as a request in the WMS server Capabilities. Once obtained, the application needs to analyze the patterns, decide which ones can be used and then issue only WMS requests that match the pattern to the normal WMS server, requests that can be built by modifying the *bbox* argument in a *TiledPattern* and prefixing the resulting string with the content of the *OnlineResource* tag.
 
 #### Service Endpoints
-The following table contains the root service endpoint for each GIBS-supported projection along with sample requests for the TWMS GetCapabilities, GetTileService, and GetMap requests.
+The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the TWMS GetCapabilities, GetTileService, and GetMap requests.
 
 |        Projection      |  Endpoint Root  | GetCapabilities | GetTileService  |     GetMap      |
 | ---------------------- | --------------- | --------------- | --------------- | --------------- |
@@ -138,7 +138,7 @@ The WMTS RESTful interface above can be easily adapted for use as a "generic" XY
 
 `https://gibs.earthdata.nasa.gov/wmts/epsg{*EPSG:Code*}/best/{*LayerIdentifier*}/default/{*Time*}/{*TileMatrixSet*}/{*ZoomLevel*}/{*TileRow*}/{*TileCol*}.png`
 
-Populating the fields with the desired projection, product, time, etc (Terra/MODIS Aerosol Optical depth from 2014/04/09, in this case), GIBS products can be used by clients such as [ESRI's ArcGIS Online](http://www.arcgis.com/home/webmap/viewer.html){:target="_blank"} to add a "Tile Layer" by leaving the row, column, and zoom level as parameters:
+Populating the fields with the desired map projection, product, time, etc (Terra/MODIS Aerosol Optical depth from 2014/04/09, in this case), GIBS products can be used by clients such as [ESRI's ArcGIS Online](http://www.arcgis.com/home/webmap/viewer.html){:target="_blank"} to add a "Tile Layer" by leaving the row, column, and zoom level as parameters:
 
 `https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Aerosol/default/2014-04-09/GoogleMapsCompatible_Level6/{level}/{row}/{col}.png`
 
