@@ -9,8 +9,12 @@ nav:
     - Accessing via Map Libraries and Scripts: map-library-usage.md
 extra_css:
     - css/style.css
+    - css/loading-spinner.css
 extra_javascript:
+    - javascript/vue@2.js
     - javascript/overrides.js
+    - javascript/imagery-products.js
+    - javascript/components.js
 theme:
     name: 'rtd-dropdown'
 markdown_extensions:

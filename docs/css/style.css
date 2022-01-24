@@ -14,11 +14,90 @@ code {
   font-size: 12px !important;
 }
 .wy-nav-content {
-  max-width: 1200px;
+  max-width: 1800px;
+  padding: 1.5em;
 }
 th {
   text-align: center;
 }
 .tocbase .toctree-l3.current {
   background: #bdbdbd;
+}
+
+.source {
+  border: 1px solid #ccc;
+}
+
+/* Imagery Products Styles */
+#page-container {
+  min-height: 600px;
+}
+#page-container h2 {
+  margin: 10px 10px 20px 0;
+}
+#page-container h3 {
+  margin: 10px 10px 10px 0;
+}
+#page-container h4 {
+  margin: 0px 10px 10px 0;
+}
+.categories-header {
+  display: inline;
+}
+.category-selector {
+  margin: 10px auto;
+  text-align: center;
+  border: 1px solid #333;
+  background: #eee;
+  border-radius: 10px;
+}
+.category-selector select {
+  font-size: 16px;
+  display: inline;
+  background: #fff;
+  cursor: pointer;
+}
+
+.imagery-products {
+  margin: 10px;
+}
+
+.measurement-container h3 {
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.measurement-container h3:hover {
+  color: #666;
+}
+
+.layer-table.docutils {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 5px;
+}
+.layer-table.docutils tr td {
+  padding: 6px;
+}
+.layer-table td, .layer-table th {
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+.measurement-container .layer-table tr td ul {
+  margin-bottom: 2px;
+  line-height: inherit;
+  list-style: square;
+}
+
+.monospace {
+  font-family:'Courier New', Courier, monospace;
+}
+
+.sort {
+  cursor: pointer;
+}
+.sort:hover {
+  color: #666;
+}
+.unsorted {
+  color: #666;
 }
