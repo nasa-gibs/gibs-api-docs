@@ -2,7 +2,7 @@ Vue.component('category-selector', {
   props: ['categories', 'selectCategory'],
   template: `
     <div class="category-selector">
-      <h3 class="categories-header"> Categories: &nbsp; </h3>
+      <h3 class="categories-header"> Science Disciplines: &nbsp; </h3>
       <select class="category-selector" v-on:change="selectCategory($event)">
         <option 
           v-for="category in categories" 
@@ -100,7 +100,7 @@ Vue.component('layer-table', {
         {
           title: `
             <span>
-              Projections
+              Projection(s)
               <sup> [<a href="#footnote-1">1</a>] </sup>
             </span>
           `,
@@ -161,7 +161,7 @@ Vue.component('layer-table', {
         {
           title: `
             <span>
-              Product <sup> [<a href="#footnote-3">3</a>] </sup>
+              Product <sup> [<a href="#footnote-3">3</a>] </sup> <sup> [<a href="#footnote-4">4</a>] </sup>
             </span>
           `,
           property: 'products',
