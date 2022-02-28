@@ -7,6 +7,7 @@ nav:
     - Access Advanced Topics: access-advanced-topics.md
     - Accessing via GIS Applications: gis-usage.md
     - Accessing via Map Libraries and Scripts: map-library-usage.md
+    - Python Examples: python-examples/python-examples.md
 extra_css:
     - css/style.css
     - css/loading-spinner.css
