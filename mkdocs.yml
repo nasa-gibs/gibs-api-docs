@@ -8,6 +8,7 @@ nav:
     - Accessing via GIS Applications: gis-usage.md
     - Accessing via Map Libraries and Scripts: map-library-usage.md
     - Python Examples: python-examples/python-examples.md
+    - Notebook page: python-examples/gibs-jupyter-notebook.ipynb
 extra_css:
     - css/style.css
     - css/loading-spinner.css
@@ -23,3 +24,5 @@ markdown_extensions:
     - attr_list
     - fenced_code
     - footnotes
+plugins:
+    - mkdocs-jupyter
