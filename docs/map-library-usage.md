@@ -1,4 +1,4 @@
-# Accessing via Map Libraries and Scripts
+# Accessing via Map Libraries and GDAL Scripts
 
 There are several freely-available map libraries available to help build your own interface to explore NASA's Global Imagery Browse Services (GIBS) visualizations.  The information on this page provides instructions for the following libraries:
 
@@ -331,6 +331,10 @@ gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere 
 ```
 
 <hr style="border:2px solid gray"> </hr>
+
+## Python
+
+[**Accessing via Python**](./python-examples/gibs-jupyter-notebook.ipynb) - Python examples of accessing GIBS imagery (also downloadable as a [**Jupyter Notebook**](https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-examples/gibs-jupyter-notebook.ipynb))
 
 ## Bulk Downloading
 
