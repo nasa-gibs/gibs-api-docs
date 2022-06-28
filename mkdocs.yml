@@ -6,9 +6,8 @@ nav:
     - Access Basics: access-basics.md
     - Access Advanced Topics: access-advanced-topics.md
     - Accessing via GIS Applications: gis-usage.md
-    - Accessing via Map Libraries and Scripts: map-library-usage.md
-    - Python Examples: python-examples/python-examples.md
-    - Notebook page: python-examples/gibs-jupyter-notebook.ipynb
+    - Accessing via Map Libraries and GDAL Scripts: map-library-usage.md
+    - Accessing via Python: python-examples/gibs-jupyter-notebook.ipynb
 extra_css:
     - css/style.css
     - css/loading-spinner.css
