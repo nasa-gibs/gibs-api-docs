@@ -18,7 +18,7 @@ Visit the following content areas within this documentation site to learn more a
 * [**Accessing via GIS Applications**](./gis-usage/) - Learn how to access GIBS imagery via Geographic Information System (GIS) applications
 * [**Accessing via Map Libraries and Scripts**](./map-library-usage/) - Learn how to access GIBS imagery from interactive mapping libraries and GDAL-based scripts
 
-Contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov) if you have additional questions. 
+Contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov?subject=GIBS API Questions) if you have additional questions. 
 
 You may also visit the [GIBS landing page](https://earthdata.nasa.gov/gibs){:target="_blank"} for high-level information and the [GIBS blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} for periodic updates on new Worldview features, GIBS service enhancements, and visualization layers.
 
