@@ -8,6 +8,7 @@ nav:
     - Accessing via GIS Applications: gis-usage.md
     - Accessing via Map Libraries and GDAL Scripts: map-library-usage.md
     - Accessing via Python: python-usage.ipynb
+    - Contact Us: contact-us.md
 extra_css:
     - css/style.css
     - css/loading-spinner.css
