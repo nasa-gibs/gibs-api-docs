@@ -6,7 +6,8 @@ nav:
     - Access Basics: access-basics.md
     - Access Advanced Topics: access-advanced-topics.md
     - Accessing via GIS Applications: gis-usage.md
-    - Accessing via Map Libraries and Scripts: map-library-usage.md
+    - Accessing via Map Libraries and GDAL Scripts: map-library-usage.md
+    - Accessing via Python: python-usage.ipynb
     - Contact Us: contact-us.md
 extra_css:
     - css/style.css
@@ -23,3 +24,5 @@ markdown_extensions:
     - attr_list
     - fenced_code
     - footnotes
+plugins:
+    - mkdocs-jupyter
