@@ -14,4 +14,5 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-rtd-dropdown
+      - run: pip install mkdocs-jupyter
       - run: mkdocs gh-deploy --force
