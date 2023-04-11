@@ -334,7 +334,7 @@ gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere 
 
 ## Python
 
-[**Accessing via Python**](./python-examples/gibs-jupyter-notebook.ipynb) - Python examples of accessing GIBS imagery (also downloadable as a [**Jupyter Notebook**](https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-examples/gibs-jupyter-notebook.ipynb))
+[**Accessing via Python**](../python-usage/) - Python examples of accessing GIBS imagery (also downloadable as a [**Jupyter Notebook**](https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-usage.ipynb))
 
 ## Bulk Downloading
 
