@@ -17,7 +17,7 @@ Visit the following content areas within this documentation site to learn more a
 * [**Access Advanced Topics**](./access-advanced-topics/) - Take a deeper dive into advanced topics related to accessing and interpreting GIBS visualizations
 * [**Accessing via GIS Applications**](./gis-usage/) - Learn how to access GIBS imagery via Geographic Information System (GIS) applications
 * [**Accessing via Map Libraries and Scripts**](./map-library-usage/) - Learn how to access GIBS imagery from interactive mapping libraries and GDAL-based scripts
-* [**Accessing via Python**](./python-examples/gibs-jupyter-notebook/) - Python examples of accessing GIBS imagery (also downloadable as a [**Jupyter Notebook**](https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-examples/gibs-jupyter-notebook.ipynb))
+* [**Accessing via Python**](./python-usage/) - Python examples of accessing GIBS imagery (also downloadable as a [**Jupyter Notebook**](https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-usage.ipynb))
 
 Contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov?subject=GIBS API Questions) if you have additional questions. 
 
