@@ -52,6 +52,7 @@ Vue.component('layer-table', {
   },
   data: function () {
     const { layers } = this.measurement;
+    console.log(layers);
     const defaultRenderer = {
       props: ['layer', 'property', 'url'],
       template: `<span> {{ layer[property] }} </span>`
@@ -237,6 +238,7 @@ Vue.component('layer-table', {
       const layerString = layers.join(',');
       const baseUrl = `https://worldview.earthdata.nasa.gov/?l=${layerString}`
       const params = startDate ? `&t=${date}` : ``
+      console.log(baseUrl + params);
       return baseUrl + params;
     } 
   },
