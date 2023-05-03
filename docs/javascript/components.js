@@ -223,6 +223,22 @@ Vue.component('layer-table', {
         newDate.setDate(newDate.getDate() + days);
         return newDate;
       }
+      const getProjectionParam = (projections) => {
+        const isGeographic = projections.includes("geographic");
+        const isArctic = projections.includes("arctic");
+        const isAntarctic = projections.includes("antarctic");
+
+        switch (true) {
+          case isGeographic:
+            return "";
+          case isArctic:
+            return "&p=arctic";
+          case isAntarctic:
+            return "&p=antarctic";
+          default:
+            break;
+        }
+      }
       if (startDate) {
         const newStartDate = addDays(startDate, 1);
         date = newStartDate.toISOString().split('T')[0]
@@ -236,8 +252,9 @@ Vue.component('layer-table', {
       ]
       const layerString = layers.join(',');
       const baseUrl = `https://worldview.earthdata.nasa.gov/?l=${layerString}`
+      const projectionParam = getProjectionParam(layer.projections);
       const params = startDate ? `&t=${date}` : ``
-      return baseUrl + params;
+      return baseUrl + params + projectionParam;
     } 
   },
   mounted: function () {

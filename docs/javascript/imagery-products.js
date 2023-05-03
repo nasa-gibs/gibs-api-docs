@@ -38,7 +38,7 @@ const getResolution = ({ projections, type }) => {
  */
 const getProjections = (layer) => {
   const projections = Object.keys(layer.projections);
-  if (layer.type !== "vector")
+  if (layer.type !== "vector" && layer.projections.hasOwnProperty("geographic"))
     projections.unshift("web mercator");
   return projections;
 }
