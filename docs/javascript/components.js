@@ -98,6 +98,17 @@ Vue.component('layer-table', {
           renderer: defaultRenderer
         },
         {
+          title: 'Temporal Range',
+          property: 'temporalRange',
+          sortable: true,
+          sortFn: this.sortDate,
+          visible: (() => layers.some(({ startDate }) => startDate ))(),
+          renderer: {
+            ...defaultRenderer,
+            template: `<span> {{ layer.startDate }} - <br/> {{ layer.endDate }} </span>`
+          }
+        },
+        {
           title: `
             <span>
               Projection(s)
@@ -146,17 +157,6 @@ Vue.component('layer-table', {
           sortable: true,
           visible: (() => layers.some(({ format }) => format ))(),
           renderer: defaultRenderer
-        },
-        {
-          title: 'Temporal Range',
-          property: 'temporalRange',
-          sortable: true,
-          sortFn: this.sortDate,
-          visible: (() => layers.some(({ startDate }) => startDate ))(),
-          renderer: {
-            ...defaultRenderer,
-            template: `<span> {{ layer.startDate }} - <br/> {{ layer.endDate }} </span>`
-          }
         },
         {
           title: `
