@@ -65,7 +65,7 @@ const getProducts = (conceptIds) => {
 function formatLayers (layers) {
   Object.keys(layers).forEach(id => {
     const layer = layers[id];
-    const { period, title, layergroup } = layer;
+    const { layerPeriod: period, title, layergroup } = layer;
     const format = (layer.format || ' / ').split('/')[1];
     const [ platform, instrument ] = (layer.subtitle || ' / ').split('/');
     layers[id] = {
