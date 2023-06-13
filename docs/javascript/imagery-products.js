@@ -8,9 +8,10 @@ const getDate = (layer, key) => {
   if (!layer[key]) {
     return key === 'endDate' && layer['startDate'] ? 'Present' : '';
   }
-  const { period, inactive } = layer;
+  const { period, ongoing } = layer;
   const date = period === 'subdaily' ? layer[key] : layer[key].split('T')[0];
-  return (key === 'endDate' && !inactive) ? 'Present' : date;
+
+  return (key === 'endDate' && ongoing) ? 'Present' : date;
 }
 
 /**
