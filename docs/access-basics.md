@@ -1,6 +1,6 @@
 # Access Basics
 
-NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through public standards-compliant web services, hosted on the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.  Each service is accessed through service endpoints specific to the service and map projection.  Visualizations within these services are available in pre-determined resolutions. 
+NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through public standards-compliant web services, hosted on the [https://gibs.earthdata.nasa.gov](https://gibs.earthdata.nasa.gov) domain.  Each service is accessed through service endpoints specific to the service and map projection.  Visualizations within these services are available in pre-determined resolutions. For a full list of available visualizations, see the [Visualization Product Catalog](../available-visualizations/#visualization-product-catalog).
 
 The information on this page covers the following topics related to accessing GIBS visualizations:
 
