@@ -182,7 +182,7 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 
 ![ArcGIS Online, View Layer](img/AGOL-LayerAdded.png)
 
-* To change the date, click on the three dots then click on "Show properties". The Properties window will open on the right side of the map. Scroll to the bottom of the window go to the "Custom Parameters" section.
+* To change the date, click on the three dots then click on "Show properties". The Properties window will open on the right side of the map. Scroll to the bottom of the window and go to the "Custom Parameters" section.
 
 ![ArcGIS Online, Change Time](img/AGOL-ChangeTime.png)
 
