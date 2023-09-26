@@ -154,20 +154,41 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 
 ### Adding GIBS layers via WMS
 
-* Click the "Modify Map" button in the upper right corner, then "Add | Add Layer from Web".
+* Click on "Map" in the top menu navigation
+
+![ArcGIS Online, Access Map](img/AGOL-AccessMap.png)
+
+* Click on the down arrow next to the "Add" icon in the left side Layers section, then "Add Layer from URL"
 
 ![ArcGIS Online, Add Layer](img/AGOL-AddLayer.png)
 
-* Change the data type to a WMS OGC Web Service
-* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) into the "URL" field and press the "Get Layers" button
-* Deselect all of the layers (upper left "square") and select a layer you'd like to add
+* Or click on the plus button in the far left menu navigation bar, then "Add Layer from URL"
 
-![ArcGIS Online, Add Layer from web](img/AGOL-AddLayer2.png)
+![ArcGIS Online, Add Layer from URL](img/AGOL-AddLayer2.png)
 
-* For each layer that you've loaded, click on the three small dots below "NASA Global Imagery Browse Services for EOSDIS", then "WMS OGC options"
-* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date; note that this is currently a workaround and should be more directly supported in the future
+* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) into the "URL" field; note that the [GIBS EPSG:3857 WMS endpoint](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi) works best since this is the native projection of the ArcGIS Online map.
 
-![ArcGIS Online, Adjust Time](img/AGOL-TimeAdjust2.png)
+![ArcGIS Online, Add Layer Endpoint](img/AGOL-AddLayer3.png)
+
+* Under Custom Parameters, click on "+ Add custom parameter". Add "TIME" to the Parameter field and a date in YYYY-MM-DD format into the "Value" field, then click on the "Next" button in the lower right corner.
+
+![ArcGIS Online, Add Layer Time](img/AGOL-AddLayer4.png)
+
+* You are now presented with all the layers available via the GIBS endpoint in the Add Layers window. Select a layer to add to the map by entering a search term to narrow down the results or scroll through the list to find a layer.
+
+![ArcGIS Online, Select Layer](img/AGOL-SelectLayer.png)
+
+* Now your layer for your predefined date is viewable in the map interface.
+
+![ArcGIS Online, View Layer](img/AGOL-LayerAdded.png)
+
+* To change the date, click on the three dots then click on "Show properties". The Properties window will open on the right side of the map. Scroll to the bottom of the window and under "Custom Parameters".
+
+![ArcGIS Online, Change Time](img/AGOL-ChangeTime.png)
+
+* Click on "TIME", change the date, and click "Update".
+
+![ArcGIS Online, Change Time](img/AGOL-ChangeTime2.png)
 
 ### Adding GIBS layers from a list of ones predefined by ESRI
 
