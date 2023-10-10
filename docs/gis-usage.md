@@ -28,11 +28,11 @@ The [QGIS application](https://qgis.org/){:target="_blank"} supports GIBS' time-
 
 * In QGIS, open the "Layer | Add Layer | Add WMS / WMTS Layer" window
 * Add a "Name" such as "GIBS WMS (EPSG:4326, Best)"
-* Add a "URL" for the [GIBS WMS endpoint](../access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
-[https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
+* Add a "URL" for the [GIBS WMS endpoint](../access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:<br>
+https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi <br> 
+https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi
 
 !!! Note
     If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.
@@ -75,11 +75,11 @@ GIBS imagery layers can be directly loaded into [ESRI ArcGIS Pro](https://www.es
 * After starting up ArcGIS Pro, select "Start without a template" from the home page
 * Click the "Insert" tab, "Connections", "New WMS Server"<br>
 ![ArcGIS Pro New WMS Server](img/ArcGISPro-NewWMS.png){ width=50% }
-* Add a "Server URL" for the [GIBS WMS endpoint](../access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:
-[https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi)<br>
-[https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi](https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi)
+* Add a "Server URL" for the [GIBS WMS endpoint](../access-basics/#ogc-web-map-service-wms) of your desired map projection, e.g. one of the following:<br>
+https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi <br> 
+https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi
 
 !!! Note
     If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.
@@ -126,7 +126,7 @@ GIBS imagery layers can be directly loaded into [ESRI ArcGIS Desktop/ArcMap](htt
 ### Instructions
 
 * Open the "Catalog" window (far right pane) in ArcMap and select "Add WMS Server"
-* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) or [Web Mercator](https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi)) into the "URL" field and press the "Get Layers" button to validate the connection.
+* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) (e.g., WGS84 / Geographic: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi or Web Mercator: https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi) into the "URL" field and press the "Get Layers" button to validate the connection.
 
 ![ArcMap, Add WMS Server](img/ArcMap-CatWindow.png)
 
@@ -154,20 +154,41 @@ GIBS imagery layers can be imported into [ESRI's ArcGIS Online](http://www.arcgi
 
 ### Adding GIBS layers via WMS
 
-* Click the "Modify Map" button in the upper right corner, then "Add | Add Layer from Web".
+* Click on "Map" in the top menu navigation
+
+![ArcGIS Online, Access Map](img/AGOL-AccessMap.png)
+
+* Click on the down arrow next to the "Add" icon in the left side Layers section, then "Add Layer from URL"
 
 ![ArcGIS Online, Add Layer](img/AGOL-AddLayer.png)
 
-* Change the data type to a WMS OGC Web Service
-* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) (e.g., [WGS84 / Geographic](https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi) into the "URL" field and press the "Get Layers" button
-* Deselect all of the layers (upper left "square") and select a layer you'd like to add
+* Or click on the plus button in the far left menu navigation bar, then "Add Layer from URL"
 
-![ArcGIS Online, Add Layer from web](img/AGOL-AddLayer2.png)
+![ArcGIS Online, Add Layer from URL](img/AGOL-AddLayer2.png)
 
-* For each layer that you've loaded, click on the three small dots below "NASA Global Imagery Browse Services for EOSDIS", then "WMS OGC options"
-* Add a Parameter for "TIME" and enter a YYYY-MM-DD Value for your desired date; note that this is currently a workaround and should be more directly supported in the future
+* Paste one of the [GIBS WMS endpoints](../access-basics/#ogc-web-map-service-wms) into the "URL" field; note that the GIBS EPSG:3857 WMS endpoint: https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi, works best since this is the native projection of the ArcGIS Online map.
 
-![ArcGIS Online, Adjust Time](img/AGOL-TimeAdjust2.png)
+![ArcGIS Online, Add Layer Endpoint](img/AGOL-AddLayer3.png)
+
+* Under Custom Parameters, click on "+ Add custom parameter". Add "TIME" to the Parameter field and a date in YYYY-MM-DD format into the "Value" field, then click on the "Next" button in the lower right corner.
+
+![ArcGIS Online, Add Layer Time](img/AGOL-AddLayer4.png)
+
+* You are now presented with all the layers available via the GIBS endpoint in the Add Layers window. Select a layer to add to the map by entering a search term to narrow down the results or scroll through the list to find a layer.
+
+![ArcGIS Online, Select Layer](img/AGOL-SelectLayer.png)
+
+* Now your layer for your predefined date is viewable in the map interface.
+
+![ArcGIS Online, View Layer](img/AGOL-LayerAdded.png)
+
+* To change the date, click on the three dots then click on "Show properties". The Properties window will open on the right side of the map. Scroll to the bottom of the window and go to the "Custom Parameters" section.
+
+![ArcGIS Online, Change Time](img/AGOL-ChangeTime.png)
+
+* Click on "TIME", change the date, and click "Update".
+
+![ArcGIS Online, Change Time](img/AGOL-ChangeTime2.png)
 
 ### Adding GIBS layers from a list of ones predefined by ESRI
 
