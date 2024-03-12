@@ -120,7 +120,7 @@ The GIBS Colormap specification guides the creation of GIBS Colormap XML documen
 !!! Note
     The terms "Colormap entry" and "Legend entry" are used to identify individual entries within the data-to-rgb value mapping and legend XML elements, respectively.
 
-** Data To RGB Value Mapping **
+**Data To RGB Value Mapping**
 
 * **Ref** - The unique reference id used when associating Colormap entries to Legend entries.
 * **RGB** - The visual color associated with the data value(s).
@@ -129,7 +129,7 @@ The GIBS Colormap specification guides the creation of GIBS Colormap XML documen
 * **Scaled Value(s)** - The scaled data values to which units will be applied, if appropriate, for display to end users. If this is a classification, then the appropriate label is provided for reference.
 * **No Data** - A boolean value designating whether the Colormap entry is the "no data" value or not.
 
-** Legend Representation **
+**Legend Representation**
 
 * **ID(s)** - The `ref` values (see above) to which the Legend entry is associated.
 * **RGB** - The visual color associated with the Legend entry.
@@ -143,17 +143,17 @@ A raster visualization's GIBS Colormap XML document is associated to a GIBS visu
 ``` xml
 <ows:Metadata xlink:type="simple" 
               xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap" 
-              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSR_Surface_Precipitation.xml" 
               xlink:title="GIBS Color Map: Data - RGB Mapping"/>
               
 <ows:Metadata xlink:type="simple" 
               xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.0" 
-              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.0/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.0/AMSR_Surface_Precipitation.xml" 
               xlink:title="GIBS Color Map: Data - RGB Mapping"/>
 
 <ows:Metadata xlink:type="simple" 
               xlink:role="http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.3" 
-              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSRE_Surface_Rain_Rate_Day.xml" 
+              xlink:href="https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSR_Surface_Precipitation.xml" 
               xlink:title="GIBS Color Map: Data - RGB Mapping"/>
 ```
 
@@ -162,13 +162,13 @@ As described previously, each GIBS Colormap XML document contains the informatio
 
 |  Format |  Orientation  | Sample URL |   Sample Image  |
 | ------- | ------------- | ----------- | --------------- |
-|   PNG   |   Horizontal  | [link](https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_H.png){:target="_blank"} | ![PNG Horizontal](img/AMSR2_Wind_Speed_Day_H.png) |
-|   SVG   |   Horizontal  | [link](https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_H.svg){:target="_blank"} | ![SVG Horizontal](img/AMSR2_Wind_Speed_Day_H.svg) |
-|   SVG   |   Vertical    | [link](https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_V.svg){:target="_blank"} | ![SVG Vertical](img/AMSR2_Wind_Speed_Day_V.svg) |
+|   PNG   |   Horizontal  | [link](https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.png){:target="_blank"} | ![PNG Horizontal](img/AMSR_Wind_Speed_H.png) |
+|   SVG   |   Horizontal  | [link](https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.svg){:target="_blank"} | ![SVG Horizontal](img/AMSR_Wind_Speed_H.svg) |
+|   SVG   |   Vertical    | [link](https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_V.svg){:target="_blank"} | ![SVG Vertical](img/AMSR_Wind_Speed_V.svg) |
 
 These pre-generated legends are referenced in the WMTS and WMS Capabilities documents as is described below.
 
-** WMTS Capabilities **
+**WMTS Capabilities**
 
 Pre-generated legends are referenced in the WMTS Capabilities document within the `Style/LegendURL` elements. The following snippet shows an example of how these elements will appear. Note that only the SVG-formatted legends are referenced. 
 
@@ -178,16 +178,16 @@ Pre-generated legends are referenced in the WMTS Capabilities document within th
     <ows:Identifier>default</ows:Identifier>
     <LegendURL format="image/svg+xml" xlink:type="simple" 
         xlink:role="http://earthdata.nasa.gov/gibs/legend-type/vertical" 
-        xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_V.svg" 
+        xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_V.svg" 
         xlink:title="GIBS Color Map Legend: Vertical" width="135" height="287"/>
     <LegendURL format="image/svg+xml" xlink:type="simple" 
         xlink:role="http://earthdata.nasa.gov/gibs/legend-type/horizontal" 
-        xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_H.svg" 
+        xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.svg" 
         xlink:title="GIBS Color Map Legend: Horizontal" width="377" height="85"/>
 </Style>
 ```
 
-** WMS Capabilities **
+**WMS Capabilities**
 
 Pre-generated legends are referenced in the WMS Capabilities document within the `Style/LegendURL` element. The following snippet shows an example of how this element will appear. Note that only the PNG-formatted legend is referenced.
 
@@ -198,7 +198,7 @@ Pre-generated legends are referenced in the WMS Capabilities document within the
     <LegendURL width="420" height="95">
         <Format>image/png</Format>
         <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" 
-            xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR2_Wind_Speed_Day_H.png"/>
+            xlink:href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.png"/>
     </LegendURL>
 </Style>
 ```
