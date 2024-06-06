@@ -75,7 +75,7 @@ This interactive catalog provides the following information about each GIBS visu
         <sup>[3]</sup> NRT - Near Real-Time: The imagery product is generated within 3.5 hours of observation. STD - Standard: The imagery product is generated within 24 hours of observation.
       </p>
        <p id="footnote-4">
-        <sup>[4]</sup> When multiple data products are identified, the GIBS visualization product will provide users with a view of the “Best Available” data product.  See the <a href="../api-advanced-topics/#best-available-layers">Best Available Layers advanced topic</a> for more information on how this is determined.
+        <sup>[4]</sup> When multiple data products are identified, the GIBS visualization product will provide users with a view of the “Best Available” data product.  See the <a href="../access-advanced-topics/#best-available-layers">Best Available Layers advanced topic</a> for more information on how this is determined.
       </p>
 
     </div>

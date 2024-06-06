@@ -26,3 +26,4 @@ markdown_extensions:
     - footnotes
 plugins:
     - mkdocs-jupyter
+    - search
