@@ -438,7 +438,7 @@ gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs "+proj=stere 
 ## Bulk Downloading
 
 A "Bulk Download" is defined as the planned retrieval of more than 1,000,000 imagery tiles within a 24 hour period. These activities are typically orchestrated through script-based access to the GIBS API, not user-based access through a client application. In order to ensure quality of service for all GIBS users, the GIBS team requests that bulk downloading activities be coordinated at least 48 hours in advance of the planned download. Prior to
-beginning your bulk downloading activities, please contact the GIBS support team at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov?subject=GIBS Bulk Download Request) with the subject "GIBS Bulk
+beginning your bulk downloading activities, please contact the GIBS support team at [earthdata-support@nasa.gov](mailto:earthdata-support@nasa.gov?subject=GIBS Bulk Download Request) with the subject "GIBS Bulk
 Download Request" and the following information:
 
 1. Purpose
@@ -463,4 +463,4 @@ bulk download plan:
 3. Evenly distribute download requests across the entire bulk downloading period, avoiding significant spikes of activity.
 4. Start small with fewer concurrent threads and build to your proposed maximum download rate.
 
-Subscribe to our mailing list [by sending an email to this address](mailto:eosdis-gibs-announce-join@lists.nasa.gov) (no subject or text in the body is needed) and [follow our blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} to stay up-to-date with new features and changes to existing services. Or contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov?subject=GIS API Questions) with feedback and questions.
+Subscribe to our mailing list [by sending an email to this address](mailto:eosdis-gibs-announce-join@lists.nasa.gov) (no subject or text in the body is needed) and [follow our blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} to stay up-to-date with new features and changes to existing services. Or contact us at [earthdata-support@nasa.gov](mailto:earthdata-support@nasa.gov?subject=GIS API Questions) with feedback and questions.
