@@ -1,6 +1,6 @@
 # Contact Us
 
-Contact us at [support@earthdata.nasa.gov](mailto:support@earthdata.nasa.gov?subject=GIBS API Questions) if you have any suggestions or questions. 
+Contact us at [earthdata-support@nasa.gov](mailto:earthdata-support@nasa.gov?subject=GIBS API Questions) if you have any suggestions or questions. 
 
 Be sure to refer to the [Data Use Policy and Acknowledgements](..#data-use-policy-and-acknowledgements) when utilizing GIBS imagery services.
 
