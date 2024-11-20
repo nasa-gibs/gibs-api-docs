@@ -357,7 +357,9 @@ The projection string for the GIBS Antarctic projection is "+proj=stere +lat_0=-
 
 ```
 gdal_translate -of GTiff -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.tif
-"copy" GIBS_Arctic_3413.tif.aux.xml "to"  BarentsSea.tif.aux.xml
+```
+Then copy "GIBS_Arctic_3413.tif.aux.xml" to "BarentsSea.tif.aux.xml", followed by:
+```
 gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 ```
 
