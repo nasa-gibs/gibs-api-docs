@@ -410,8 +410,8 @@ Only a subset of layers are available from GIBS in the polar projections. This i
     <DataWindow>
         <UpperLeftX>-180.0</UpperLeftX>
         <UpperLeftY>90</UpperLeftY>
-        <LowerRightX>396.0</LowerRightX>
-        <LowerRightY>-198</LowerRightY>
+        <LowerRightX>180.0</LowerRightX>
+        <LowerRightY>0</LowerRightY>
         <TileLevel>5</TileLevel>
         <TileCountX>2</TileCountX>
         <TileCountY>1</TileCountY>
