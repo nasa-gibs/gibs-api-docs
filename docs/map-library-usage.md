@@ -353,11 +353,10 @@ gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 
 The projection string for the GIBS Antarctic projection is "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs". Here are the links for the [Arctic](http://spatialreference.org/ref/epsg/3413/proj4/){:target="_blank"} and [Antarctic](http://spatialreference.org/ref/epsg/3031/proj4/){:target="_blank"} PROJ4 definitions. Some other workarounds are:
 
-* Use a ".aux.xml" file with the ".tif" file. Download the sample [Arctic](img/GIBS_Arctic_3413.tif.aux.xml){:target="_blank"} or [Antarctic](img/GIBS_Antarctic_3031.tif.aux.xml){:target="_blank"} XML file and rename it to match the GeoTIFF file.
+* Use a ".aux.xml" file with the ".tif" file. Download the sample [Arctic](img/GIBS_Arctic_3413.tif.aux.xml){:target="_blank"} or [Antarctic](img/GIBS_Antarctic_3031.tif.aux.xml){:target="_blank"} XML file and rename it to match the GeoTIFF file (copy "GIBS_Arctic_3413.tif.aux.xml" to "BarentsSea.tif.aux.xml").
 
 ```
 gdal_translate -of GTiff -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.tif
-"copy" GIBS_Arctic_3413.tif.aux.xml "to"  BarentsSea.tif.aux.xml
 gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
 ```
 
@@ -410,8 +409,8 @@ Only a subset of layers are available from GIBS in the polar projections. This i
     <DataWindow>
         <UpperLeftX>-180.0</UpperLeftX>
         <UpperLeftY>90</UpperLeftY>
-        <LowerRightX>396.0</LowerRightX>
-        <LowerRightY>-198</LowerRightY>
+        <LowerRightX>180.0</LowerRightX>
+        <LowerRightY>0</LowerRightY>
         <TileLevel>5</TileLevel>
         <TileCountX>2</TileCountX>
         <TileCountY>1</TileCountY>
