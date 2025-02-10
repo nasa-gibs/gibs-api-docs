@@ -23,8 +23,8 @@ Contact us at [earthdata-support@nasa.gov](mailto:earthdata-support@nasa.gov?sub
 
 You may also visit the [GIBS landing page](https://earthdata.nasa.gov/gibs){:target="_blank"} for high-level information and the [GIBS blog](https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS){:target="_blank"} for periodic updates on new Worldview features, GIBS service enhancements, and visualization layers.
 
-## Data Use Policy and Acknowledgements
+## Data Use Guidance and Acknowledgements
 
-NASA supports an [open data policy](https://earthdata.nasa.gov/earth-science-data-systems-program/policies){:target="_blank"}. We ask that users who make use of GIBS in their clients or when referencing it in written or oral presentations to add the following acknowledgment:
+NASA promotes [full and open sharing of data](https://www.earthdata.nasa.gov/engage/open-data-services-software-policies){:target="_blank"}. We ask that users who make use of GIBS in their clients or when referencing it in written or oral presentations to add the following acknowledgment:
 
-> _We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Observing System Data and Information System (EOSDIS)._
+> _We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS)._
