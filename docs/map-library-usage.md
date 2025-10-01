@@ -1,3 +1,6 @@
+!!! danger " "
+    **Due to the lapse in federal government funding, NASA is not updating this website. We sincerely regret this inconvenience.**
+
 # Accessing via Map Libraries and GDAL Scripts
 
 There are several freely-available map libraries available to help build your own interface to explore NASA's Global Imagery Browse Services (GIBS) visualizations.  The information on this page provides instructions for the following libraries:
