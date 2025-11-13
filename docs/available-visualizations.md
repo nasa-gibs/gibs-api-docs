@@ -1,6 +1,3 @@
-!!! danger " "
-    **Due to the lapse in federal government funding, NASA is not updating this website. We sincerely regret this inconvenience.**
-
 # Available Visualizations
 
 NASA's Global Imagery Browse Services (GIBS) visualization archive includes over 1000 visualizations representing visualized science data from the NASA Earth Observing System Data and Information System ([EOSDIS](https://earthdata.nasa.gov/eosdis){:target="_blank"}). GIBS works closely with EOSDIS science teams and data centers to identify the appropriate data range and color mappings, where appropriate, to provide the highest quality visualization to the Earth science community. Each visualization is generated at the native resolution of the source data to provide "full resolution" visualizations of a science parameter. Those visualizations are then made available through standards-compliant services (See [Visualization Services](../access-basics/#access-basics)) and may be provided in more than one projected coordinate systems (See [Projections & Resolutions](../access-advanced-topics/#projections-resolution)). 
