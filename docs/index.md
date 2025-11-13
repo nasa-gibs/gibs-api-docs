@@ -1,6 +1,3 @@
-!!! danger " "
-    **Due to the lapse in federal government funding, NASA is not updating this website. We sincerely regret this inconvenience.**
-
 # Introduction
 ## Overview
 NASA's Global Imagery Browse Services (GIBS) system provides visualizations of NASA Earth Science observations through standardized web services. These services deliver global, full-resolution visualizations of satellite data to users in a highly responsive manner, enabling visual discovery of scientific phenomena, supporting timely decision-making for natural hazards, educating the next generation of scientists, and making imagery of the planet more accessible to the media and public. Browse all of these visualizations through our [Worldview](https://worldview.earthdata.nasa.gov){:target="_blank"} application.

@@ -1,6 +1,3 @@
-!!! danger " "
-    **Due to the lapse in federal government funding, NASA is not updating this website. We sincerely regret this inconvenience.**
-
 # Accessing via GIS Applications
 
 NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through standards-compliant web services (See [Visualization Services](../access-basics/#access-basics)).  These services, specifically the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), allow you to access GIBS visualizations directly within many Geographic Information System (GIS) clients.  The information on this page provides instructions for accessing GIBS visualizations through these GIS clients:
