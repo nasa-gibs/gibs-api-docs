@@ -116,7 +116,7 @@ const app = new Vue({
       this.loading = false;
       this.errorLoading = true;
     },
-    getMeasurementsForCategory: function (category) { 
+    getMeasurementsForCategory: function (category) {
       const { measurements } = this.categories[category];
       return measurements.map((key) => {
         const m = this.allMeasurements[key];
@@ -125,6 +125,7 @@ const app = new Vue({
             const { settings } = m.sources[source];
             return settings.map((id) => this.allLayers[id])
           })
+          .filter((layer) => layer !== undefined)
           .filter(({ layergroup }) => {
             return key === 'Orbital Track' ? true : layergroup !== 'Orbital Track'
           });
