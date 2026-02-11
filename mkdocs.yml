@@ -13,10 +13,10 @@ extra_css:
     - css/style.css
     - css/loading-spinner.css
 extra_javascript:
-    - javascript/vue@2.js
+    - javascript/vue@3.js
     - javascript/overrides.js
-    - javascript/imagery-products.js
     - javascript/components.js
+    - javascript/imagery-products.js
 theme:
     name: 'rtd-dropdown'
 markdown_extensions:
