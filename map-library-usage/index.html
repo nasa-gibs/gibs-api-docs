@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Accessing via Map Libraries and GDAL Scripts - Global Imagery Browse Services (GIBS)</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/loading-spinner.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Accessing via Map Libraries and GDAL Scripts";
+    var mkdocs_page_input_path = "map-library-usage.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Global Imagery Browse Services (GIBS)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="..">Introduction</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../available-visualizations/">Available Visualizations</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-basics/">Access Basics</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-advanced-topics/">Access Advanced Topics</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../gis-usage/">Accessing via GIS Applications</a>
+  </li>
+    
+      
+
+
+  
+    
+    <li class="navtree toctree-l1 page current">
+      <a class="current" href="./">
+        Accessing via Map Libraries and GDAL Scripts
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l1 current">
+    <ul class="subnav-l1 current">
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#web-based-map-libraries">Web-based Map Libraries</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#gdal">
+      GDAL
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#requirements">Requirements</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#basic-usage">
+      Basic Usage
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l4 current with-children">
+    <a href="#tiledwms-driver">
+      TiledWMS Driver
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4 current">
+    <ul class="subnav-l4 current">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#1-tiledwms-driver-configuration-file-input">#1 - "TiledWMS" Driver Configuration File Input</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#2-tiledwms-driver-command-line-input">#2 - "TiledWMS" Driver Command Line Input</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#3-tiledwms-driver-configuration-file-for-all-datasets">#3 - "TiledWMS" Driver Configuration File for All Datasets</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#4-generate-tiledwms-configuration-files-for-specified-datasets">#4 - Generate "TiledWMS" Configuration Files for Specified Datasets</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#tms-driver">
+      "TMS Driver"
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#1-configuration-file-input">#1 - Configuration File Input</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#2-tms-driver-command-line-input">#2 - "TMS" Driver Command Line Input</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l4">
+    <a href="#wmts-driver">
+      "WMTS Driver"
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l4">
+    <ul class="subnav-l4 toc-hidden">
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#1-configuration-file-input_1">#1 - Configuration File Input</a>
+        </li>
+    
+      
+        <li class="toctree-l5">
+          <a class="toctree-l6" href="#2-wmts-driver-command-line-input">#2 - "WMTS" Driver Command Line Input</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#advanced-usage">
+      Advanced Usage
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#tms-driver-configuration-file-input-w-transparent-png">TMS Driver Configuration File Input w/ Transparent PNG</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#tms-driver-polar-imagery">TMS Driver Polar Imagery</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#tms-driver-polar-layer-w-reprojection">TMS Driver Polar Layer w/ Reprojection</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#tms-driver-reprojecting-gibs-geographic-layer-into-polar-stereographic">TMS Driver Reprojecting GIBS Geographic layer into Polar Stereographic</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#python">Python</a>
+        </li>
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#bulk-downloading">Bulk Downloading</a>
+        </li>
+    
+    </ul>
+  </li>
+
+
+  
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../python-usage/">Accessing via Python</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../contact-us/">Contact Us</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Global Imagery Browse Services (GIBS)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Accessing via Map Libraries and GDAL Scripts</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="accessing-via-map-libraries-and-gdal-scripts">Accessing via Map Libraries and GDAL Scripts</h1>
+<p>There are several freely-available map libraries available to help build your own interface to explore NASA's Global Imagery Browse Services (GIBS) visualizations.  The information on this page provides instructions for the following libraries:</p>
+<ul>
+<li><a href="#web-based-map-libraries">Web-based Map Libraries</a></li>
+<li><a href="#gdal">GDAL</a></li>
+</ul>
+<p>Additionally, information regarding bulk downloading is also provided <a href="#bulk-downloading">here</a>.</p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="web-based-map-libraries">Web-based Map Libraries</h2>
+<p>Please see our <a href="https://github.com/nasa-gibs/gibs-web-examples" target="_blank">"GIBS Web Examples" GitHub area</a> for code samples and live demos of using popular web mapping libraries (e.g., OpenLayers, Cesium, Mapbox GL) with GIBS.  Below is a screen capture of a barebones GIBS client based on the OpenLayers mapping library.</p>
+<p><a href="https://github.com/nasa-gibs/gibs-web-examples" target="_blank"><img alt="OpenLayers Example" src="../img/web-based-map-library-ol.png" width="70%" /></a></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="gdal">GDAL</h2>
+<p>The Geospatial Data Abstraction Library (<a href="https://gdal.org/" target="_blank">GDAL</a>) can be used as a basis to generate imagery from custom scripts. GDAL is a well known geospatial data access library which is part of most GIS applications. GDAL can read (and sometimes write) geospatial raster and vector data in many formats, the format specific operations being handled by a GDAL driver. </p>
+<p>The GDAL WMS driver can access many of the known tiled and non-tiled protocols. GDAL WMS has a common part that handles interfacing with GDAL, making the requests and receiving the responses, decoding the received data as needed and a few other things. Since using tiles and multiple resolutions (known as a pyramid) is well supported in GDAL and widespread in the GIS domain, the core of the WMS driver is based on this model, and tile requests are made even when accessing a dynamic service that could provide its own subsetting and resampling.</p>
+<p>The WMS driver supports several internal "minidrivers" that allow access to different web mapping services. Each of these services may support a different set of options in the Service block. Documentation for these minidrivers can be found in the <a href="https://gdal.org/drivers/raster/wms.html" target="_blank">GDAL WMS documentation area</a>. Two of these minidrivers in particular can be used by users to download GIBS imagery programmatically. They are the Tile Map Specification (TMS) and the OnEarth Tiled WMS (TiledWMS) minidrivers. Examples for both of these minidrivers are included below.</p>
+<p>The WMS driver is also used by many other GDAL drivers, for example it is used by the <a href="https://gdal.org/drivers/raster/wmts.html" target="_blank">GDAL WMTS driver</a>. Accessing GIBS imagery the WMTS driver is detailed further below.</p>
+<h3 id="requirements">Requirements</h3>
+<p>GDAL version 1.9.1 or greater with cURL support enabled. To check if cURL is enabled for GDAL, type <code>gdalinfo --format WMS</code>. If cURL is enabled, you will see information about the WMS format.  If not, you will get an error message and you will need to reconfigure GDAL to support cURL.</p>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="basic-usage">Basic Usage</h3>
+<p>This section provides basic examples of both the TiledWMS and WMS GDAL drivers. The information needed to create the local service description XML can be found in the following GIBS WMTS Capabilities documents:</p>
+<table>
+<thead>
+<tr>
+<th>Projection Name</th>
+<th>GIBS WMTS "Best Available" Capabilities document</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geographic</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml</a></td>
+</tr>
+<tr>
+<td>NSIDC Sea Ice Polar Stereographic North</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml</a></td>
+</tr>
+<tr>
+<td>Antarctic Polar Stereographic</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml</a></td>
+</tr>
+<tr>
+<td>Web Mercator</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In very limited testing, our experience has been that better image quality is obtained by using the GeoTIFF output format, then converting this to other formats, if desired, using a second gdal_translate command (seen below), or other programs such as ImageMagick convert.
+<code>gdal_translate -of JPEG GreatPlainsSmoke2.tif GreatPlainsSmoke2.jpg</code></p>
+</div>
+<h4 id="tiledwms-driver">TiledWMS Driver</h4>
+<p>TiledWMS adds a GetTileService call to the OGC WMS, the XML document returned is what contains all the information needed to configure and connect to any dataset. The GetTileService request for datasets in EPSG:4326 projection is https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService
+This URL can be used by gdalinfo to get a list of available datasets with their <code>TiledGroupName</code>:</p>
+<pre><code class="language-shell">gdalinfo &quot;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService&quot;
+</code></pre>
+<p>To see information about a single dataset, the <code>gdalinfo</code> command may be invoked with the associated <code>SUBDATASET</code> ID of the <code>TiledGroupName</code> for the dataset by using the <code>-sd</code> flag. For example:</p>
+<pre><code class="language-shell">gdalinfo -sd 479 &quot;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService&quot;
+</code></pre>
+<p>To filter for specific datasets with <code>gdalinfo</code>, the <code>-oo TiledGroupName=</code> option may be used:</p>
+<pre><code class="language-shell">gdalinfo -oo TiledGroupName=&quot;MODIS Aqua&quot; &quot;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService&quot;
+</code></pre>
+<p>The TiledWMS GDAL minidriver supports a simple XML configuration block (see example below) from the user, pulling all other information from the GIBS Tiled Web Map Service (<a href="../access-basics/#tiled-web-map-service-twms">TWMS</a>) "Tile Service" document at runtime.</p>
+<pre><code class="language-xml">&lt;GDAL_WMS&gt;
+  &lt;Service name=&quot;TiledWMS&quot;&gt;
+    &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?&lt;/ServerUrl&gt;
+    &lt;TiledGroupName&gt;MODIS Aqua CorrectedReflectance TrueColor tileset&lt;/TiledGroupName&gt;
+    &lt;Change key=&quot;${time}&quot;&gt;2013-08-21&lt;/Change&gt;
+  &lt;/Service&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<p>In the above XML block, the following values may be changed to meet your needs:</p>
+<ul>
+<li><strong>Server Url</strong> - Set the <em>ServerUrl</em> to a value of <code>{Endpoint Root}/twms.cgi?</code>, where the endpoint root is defined in <a href="../access-basics/#service-endpoints_2">this</a> table.<ul>
+<li>e.g. <code>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?</code></li>
+</ul>
+</li>
+<li><strong>Tiled Group Name</strong> - When accessing visualizations through TWMS, the <em>TiledGroupName</em> value is utilized instead of the layers identifier. The <em>TiledGroupName</em> can also be generated by replacing all underscores in a visualization's <em>Identifier</em> from GetCapabilities with spaces and appending " tileset". For example:<ul>
+<li><strong>Identifier</strong> - MODIS_Aqua_CorrectedReflectance_TrueColor</li>
+<li><strong>Tiled Group Name</strong> - MODIS Aqua CorrectedReflectance TrueColor tileset</li>
+</ul>
+</li>
+<li><strong>Time</strong> - Insert the date (e.g. 2013-08-21) or datetime (e.g. 2013-08-21T00:00:00Z) you are requesting. If no time is provided, you can add an option to your GDAL command to specify the value, e.g., <code>-oo Change=time:2020-02-05</code> </li>
+</ul>
+<p>The following examples demonstrate how to invoke the GDAL TiledWMS driver for imagery requests.</p>
+<h5 id="1-tiledwms-driver-configuration-file-input">#1 - "TiledWMS" Driver Configuration File Input</h5>
+<p>In this example, the following XML file is created and saved to your local file system.  Then the <code>gdal_translate</code> command shown below is run with your desired area of interest and output dimensions.  </p>
+<pre><code class="language-xml">&lt;GDAL_WMS&gt;
+  &lt;Service name=&quot;TiledWMS&quot;&gt;
+    &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?&lt;/ServerUrl&gt;
+    &lt;TiledGroupName&gt;MODIS Aqua CorrectedReflectance TrueColor tileset&lt;/TiledGroupName&gt;
+    &lt;Change key=&quot;${time}&quot;&gt;2013-08-21&lt;/Change&gt;
+  &lt;/Service&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<p>Let's save the XML as a file named <code>GIBS_Aqua_MODIS_true.xml</code></p>
+<pre><code>gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MODIS_true.xml GreatPlainsSmoke1.tif
+</code></pre>
+<p>The XML file can be opened in any GDAL based GIS software. However, in ArcGIS Pro, TileWMS is not recognized without some extra configuration steps, but it can be dragged and dropped into a map and it will work. Alternatively, we can change the extension into something supported, like .tif for example.</p>
+<p>This file shows one of the main advantages of the TiledWMS over other GDAL WMS minidriver protocols. Only the minimum amount of information is stored in the handle file. No fiddling with bounding boxes, tile sizes, number of levels is required. Getting the detail correct becomes the responsibility of the source server. All that is needed is the server URL, the name of the tiled group and optionally a set of parameter changes supported by the tiled group.</p>
+<h5 id="2-tiledwms-driver-command-line-input">#2 - "TiledWMS" Driver Command Line Input</h5>
+<p>This example invokes gdal_translate with the content of the TileWMS local service description XML file embedded as a command line argument. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as the previous example, run the following:</p>
+<pre><code>gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '&lt;GDAL_WMS&gt;&lt;Service name=&quot;TiledWMS&quot;&gt;&lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?&lt;/ServerUrl&gt;&lt;TiledGroupName&gt;MODIS Aqua CorrectedReflectance TrueColor tileset&lt;/TiledGroupName&gt;&lt;Change key=&quot;${time}&quot;&gt;2013-08-21&lt;/Change&gt;&lt;/Service&gt;&lt;/GDAL_WMS&gt;' GreatPlainsSmoke2.tif
+</code></pre>
+<h5 id="3-tiledwms-driver-configuration-file-for-all-datasets">#3 - "TiledWMS" Driver Configuration File for All Datasets</h5>
+<p>The TiledGroupName can also be fed as an open option. Create the following XML file:</p>
+<pre><code class="language-xml">&lt;GDAL_WMS&gt;
+  &lt;Service name=&quot;TiledWMS&quot;&gt;
+    &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?&lt;/ServerUrl&gt;
+  &lt;/Service&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<p>Let's save the XML as a file named <code>GIBS_epsg4326.xml</code>. Now we can run <code>gdal_translate</code> and use the <code>-oo</code> options to specify the dataset and time.</p>
+<pre><code class="language-shell">gdal_translate -of JPEG -outsize 2560 1280 -oo TiledGroupName=&quot;MODIS Aqua CorrectedReflectance TrueColor tileset&quot; -oo Change=time:2020-02-05 GIBS_epsg4326.xml MODIS_A_Feb_05_2020.jpg
+</code></pre>
+<h5 id="4-generate-tiledwms-configuration-files-for-specified-datasets">#4 - Generate "TiledWMS" Configuration Files for Specified Datasets</h5>
+<p>gdal_translate has a <code>-sds</code> option where each subdataset of the input is copied, in sequence. This can be used to generate multiple handle files in a single command. We can use the open options to restrict which gets generated. For example, this generates all the handle files for patterns that contain the word "infrared":</p>
+<pre><code class="language-shell">gdal_translate -of WMS -sds -oo TiledGroupName=&quot;infrared&quot; -oo Change=time:2019-10-21 &quot;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService&quot; Infrared.tWMS
+</code></pre>
+<p>Additionally, a <code>StoreConfiguration</code> open option can be applied to store the GetTileService response locally to speed up the requests:</p>
+<pre><code class="language-shell">gdal_translate -of WMS -sds -oo StoreConfiguration=yes -oo TiledGroupName=&quot;infrared&quot; -oo Change=time:2019-10-21 &quot;https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService&quot; Infrared.tWMS
+</code></pre>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="tms-driver">"TMS Driver"</h4>
+<p>The TMS GDAL minidriver relies on a more complex XML configuration block (see example below) from the user that defines all information required for accessing a tiled visualization service.</p>
+<pre><code class="language-xml">    &lt;GDAL_WMS&gt;
+        &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-08-21/250m/${z}/${y}/${x}.jpg&lt;/ServerUrl&gt;
+        &lt;/Service&gt;
+        &lt;DataWindow&gt;
+            &lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;
+            &lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;
+            &lt;LowerRightX&gt;396.0&lt;/LowerRightX&gt;
+            &lt;LowerRightY&gt;-198&lt;/LowerRightY&gt;
+            &lt;TileLevel&gt;8&lt;/TileLevel&gt;
+            &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+            &lt;TileCountY&gt;1&lt;/TileCountY&gt;
+            &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+        &lt;/DataWindow&gt;
+        &lt;Projection&gt;EPSG:4326&lt;/Projection&gt;
+        &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+        &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+        &lt;BandsCount&gt;3&lt;/BandsCount&gt;
+    &lt;/GDAL_WMS&gt;
+</code></pre>
+<p>In the above XML block, the following values may be changed to meet your needs:</p>
+<ul>
+<li>&lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/<strong>epsgcode</strong>/best/<strong>layer_name</strong>/default/<strong>date</strong>/<strong>resolution</strong>/${z}/${y}/${x}.<strong>format</strong>&lt;/ServerUrl&gt;<ul>
+<li><strong>layer_name</strong> - use the layer's "Identifier" from the relevant GIBS WMTS GetCapabilities document. Note that only one layer can be retrieved per gdal_translate call.</li>
+<li><strong>date</strong> - use the desired date in YYYY-MM-DD format</li>
+<li><strong>epsgcode</strong> - use "epsg" followed by the appropriate EPSG code as defined in <a href="../access-basics/#map-projections">this</a> table.</li>
+<li><strong>resolution</strong> - use the layer's "TileMatrixSet" value from the relevant GIBS WMTS GetCapabilities document</li>
+<li><strong>format</strong> - use jpg or png extension based on the "Format"</li>
+</ul>
+</li>
+<li><strong>Bounding box</strong> - use <code>-180.0, 90, 396.0, -198</code> for Geographic projection and <code>-4194304, 4194304, 4194304, -4194304</code> for the Polar projections</li>
+<li><strong>&lt;TileLevel&gt;</strong> - select from the table below based on "Resolution" and "Projection". Note that the TileLevel in the table below is the maximum for that resolution. You can specify a lower value of TileLevel to force GDAL to use coarser resolution input tiles. This can be used to speed up projection, for example during development and testing.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Resolution</th>
+<th>TileLevel (Geographic)</th>
+<th>TileLevel (Polar)</th>
+<th>Resolution (Web Mercator)</th>
+<th>Tile Level (Web Mercator)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2km</td>
+<td>5</td>
+<td>2</td>
+<td>GoogleMapsCompatible_Level6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>1km</td>
+<td>6</td>
+<td>3</td>
+<td>GoogleMapsCompatible_Level7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>500m</td>
+<td>7</td>
+<td>4</td>
+<td>GoogleMapsCompatible_Level8</td>
+<td>8</td>
+</tr>
+<tr>
+<td>250m</td>
+<td>8</td>
+<td>5</td>
+<td>GoogleMapsCompatible_Level9</td>
+<td>9</td>
+</tr>
+<tr>
+<td>125m</td>
+<td>9</td>
+<td>-</td>
+<td>GoogleMapsCompatible_Level10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>62.5m</td>
+<td>10</td>
+<td>-</td>
+<td>GoogleMapsCompatible_Level11</td>
+<td>11</td>
+</tr>
+<tr>
+<td>31.25m</td>
+<td>11</td>
+<td>-</td>
+<td>GoogleMapsCompatible_Level12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>15.625m</td>
+<td>12</td>
+<td>-</td>
+<td>GoogleMapsCompatible_Level3</td>
+<td>13</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>&lt;TileCountX&gt;&lt;TileCountY&gt;</strong> - use 2, 1 for Geographic projection and 2, 2 for Polar projections</li>
+<li><strong>&lt;Projection&gt;</strong> - use the appropriate EPSG code as described in the above "epsgcode" table</li>
+<li><strong>&lt;Bands&gt;</strong> - use 3 for .jpg (except use 1 for ASTER_GDEM_Greyscale_Shaded_Relief) and 4 for .png</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The values for &lt;YOrigin&gt;, &lt;BlockSizeX&gt;, and &lt;BlockSizeY&gt; are constant for all GIBS layers.</p>
+</div>
+<p>The following examples demonstrate how to invoke the GDAL TMS driver.</p>
+<h5 id="1-configuration-file-input">#1 - Configuration File Input</h5>
+<p>Create a local service description XML file and invoke gdal_translate. In this example, GIBS_Aqua_MODIS_true.xml is used to generate a true color JPEG image from Aqua MODIS of a smoke plume from western fires over the central United States. The contents of GIBS_Aqua_MODIS_true.xml would be:</p>
+<pre><code class="language-xml">    &lt;GDAL_WMS&gt;
+        &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-08-21/250m/${z}/${y}/${x}.jpg&lt;/ServerUrl&gt;
+        &lt;/Service&gt;
+        &lt;DataWindow&gt;
+            &lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;
+            &lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;
+            &lt;LowerRightX&gt;396.0&lt;/LowerRightX&gt;
+            &lt;LowerRightY&gt;-198&lt;/LowerRightY&gt;
+            &lt;TileLevel&gt;8&lt;/TileLevel&gt;
+            &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+            &lt;TileCountY&gt;1&lt;/TileCountY&gt;
+            &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+        &lt;/DataWindow&gt;
+        &lt;Projection&gt;EPSG:4326&lt;/Projection&gt;
+        &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+        &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+        &lt;BandsCount&gt;3&lt;/BandsCount&gt;
+    &lt;/GDAL_WMS&gt;
+</code></pre>
+<pre><code>    gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_Aqua_MODIS_true.xml GreatPlainsSmoke1.tif
+</code></pre>
+<h5 id="2-tms-driver-command-line-input">#2 - "TMS" Driver Command Line Input</h5>
+<p>Invoke gdal_translate with the content of the local service description XML file embedded into the command. This approach is useful for automated scripting to download various layers, dates, etc. To generate the same image as above:</p>
+<pre><code>gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 '&lt;GDAL_WMS&gt;&lt;Service name=&quot;TMS&quot;&gt;&lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-08-21/250m/${z}/${y}/${x}.jpg&lt;/ServerUrl&gt;&lt;/Service&gt;&lt;DataWindow&gt;&lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;&lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;&lt;LowerRightX&gt;396.0&lt;/LowerRightX&gt;&lt;LowerRightY&gt;-198&lt;/LowerRightY&gt;&lt;TileLevel&gt;8&lt;/TileLevel&gt;&lt;TileCountX&gt;2&lt;/TileCountX&gt;&lt;TileCountY&gt;1&lt;/TileCountY&gt;&lt;YOrigin&gt;top&lt;/YOrigin&gt;&lt;/DataWindow&gt;&lt;Projection&gt;EPSG:4326&lt;/Projection&gt;&lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;&lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;&lt;BandsCount&gt;3&lt;/BandsCount&gt;&lt;/GDAL_WMS&gt;' GreatPlainsSmoke2.tif
+</code></pre>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="wmts-driver">"WMTS Driver"</h4>
+<p>A WMTS driver was added to GDAL in version 2.1 and greater. It can be used with the GIBS GetCapabilities to get a list of available datasets:</p>
+<pre><code class="language-shell">gdalinfo &quot;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities&quot;
+</code></pre>
+<p>or information about a single dataset using the <code>WMTS:</code> prefix:</p>
+<pre><code class="language-shell">gdalinfo &quot;WMTS:https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities,layer=MODIS_Terra_CorrectedReflectance_TrueColor&quot;
+</code></pre>
+<p><strong>Note the drawback of using WMTS is that the <code>time</code> parameter is not supported. This means users are limited to only the default <code>time</code> for any given layer.</strong></p>
+<h5 id="1-configuration-file-input_1">#1 - Configuration File Input</h5>
+<p>Create a local service description XML file and invoke gdal_translate. In this example, GIBS_Terra_MODIS_true.xml is used to generate a true color JPEG image from Terra MODIS of the entire world for the current day. The contents of GIBS_Terra_MODIS_true.xml would be:</p>
+<pre><code class="language-xml">&lt;GDAL_WMTS&gt;
+  &lt;GetCapabilitiesUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;amp;request=GetCapabilities&lt;/GetCapabilitiesUrl&gt;
+  &lt;Layer&gt;MODIS_Terra_CorrectedReflectance_TrueColor&lt;/Layer&gt;
+  &lt;Style&gt;default&lt;/Style&gt;
+  &lt;TileMatrixSet&gt;250m&lt;/TileMatrixSet&gt;
+  &lt;DataWindow&gt;
+    &lt;UpperLeftX&gt;-180&lt;/UpperLeftX&gt;
+    &lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;
+    &lt;LowerRightX&gt;180&lt;/LowerRightX&gt;
+    &lt;LowerRightY&gt;-90&lt;/LowerRightY&gt;
+  &lt;/DataWindow&gt;
+  &lt;BandsCount&gt;3&lt;/BandsCount&gt;
+  &lt;DataType&gt;Byte&lt;/DataType&gt;
+  &lt;Cache /&gt;
+&lt;/GDAL_WMTS&gt;
+</code></pre>
+<pre><code>gdal_translate -of JPEG -outsize 2560 1280 GIBS_Terra_MODIS_true.xml GIBS_Terra_MODIS_true.jpeg
+</code></pre>
+<h5 id="2-wmts-driver-command-line-input">#2 - "WMTS" Driver Command Line Input</h5>
+<p>Invoke gdal_translate with the content of the local service description XML file embedded into the command. To generate the same image as above:</p>
+<pre><code>gdal_translate -of JPEG -outsize 2560 1280 &quot;WMTS:https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities,layer=MODIS_Terra_CorrectedReflectance_TrueColor&quot; MODIS_Terra_default.jpg
+</code></pre>
+<p>Note that the WMTS driver defaults to 4 bands, which may result in discoloration if the incorrect number of bands is specified. There is currently not a way to specify the number of bands from the command line with the WMTS driver, which may result in discoloration with this example.</p>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="advanced-usage">Advanced Usage</h3>
+<h4 id="tms-driver-configuration-file-input-w-transparent-png">TMS Driver Configuration File Input w/ Transparent PNG</h4>
+<p>In this example, GIBS_OMI_AI.xml is used to generate a transparent PNG image from the OMI Aerosol Index over the same region as the first two examples. The "Layer Name on Server" and EPSG/resolution in &lt;ServerURL&gt;, the &lt;TileLevel&gt;, and the &lt;BandsCount&gt; have changed from the first examples. The contents of GIBS_OMI_AI.xml would be:</p>
+<pre><code>&lt;GDAL_WMS&gt;
+    &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/OMI_Aerosol_Index/default/2013-08-21/2km/${z}/${y}/${x}.png&lt;/ServerUrl&gt;
+    &lt;/Service&gt;
+    &lt;DataWindow&gt;
+        &lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;
+        &lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;
+        &lt;LowerRightX&gt;396.0&lt;/LowerRightX&gt;
+        &lt;LowerRightY&gt;-198&lt;/LowerRightY&gt;
+        &lt;TileLevel&gt;5&lt;/TileLevel&gt;
+        &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+        &lt;TileCountY&gt;1&lt;/TileCountY&gt;
+        &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+    &lt;/DataWindow&gt;
+    &lt;Projection&gt;EPSG:4326&lt;/Projection&gt;
+    &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+    &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+    &lt;BandsCount&gt;4&lt;/BandsCount&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<pre><code>gdal_translate -of GTiff -outsize 1200 1000 -projwin -105 42 -93 32 GIBS_OMI_AI.xml GreatPlainsSmokeAI.tif
+</code></pre>
+<h4 id="tms-driver-polar-imagery">TMS Driver Polar Imagery</h4>
+<p>In this example, GIBS_Terra_MODIS_Arctic.xml is used to generate a true color JPEG image from Terra MODIS of a phytoplankton bloom in the Barents Sea. The "Layer Name on Server" and EPSG/resolution in &lt;ServerUrl&gt;, the &lt;DataWindow&gt; elements, and the &lt;Projection&gt; have changed from the first examples. The contents of GIBS_Terra_MODIS_Arctic.xml would be:</p>
+<pre><code>&lt;GDAL_WMS&gt;
+    &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/2013-08-01/250m/${z}/${y}/${x}.jpg&lt;/ServerUrl&gt;
+    &lt;/Service&gt;
+    &lt;DataWindow&gt;
+        &lt;UpperLeftX&gt;-4194304&lt;/UpperLeftX&gt;
+        &lt;UpperLeftY&gt;4194304&lt;/UpperLeftY&gt;
+        &lt;LowerRightX&gt;4194304&lt;/LowerRightX&gt;
+        &lt;LowerRightY&gt;-4194304&lt;/LowerRightY&gt;
+        &lt;TileLevel&gt;5&lt;/TileLevel&gt;
+        &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+        &lt;TileCountY&gt;2&lt;/TileCountY&gt;
+        &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+    &lt;/DataWindow&gt;
+    &lt;Projection&gt;EPSG:3413&lt;/Projection&gt;
+    &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+    &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+    &lt;BandsCount&gt;3&lt;/BandsCount&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<p>GeoTIFF files created by GDAL using the default tags for the GIBS polar projections do not work correctly in some GIS programs. So we recommend specifying the output projection in PROJ4 format:</p>
+<pre><code>gdal_translate -of GTiff -outsize 980 940 -a_srs &quot;+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&quot; -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.tif
+gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
+</code></pre>
+<p>The projection string for the GIBS Antarctic projection is "+proj=stere +lat_0=-90 +lat_ts=-71 +lon_0=0 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs". Here are the links for the <a href="http://spatialreference.org/ref/epsg/3413/proj4/" target="_blank">Arctic</a> and <a href="http://spatialreference.org/ref/epsg/3031/proj4/" target="_blank">Antarctic</a> PROJ4 definitions. Some other workarounds are:</p>
+<ul>
+<li>Use a ".aux.xml" file with the ".tif" file. Download the sample <a href="../img/GIBS_Arctic_3413.tif.aux.xml" target="_blank">Arctic</a> or <a href="../img/GIBS_Antarctic_3031.tif.aux.xml" target="_blank">Antarctic</a> XML file and rename it to match the GeoTIFF file (copy "GIBS_Arctic_3413.tif.aux.xml" to "BarentsSea.tif.aux.xml").</li>
+</ul>
+<pre><code>gdal_translate -of GTiff -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.tif
+gdal_translate -of JPEG BarentsSea.tif BarentsSea.jpg
+</code></pre>
+<ul>
+<li>Use JPEG format instead. This will create a .jpg.aux.xml file in addition to the .jpg file.</li>
+</ul>
+<pre><code>gdal_translate -of JPEG -outsize 980 940 -projwin 1520000 240000 2500000 -700000 GIBS_Terra_MODIS_Arctic.xml BarentsSea.jpg
+</code></pre>
+<h4 id="tms-driver-polar-layer-w-reprojection">TMS Driver Polar Layer w/ Reprojection</h4>
+<p>In this example, GIBS_Aqua_MODIS_Arctic.xml is used to generate a true color JPEG image from Aqua MODIS of the Beaufort Sea reprojected to have 145W down. The "Layer Name on Server" and EPSG/resolution in &lt;ServerUrl&gt;, the &lt;DataWindow&gt; elements, and the &lt;Projection&gt; have changed from the first examples. The contents of GIBS_Aqua_MODIS_Arctic.xml would be:</p>
+<pre><code>&lt;GDAL_WMS&gt;
+    &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/MODIS_Aqua_CorrectedReflectance_TrueColor/default/2013-06-20/250m/${z}/${y}/${x}.jpg&lt;/ServerUrl&gt;
+    &lt;/Service&gt;
+    &lt;DataWindow&gt;
+        &lt;UpperLeftX&gt;-4194304&lt;/UpperLeftX&gt;
+        &lt;UpperLeftY&gt;4194304&lt;/UpperLeftY&gt;
+        &lt;LowerRightX&gt;4194304&lt;/LowerRightX&gt;
+        &lt;LowerRightY&gt;-4194304&lt;/LowerRightY&gt;
+        &lt;TileLevel&gt;5&lt;/TileLevel&gt;
+        &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+        &lt;TileCountY&gt;2&lt;/TileCountY&gt;
+        &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+    &lt;/DataWindow&gt;
+    &lt;Projection&gt;EPSG:3413&lt;/Projection&gt;
+    &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+    &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+    &lt;BandsCount&gt;3&lt;/BandsCount&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<pre><code>gdalwarp -t_srs '+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-145 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs' -te -1600000 -2500000 1200000 -400000 -tr 1000 1000 GIBS_Aqua_MODIS_Arctic.xml Beaufort_neg145down_1km.tif
+gdal_translate -of JPEG Beaufort_neg145down_1km.tif Beaufort_neg145down_1km.jpg
+</code></pre>
+<h4 id="tms-driver-reprojecting-gibs-geographic-layer-into-polar-stereographic">TMS Driver Reprojecting GIBS Geographic layer into Polar Stereographic</h4>
+<p>Only a subset of layers are available from GIBS in the polar projections. This is an example of how to project a geographic layer into a polar projection. The contents of GIBS_Terra_Cloud_Fraction.xml would be:</p>
+<pre><code>&lt;GDAL_WMS&gt;
+    &lt;Service name=&quot;TMS&quot;&gt;
+        &lt;ServerUrl&gt;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_Cloud_Fraction_Day/default/2017-05-16/2km/${z}/${y}/${x}.png&lt;/ServerUrl&gt;
+    &lt;/Service&gt;
+    &lt;DataWindow&gt;
+        &lt;UpperLeftX&gt;-180.0&lt;/UpperLeftX&gt;
+        &lt;UpperLeftY&gt;90&lt;/UpperLeftY&gt;
+        &lt;LowerRightX&gt;180.0&lt;/LowerRightX&gt;
+        &lt;LowerRightY&gt;0&lt;/LowerRightY&gt;
+        &lt;TileLevel&gt;5&lt;/TileLevel&gt;
+        &lt;TileCountX&gt;2&lt;/TileCountX&gt;
+        &lt;TileCountY&gt;1&lt;/TileCountY&gt;
+        &lt;YOrigin&gt;top&lt;/YOrigin&gt;
+    &lt;/DataWindow&gt;
+    &lt;Projection&gt;EPSG:4326&lt;/Projection&gt;
+    &lt;BlockSizeX&gt;512&lt;/BlockSizeX&gt;
+    &lt;BlockSizeY&gt;512&lt;/BlockSizeY&gt;
+    &lt;BandsCount&gt;4&lt;/BandsCount&gt;
+    &lt;ZeroBlockHttpCodes&gt;204,404,400&lt;/ZeroBlockHttpCodes&gt;
+&lt;/GDAL_WMS&gt;
+</code></pre>
+<pre><code>gdalwarp -wo SOURCE_EXTRA=100 -wo SAMPLE_GRID=YES -of GTiff -t_srs &quot;+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs&quot; -ts 4096 4096 -te -4194304 -4194304 4194304 4194304 GIBS_Terra_Cloud_Fraction.xml Terra_Cloud_Fraction_Arctic.tif
+</code></pre>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="python">Python</h2>
+<p><a href="../python-usage/"><strong>Accessing via Python</strong></a> - Python examples of accessing GIBS imagery (also downloadable as a <a href="https://github.com/nasa-gibs/gibs-api-docs/raw/main/docs/python-usage.ipynb"><strong>Jupyter Notebook</strong></a>)</p>
+<h2 id="bulk-downloading">Bulk Downloading</h2>
+<p>A "Bulk Download" is defined as the planned retrieval of more than 1,000,000 imagery tiles within a 24 hour period. These activities are typically orchestrated through script-based access to the GIBS API, not user-based access through a client application. In order to ensure quality of service for all GIBS users, the GIBS team requests that bulk downloading activities be coordinated at least 48 hours in advance of the planned download. Prior to
+beginning your bulk downloading activities, please contact the GIBS support team at <a href="mailto:earthdata-support@nasa.gov?subject=GIBS Bulk Download Request">earthdata-support@nasa.gov</a> with the subject "GIBS Bulk
+Download Request" and the following information:</p>
+<ol>
+<li>Purpose</li>
+<li>Primary POC (Email &amp; Phone)</li>
+<li>Layers</li>
+<li>Zoom Level(s)</li>
+<li>Date(s)</li>
+<li>Expected Load Profile<ul>
+<li>Start and End Times</li>
+<li>Request Volume per Hour</li>
+<li>Number of Concurrent Downloads</li>
+</ul>
+</li>
+<li>Source IP Address(es)</li>
+</ol>
+<p>The GIBS utilization profile indicates that there is not a period of time within which "regular" usage drops. Therefore, bulk downloading activities are
+allowed to occur as is convenient for the downloading group or individual. The following guidelines should be taken into consider when designing a
+bulk download plan:</p>
+<ol>
+<li>Limit sustained download bandwidth to 50 Mbps.<ul>
+<li>For GIBS overlay (PNG) layers, this is an approximate minimum of 150k tiles per hour due to the large size variation based on the image content density.</li>
+<li>For GIBS base (JPEG) layers, this is approximately 350k tiles per hour with limited variation in image size across products and geographic regions.</li>
+</ul>
+</li>
+<li>Limit concurrent downloads to 500 threads</li>
+<li>Evenly distribute download requests across the entire bulk downloading period, avoiding significant spikes of activity.</li>
+<li>Start small with fewer concurrent threads and build to your proposed maximum download rate.</li>
+</ol>
+<p>Subscribe to our mailing list <a href="mailto:eosdis-gibs-announce-join@lists.nasa.gov">by sending an email to this address</a> (no subject or text in the body is needed) and <a href="https://wiki.earthdata.nasa.gov/pages/viewrecentblogposts.action?key=GIBS" target="_blank">follow our blog</a> to stay up-to-date with new features and changes to existing services. Or contact us at <a href="mailto:earthdata-support@nasa.gov?subject=GIS API Questions">earthdata-support@nasa.gov</a> with feedback and questions.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../python-usage/" class="btn btn-neutral float-right" title="Accessing via Python">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../gis-usage/" class="btn btn-neutral" title="Accessing via GIS Applications"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../gis-usage/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../python-usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../javascript/vue@3.js" defer></script>
+      <script src="../javascript/overrides.js" defer></script>
+      <script src="../javascript/components.js" defer></script>
+      <script src="../javascript/imagery-products.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

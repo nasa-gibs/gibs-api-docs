@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Accessing via GIS Applications - Global Imagery Browse Services (GIBS)</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/loading-spinner.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Accessing via GIS Applications";
+    var mkdocs_page_input_path = "gis-usage.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Global Imagery Browse Services (GIBS)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="..">Introduction</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../available-visualizations/">Available Visualizations</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-basics/">Access Basics</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-advanced-topics/">Access Advanced Topics</a>
+  </li>
+    
+      
+
+
+  
+    
+    <li class="navtree toctree-l1 page current">
+      <a class="current" href="./">
+        Accessing via GIS Applications
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l1 current">
+    <ul class="subnav-l1 current">
+    
+      
+          
+
+  <li class="toctree-l2 current with-children">
+    <a href="#qgis">
+      QGIS
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#requirements">Requirements</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#instructions">Instructions</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#esri-arcgis-pro">
+      ESRI ArcGIS Pro
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#requirements_1">Requirements</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#instructions_1">Instructions</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#troubleshooting">Troubleshooting</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#esri-arcgis-desktop-arcmap">
+      ESRI ArcGIS Desktop / ArcMap
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#requirements_2">Requirements</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#instructions_2">Instructions</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#esri-arcgis-online">
+      ESRI ArcGIS Online
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#adding-gibs-layers-via-wms">Adding GIBS layers via WMS</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#adding-gibs-layers-from-a-list-of-ones-predefined-by-esri">Adding GIBS layers from a list of ones predefined by ESRI</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#google-earth-web-pro">
+      Google Earth (Web / Pro)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#generatedownload-kmz-file-from-worldview">Generate/Download KMZ file from Worldview</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#loading-a-kmz-into-google-earth-web">Loading a KMZ into Google Earth (Web)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#loading-a-kmz-into-google-earth-pro-desktop">Loading a KMZ into Google Earth Pro (Desktop)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../map-library-usage/">Accessing via Map Libraries and GDAL Scripts</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../python-usage/">Accessing via Python</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../contact-us/">Contact Us</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Global Imagery Browse Services (GIBS)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Accessing via GIS Applications</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="accessing-via-gis-applications">Accessing via GIS Applications</h1>
+<p>NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through standards-compliant web services (See <a href="../access-basics/#access-basics">Visualization Services</a>).  These services, specifically the OGC Web Map Service (WMS) and Web Map Tile Service (WMTS), allow you to access GIBS visualizations directly within many Geographic Information System (GIS) clients.  The information on this page provides instructions for accessing GIBS visualizations through these GIS clients:</p>
+<ul>
+<li><a href="#qgis">QGIS</a></li>
+<li><a href="#esri-arcgis-pro">ESRI ArcGIS Pro</a></li>
+<li><a href="#esri-arcgis-desktop-arcmap">ESRI ArcGIS Desktop / ArcMap</a></li>
+<li><a href="#esri-arcgis-online">ESRI ArcGIS Online</a></li>
+<li><a href="#google-earth-web-pro">Google Earth (Web / Pro)</a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some GIS applications do not currently handle time-varying visualizations, especially with WMTS sources. The primary suggested method for access within GIS clients is through WMS as this protocol has better time support.
+Alternatively, <a href="https://worldview.earthdata.nasa.gov/" target="_blank">Worldview's</a> "image snapshot" tool (pictured below) can be used to export imagery as a GeoTIFF or KMZ (or other formats with worldfiles) which can then be imported into your application.</p>
+<p><img alt="Worldview, Capture Image Snapshot" src="../img/Worldview-snapshot2.png" width="70%" /></p>
+</div>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="qgis">QGIS</h2>
+<p>The <a href="https://qgis.org/" target="_blank">QGIS application</a> supports GIBS' time-varying layers using the WMS protocol.</p>
+<h3 id="requirements">Requirements</h3>
+<ul>
+<li>QGIS <a href="https://qgis.org/en/site/forusers/visualchangelog314/#temporal" target="_blank">version 3.14</a> or later</li>
+</ul>
+<h3 id="instructions">Instructions</h3>
+<ul>
+<li>In QGIS, open the "Layer | Add Layer | Add WMS / WMTS Layer" window</li>
+<li>Add a "Name" such as "GIBS WMS (EPSG:4326, Best)"</li>
+<li>Add a "URL" for the <a href="../access-basics/#ogc-web-map-service-wms">GIBS WMS endpoint</a> of your desired map projection, e.g. one of the following:<br>
+https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi <br> 
+https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.</p>
+</div>
+<p><img alt="QGIS, Add WTMS Connection" src="../img/CreateWMSConnection_QGIS.png" /></p>
+<ul>
+<li>Click the "Connect" button to list all available layers for that map projection, select a layer of interest, and "Add" it to the map:</li>
+</ul>
+<p><img alt="QGIS, Connect to WMS Connection" src="../img/ConnectWMS_QGIS.png" /></p>
+<ul>
+<li>This should result in a map and legend with your selected layer:</li>
+</ul>
+<p><img alt="QGIS, WMS Layer added" src="../img/WMSlayer_QGIS.png" /></p>
+<ul>
+<li>At this point, you'll need to enable temporal navigation in QGIS to change the currently-displayed date; just above the map area, you can enable either a fixed temporal range or an animated one. For this example, we'll enable a fixed one by clicking the <img alt="QGIS, Temporal Controller Button" src="../img/TemporalControllerbutton_QGIS.png" /> button.</li>
+<li>In the case of QGIS, the first field (i.e., leftmost) in the date range is what controls the imagery from GIBS.</li>
+</ul>
+<p><img alt="QGIS, Temporal Controller" src="../img/TemporalController_QGIS.png" /></p>
+<ul>
+<li>Note that each time-enabled layer also has a "clock" button which helpfully takes you to a temporal properties panel for that particular layer.</li>
+</ul>
+<p><img alt="QGIS, Temporal Info Button" src="../img/TemporalInfoButton_QGIS.png" width="50%" /></p>
+<p><img alt="QGIS, Temporal Info Panel" src="../img/TemporalInfoPanel_QGIS.png" width="70%" /></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="esri-arcgis-pro">ESRI ArcGIS Pro</h2>
+<p>GIBS imagery layers can be directly loaded into <a href="https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview" target="_blank">ESRI ArcGIS Pro</a> using the WMS protocol.</p>
+<h3 id="requirements_1">Requirements</h3>
+<ul>
+<li>ESRI ArcGIS Pro 2.7 or later</li>
+</ul>
+<h3 id="instructions_1">Instructions</h3>
+<ul>
+<li>After starting up ArcGIS Pro, select "Start without a template" from the home page</li>
+<li>Click the "Insert" tab, "Connections", "New WMS Server"<br>
+<img alt="ArcGIS Pro New WMS Server" src="../img/ArcGISPro-NewWMS.png" width="50%" /></li>
+<li>Add a "Server URL" for the <a href="../access-basics/#ogc-web-map-service-wms">GIBS WMS endpoint</a> of your desired map projection, e.g. one of the following:<br>
+https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi <br> 
+https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi <br>
+https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you're using the Web Mercator (EPSG:3857) map projection in your desktop GIS client and load the EPSG:3857 WMS endpoint, you'll currently see a flat list of GIBS' 1000+ available layers.  As an alternative, you may want to load the geographic (EPSG:4326) WMS endpoint to browse those layers in a hierarchical manner (by categories such as Cloud Top Height, Land Cover, Sea Surface Temperature).  In that case, the layers will be retrieved as EPSG:4326 and reprojected to EPSG:3857 by your GIS client.  Note that if you instead retrieved imagery from GIBS' EPSG:3857 endpoint, the reprojection is performed by GIBS on its own EPSG:4326 imagery archive.  So a reprojection will be happening in either case, it's just a matter of whether it's by the GIS client or by GIBS.</p>
+</div>
+<ul>
+<li>If the "Catalog" pane isn't already open, click the "View" tab and then the "Catalog Pane" button</li>
+<li>In the Catalog pane, click the triangle next to the "Servers" item which should reveal the "NASA Global Imagery Browse Services (GIBS)" entry; note that you can now add this entry as a favorite by right-clicking on it and "Add to Favorites" which will then allow it to appear in the favorites tab<br>
+<img alt="ArcGIS Pro Catalog Pane" src="../img/ArcGISPro-CatalogPane.png" width="30%" /></li>
+<li>Right-click on a GIBS layer of your choosing ("Aerosol Index (OMPS, Suomi NPP)" is selected above), select "Add To New" and then "Map"; </li>
+<li>At this point and depending on the layer you've selected, you should see imagery on the map!  <ul>
+<li>A legend may also be available for your selected layer if you expand the layer item in the Contents pane.  </li>
+<li>If you don't see imagery yet, you may need to zoom out to see if it's available in another part of the world and/or adjust the currently-selected time as described in the next steps.<br>
+<img alt="ArcGIS Pro Map Imagery" src="../img/ArcGISPro-MapImagery.png" width="60%" /></li>
+</ul>
+</li>
+<li>Since most GIBS imagery is available over many different points in time, you'll now need to enable the time controls to select your date/time of interest.  So once you add a time-varying layer into ArcGIS Pro, a "Time" tab in the top ribbon should now be visible.
+<img alt="ArcGIS Pro Map Imagery" src="../img/ArcGISPro-TimePanel.png" width="100%" /><ul>
+<li>On the right side, notice the “Full Extent” group; the dates listed show the start and stop dates available</li>
+<li>On the left side in the “Current Time” group:<ul>
+<li>Enter the Start date - this will be the date that you want to display</li>
+<li>Set the Span to 0</li>
+<li>The End date should match the Start date after the Span is set to 0</li>
+</ul>
+</li>
+<li>In the "Step" group<ul>
+<li>If the "Step Interval" area is grayed out, click the clock icon to the right of the selection</li>
+<li>Ensure that the radio button next to "Step Interval" is selected and choose your desired time adjustment increment; for most GIBS layers this is set to "1 Days".  That said, there are many other types of layers including geostationary which is generally on a 10 minute interval.  Other layer intervals include 8 days, 1 month, or one year.  You can often deduce this from the GIBS layer name itself which often includes its interval (e.g., "8-day") if it's not a daily product.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hover over the time display in the top right of the main display area. The times in blue contain data for that period. If the area is white, there is no data available. To advance the time one step, click on the smaller right arrow on the time display or in the “Playback” group. To show an animation, click on the larger right arrow. The control the pace of the animation, in the “Playback” tab adjust the slider labeled “slower – faster”. To reset the time to the current start, move the time icon all the way to the left with your mouse. Note – If you use the mouse to reposition the time icon, be careful to clear the time in “Start” and “End” current time or the data may not display.
+<img alt="ArcGIS Pro Map Imagery" src="../img/ArcGISPro-TimeController.png" width="60%" /></li>
+</ul>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>Here are some common reasons why imagery isn't appearing:</p>
+<ul>
+<li>The current time is not within the full extent period</li>
+<li>The Span is not set to 0</li>
+<li>The step interval of the dataset is not correctly set (e.g. 1 years set instead of 1 days)</li>
+</ul>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="esri-arcgis-desktop-arcmap">ESRI ArcGIS Desktop / ArcMap</h2>
+<p>GIBS imagery layers can be directly loaded into <a href="https://www.esri.com/en-us/arcgis/products/arcgis-desktop/overview" target="_blank">ESRI ArcGIS Desktop/ArcMap</a> using the WMS protocol.</p>
+<h3 id="requirements_2">Requirements</h3>
+<ul>
+<li>ESRI ArcGIS ArcMap 10.2.1 or later (earlier versions are untested, though possibly usable)</li>
+</ul>
+<h3 id="instructions_2">Instructions</h3>
+<ul>
+<li>Open the "Catalog" window (far right pane) in ArcMap and select "Add WMS Server"</li>
+<li>Paste one of the <a href="../access-basics/#ogc-web-map-service-wms">GIBS WMS endpoints</a> (e.g., WGS84 / Geographic: https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi or Web Mercator: https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi) into the "URL" field and press the "Get Layers" button to validate the connection.</li>
+</ul>
+<p><img alt="ArcMap, Add WMS Server" src="../img/ArcMap-CatWindow.png" /></p>
+<ul>
+<li>Expand the "NASA Global Imagery Browse Services for EOSDIS on gibs.earthdata.nasa.gov" entry in the catalog pane to reveal the list of available layers.</li>
+</ul>
+<p><img alt="ArcMap, GIBS Catalog" src="../img/ArcMap-GIBS-Catalog.png" /></p>
+<ul>
+<li>Drag any layers of interest (VIIRS Corrected Reflectance in this case) into the layer pane at far left:</li>
+</ul>
+<p><img alt="ArcMap, Add imagery" src="../img/ArcMap-VIIRS-CR.png" /></p>
+<ul>
+<li>Open the Time Slider panel from the toolbar and choose your date of interest.</li>
+</ul>
+<p><img alt="ArcMap, Time Slider" src="../img/ArcMap-TimeSlider.png" /></p>
+<ul>
+<li>Add any other layers in a similar manner.</li>
+</ul>
+<p><img alt="ArcMap, Time Panel" src="../img/ArcMap-TimePanel.png" /></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="esri-arcgis-online">ESRI ArcGIS Online</h2>
+<p>GIBS imagery layers can be imported into <a href="http://www.arcgis.com/" target="_blank">ESRI's ArcGIS Online</a> in one of two ways: through the GIBS WMS or as a predefined layer from ESRI.</p>
+<h3 id="adding-gibs-layers-via-wms">Adding GIBS layers via WMS</h3>
+<ul>
+<li>Click on "Map" in the top menu navigation</li>
+</ul>
+<p><img alt="ArcGIS Online, Access Map" src="../img/AGOL-AccessMap.png" /></p>
+<ul>
+<li>Click on the down arrow next to the "Add" icon in the left side Layers section, then "Add Layer from URL"</li>
+</ul>
+<p><img alt="ArcGIS Online, Add Layer" src="../img/AGOL-AddLayer.png" /></p>
+<ul>
+<li>Or click on the plus button in the far left menu navigation bar, then "Add Layer from URL"</li>
+</ul>
+<p><img alt="ArcGIS Online, Add Layer from URL" src="../img/AGOL-AddLayer2.png" /></p>
+<ul>
+<li>Paste one of the <a href="../access-basics/#ogc-web-map-service-wms">GIBS WMS endpoints</a> into the "URL" field; note that the GIBS EPSG:3857 WMS endpoint: https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi, works best since this is the native projection of the ArcGIS Online map.</li>
+</ul>
+<p><img alt="ArcGIS Online, Add Layer Endpoint" src="../img/AGOL-AddLayer3.png" /></p>
+<ul>
+<li>Under Custom Parameters, click on "+ Add custom parameter". Add "TIME" to the Parameter field and a date in YYYY-MM-DD format into the "Value" field, then click on the "Next" button in the lower right corner.</li>
+</ul>
+<p><img alt="ArcGIS Online, Add Layer Time" src="../img/AGOL-AddLayer4.png" /></p>
+<ul>
+<li>You are now presented with all the layers available via the GIBS endpoint in the Add Layers window. Select a layer to add to the map by entering a search term to narrow down the results or scroll through the list to find a layer.</li>
+</ul>
+<p><img alt="ArcGIS Online, Select Layer" src="../img/AGOL-SelectLayer.png" /></p>
+<ul>
+<li>Now your layer for your predefined date is viewable in the map interface.</li>
+</ul>
+<p><img alt="ArcGIS Online, View Layer" src="../img/AGOL-LayerAdded.png" /></p>
+<ul>
+<li>To change the date, click on the three dots then click on "Show properties". The Properties window will open on the right side of the map. Scroll to the bottom of the window and go to the "Custom Parameters" section.</li>
+</ul>
+<p><img alt="ArcGIS Online, Change Time" src="../img/AGOL-ChangeTime.png" /></p>
+<ul>
+<li>Click on "TIME", change the date, and click "Update".</li>
+</ul>
+<p><img alt="ArcGIS Online, Change Time" src="../img/AGOL-ChangeTime2.png" /></p>
+<h3 id="adding-gibs-layers-from-a-list-of-ones-predefined-by-esri">Adding GIBS layers from a list of ones predefined by ESRI</h3>
+<ul>
+<li>Search for <a href="http://www.arcgis.com/home/search.html?q=Global%20Imagery%20Browse%20Services&amp;t=content" target="_blank">"Global Imagery Browse Services"</a> in ArcGIS Online and add individual results to your map, such as <a href="http://www.arcgis.com/home/item.html?id=10739eefdc9743a2b884bebe4b3476d7" target="_blank">Aqua/MODIS Corrected Reflectance (True Color)</a>.</li>
+<li>To change the currently-displayed date, go to the "Details" pane, then click the small down arrow next to the layer name. Click "Enable Time Animation", then adjust the date at the bottom of the page.</li>
+</ul>
+<p><img alt="ArcGIS Online, Enable Time" src="../img/AGOL-EnableTime.png" /></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="google-earth-web-pro">Google Earth (Web / Pro)</h2>
+<p>The <a href="https://earth.google.com/web/" target="_blank">web-based Google Earth</a> and <a href="https://www.google.com/earth/versions/#earth-pro" target="_blank">desktop Google Earth Pro</a> support loading of KML/KMZ files which allows you to import GIBS imagery via Worldview's KMZ download capability.</p>
+<h3 id="generatedownload-kmz-file-from-worldview">Generate/Download KMZ file from Worldview</h3>
+<ul>
+<li>Start in <a href="https://worldview.earthdata.nasa.gov/" target="_blank">Worldview</a> to find your imagery of interest.<ul>
+<li>Use Worldview's "camera tool" in the upper right corner to select an image to download and choose the "KMZ" format</li>
+<li>Click "Download" and save the KMZ file to your computer</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Worldview, image snapshot" src="../img/Worldview-snapshot.png" /></p>
+<h3 id="loading-a-kmz-into-google-earth-web">Loading a KMZ into Google Earth (Web)</h3>
+<ul>
+<li>Open <a href="https://earth.google.com/web/" target="_blank">Google Earth (Web)</a><ul>
+<li>Click the "hamburger" button (three horizontal lines in the upper left), go to Projects, and click "Import KML from computer"</li>
+<li>Select the KMZ file that you just downloaded from Worldview</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Google Earth, Worldview KMZ" src="../img/GoogleEarth-WorldviewKMZ.png" /></p>
+<h3 id="loading-a-kmz-into-google-earth-pro-desktop">Loading a KMZ into Google Earth Pro (Desktop)</h3>
+<ul>
+<li>Launch <a href="https://www.google.com/earth/versions/#earth-pro" target="_blank">Google Earth Pro</a><ul>
+<li>Go the the "File" menu and click "Open..." </li>
+<li>Select the KMZ file that you just downloaded from Worldview</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Google Earth Pro, Worldview KMZ" src="../img/GoogleEarthPro-WorldviewKMZ.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../map-library-usage/" class="btn btn-neutral float-right" title="Accessing via Map Libraries and GDAL Scripts">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../access-advanced-topics/" class="btn btn-neutral" title="Access Advanced Topics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../access-advanced-topics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../map-library-usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../javascript/vue@3.js" defer></script>
+      <script src="../javascript/overrides.js" defer></script>
+      <script src="../javascript/components.js" defer></script>
+      <script src="../javascript/imagery-products.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

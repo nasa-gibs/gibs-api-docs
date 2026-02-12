@@ -1,0 +1,113 @@
+{
+  "title": "Vector Metadata",
+  "description": "Vector Metadata Schema",
+  "type": "object",
+  "properties": {
+    "id": {
+       "description": "Unique identifier for the vector metadata.",
+       "type": "string",
+       "minLength": 1
+    },
+    "mvt_properties": {
+       "description": "List of properties that will appear in the MVT.",
+       "type": "array",
+       "items": {
+          "type": "object",
+          "properties": {
+             "Identifier": {
+                "description": "The unique identifier of the MVT property.",
+                "type": "string",
+                "minLength": 1
+             },
+             "Title": {
+                "description": "A human readable title for the property.",
+                "type": "string",
+                "minLength": 1
+             },
+             "Description": {
+                "description": "A human readable description for the property.",
+                "type": "string",
+                "minLength": 1
+             },
+             "Units": {
+                "description": "The units value to be applied to the actual value of this property.",
+                "type": "string",
+                "minLength": 1
+             },
+             "DataType": {
+                "description": "The data type of this property.",
+                "type": "string",
+                "enum": ["int", "float", "string", "datetime"]
+             },
+             "ValueList": {
+                "description": "A listing of the possible valid values for a 'string' property type, if the property has a controlled list.",
+                "type": "array",
+                "items": {
+                   "type": "string",
+                   "minLength": 1
+                },
+                "minItems": 1
+             },
+             "ValueRanges": {
+                "description": "A listing of mutually exclusive min and max value pairs representing ranges of valid values for the 'Integer', 'float', and 'datetime' property types.",
+                "type": "array",
+                "items": {
+                   "type": "object",
+                   "properties": {
+                      "Min": {
+                         "description": "",
+                         "type": ["number", "string"],
+                         "minLength": 1
+                      },
+                      "Max": {
+                         "description": "",
+                         "type": ["number", "string"],
+                         "minLength": 1
+                      }
+                   },
+                   "required": ["Min", "Max"],
+                   "additionalProperties": false
+                },
+                "minItems": 1
+             },
+             "ValueMap": {
+                "description": "A map of the possible valid values for 'string' or 'int' property types, and their associated description.",
+                "type": "object",
+                "patternProperties": {
+                   "^.*$": {
+                      "type": "string",
+                      "minLength": 1
+                   }
+                },
+                "additionalProperties": false
+             },
+             "Function": {
+                "description": "The property’s intended function as a part of the visualization product.",
+                "type": "string",
+                "enum": ["Describe", "Identify", "Style"]
+             },
+             "IsOptional": {
+                "description": "Indicates whether the property is optional.",
+                "type": "boolean"
+             },
+             "IsLabel": {
+                "description": "Indicates whether the property should be used to label the point in a user interface.",
+                "type": "boolean"
+             }
+          },
+          "anyOf": [
+             {},
+             { "required": ["ValueRanges"] },
+             { "required": ["ValueList"] },
+             { "required": ["ValueMap"] }
+          ],
+          "not": { "required": ["ValueRanges", "ValueList", "ValueMap"] },
+          "required": ["Identifier", "Title", "Description", "DataType", "Function", "IsOptional", "IsLabel"],
+          "additionalProperties": false
+       },
+       "minItems": 1
+    }
+  },
+  "required": ["id", "mvt_properties"],
+  "additionalProperties": false
+}

@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Access Advanced Topics - Global Imagery Browse Services (GIBS)</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/loading-spinner.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Access Advanced Topics";
+    var mkdocs_page_input_path = "access-advanced-topics.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Global Imagery Browse Services (GIBS)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="..">Introduction</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../available-visualizations/">Available Visualizations</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-basics/">Access Basics</a>
+  </li>
+    
+      
+
+
+  
+    
+    <li class="navtree toctree-l1 page current">
+      <a class="current" href="./">
+        Access Advanced Topics
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l1 current">
+    <ul class="subnav-l1 current">
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#layer-naming-convention">Layer Naming Convention</a>
+        </li>
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#best-available-layers">"Best Available" Layers</a>
+        </li>
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#domain-sharding">Domain Sharding</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#tiled-access-resolutions">
+      Tiled Access Resolutions
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#wgs-84-lat-lon-geographic-epsg4326">WGS 84 / Lat-lon / Geographic (EPSG:4326)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#nsidc-sea-ice-polar-stereographic-north-epsg3413">NSIDC Sea Ice Polar Stereographic North (EPSG:3413)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#antarctic-polar-stereographic-epsg3031">Antarctic Polar Stereographic (EPSG:3031)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#web-mercator-epsg3857">Web Mercator (EPSG:3857)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#mapping-rgb-to-data-values">
+      Mapping RGB to Data Values
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#gibs-colormap-specification">GIBS Colormap Specification</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#metadata-association">Metadata Association</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#pre-generated-legends">Pre-Generated Legends</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#examples">
+      Examples
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#discrete-data">Discrete Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#continuous-data">Continuous Data</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#continuous-data-reduced-legend">Continuous Data (Reduced Legend)</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#classification-data">Classification Data</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#vector-visualizations">
+      Vector Visualizations
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#access">
+      Access
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#wmts-vector-tiles">WMTS Vector Tiles</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#wms-raster-images">WMS Raster Images</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#vector-properties">
+      Vector Properties
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#specification">Specification</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#metadata-association_1">Metadata Association</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#examples_1">Examples</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#vector-styles">
+      Vector Styles
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#specification_1">Specification</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#metadata-association_2">Metadata Association</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#dynamic-legend-graphics">Dynamic Legend Graphics</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#examples_2">Examples</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../gis-usage/">Accessing via GIS Applications</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../map-library-usage/">Accessing via Map Libraries and GDAL Scripts</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../python-usage/">Accessing via Python</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../contact-us/">Contact Us</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Global Imagery Browse Services (GIBS)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Access Advanced Topics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="access-advanced-topics">Access Advanced Topics</h1>
+<ul>
+<li><a href="#layer-naming-convention">Layer Naming Convention</a></li>
+<li><a href="#best-available-layers">"Best Available" Layers</a></li>
+<li><a href="#domain-sharding">Domain Sharding</a></li>
+<li><a href="#tiled-access-resolutions">Tiled Access Resolutions</a></li>
+<li><a href="#mapping-rgb-to-data-values">Mapping RGB to Data Values</a></li>
+<li><a href="#vector-visualizations">Vector Visualizations</a></li>
+</ul>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="layer-naming-convention">Layer Naming Convention</h2>
+<p>GIBS visualization layer identifiers follow a human-readable convention (e.g. <em>MODIS_Terra_Aerosol_Optical_Depth_v6_STD</em>) to simplify situations where manual parsing of service documentation (e.g. WMTS GetCapabilities) is performed. Identifiers include uniquely identifying information like the following items:</p>
+<ul>
+<li><strong>Instrument/Platform</strong> - The Instrument and Platform responsible for collecting the visualized data (e.g. "MODIS / Terra")</li>
+<li><strong>Science Parameter</strong> - The science parameter that is being visualized (e.g. "Aerosol Optical Depth")</li>
+<li><strong>Processing Level</strong> - The processing level of the associated data (e.g. "L3" or "L2")</li>
+<li><strong>Data Period</strong> - The period of the available visualization products (e.g. "Monthly")<ul>
+<li>If not included, it is implied that the visualization has a "Daily" period </li>
+</ul>
+</li>
+<li><strong>Data Version</strong> - The version of the associated data product (e.g. "v6")</li>
+<li><strong>Data Latency</strong> - The latency of the associated data product (e.g. "STD" or "NRT")</li>
+</ul>
+<p>The following are examples of visualization identifiers for the "Aerosol Optical Depth" science parameter collected by the MODIS instrument on the Terra platform. In this example, visualization layers exist for a combination of data versions and latencies. The first item is considered the "Best Available" layer, which is described further in the following section.</p>
+<ul>
+<li>MODIS_Terra_Aerosol_Optical_Depth</li>
+<li>MODIS_Terra_Aerosol_Optical_Depth_v6_NRT</li>
+<li>MODIS_Terra_Aerosol_Optical_Depth_v6_STD</li>
+<li>MODIS_Terra_Aerosol_Optical_Depth_v5_NRT</li>
+</ul>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="best-available-layers">"Best Available" Layers</h2>
+<p>Visualizations representing the same science parameter from a specific instrument and platform may be available for multiple data versions and/or latencies. Direct access to those various flavors of the same visualization are available. However, many users may simply want to interact with a single, combined, visualization.  Therefore, GIBS provides a set of "Best Available" visualization layers that abstract away the individual versions and latencies.  The determination of what is considered "best" is coordinated with each visualization's provider. In most cases, the following priority is used:</p>
+<ol>
+<li>Latest Version Standard Product</li>
+<li>Latest Version NRT</li>
+<li>Previous Version Standard Product</li>
+<li>Previous Version NRT</li>
+</ol>
+<p><img alt="versions" src="../img/versions.png" /></p>
+<p>See the image above for a visual example. The top four bars show the temporal coverage of related visualizations. The bottom bar shows the visualization that will be returned based on the "best available" determination.</p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="domain-sharding">Domain Sharding</h2>
+<p>The HTTP/1.1 specification limits the number of concurrent requests from a browser to the same server based on domain. When loading multiple map tiles in a user interface, this limitation results in a sub-optimal interaction.  The common workaround is to employ "domain sharding", which splits content across multiple subdomains. By doing so, browsers can download resources simultaneously, thus increasing the number of tiles loaded and improving the user experience. The HTTP/2 specification removed the limitation by allowing a browser to issue multiple simultaneous requests across a single connection.  Thus eliminating the need for domain sharding.</p>
+<p>At present, GIBS infrastruction <em>does not</em> support HTTP/2 connections.  Instead, clients must still utilize the HTTP/1.1 domain sharding approach to simultaneously download multiple tiles.  The available subdomains for the GIBS system are listed below:</p>
+<ul>
+<li><a href="https://gibs-a.earthdata.nasa.gov">https://gibs-a.earthdata.nasa.gov</a></li>
+<li><a href="https://gibs-b.earthdata.nasa.gov">https://gibs-b.earthdata.nasa.gov</a></li>
+<li><a href="https://gibs-c.earthdata.nasa.gov">https://gibs-c.earthdata.nasa.gov</a></li>
+</ul>
+<p>Note that these are simply aliases for the <a href="https://gibs.earthdata.nasa.gov">https://gibs.earthdata.nasa.gov</a> domain.</p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="tiled-access-resolutions">Tiled Access Resolutions</h2>
+<p>GIBS visualizations are fundamentally a set of pre-generated raster or vector tiles that comply with a known gridding structure and resolution (a.k.a. "TileMatrixSet"). These tiles are made available through tiled services (e.g. WMTS and TWMS) or non-tiled services (e.g. WMS).  The latter reads the native tiles and then slices and stitches as needed to create the requested output.  When developing visualizations, GIBS coordinates with the data owners to determine the "appropriate" resolution.</p>
+<p>The following subsections provide details regarding each projection's supported resolutions:</p>
+<h3 id="wgs-84-lat-lon-geographic-epsg4326">WGS 84 / Lat-lon / Geographic (EPSG:4326)</h3>
+<table>
+<thead>
+<tr>
+<th>Resolution (per pixel)</th>
+<th>Tile Matrix Set (WMTS)</th>
+<th># Zoom Levels</th>
+<th>Max Resolution (deg/pixel)</th>
+<th>Min Resolution (deg/pixel)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>15.125m</td>
+<td>15.125m</td>
+<td>13</td>
+<td>0.5625</td>
+<td>0.0001373291015625</td>
+</tr>
+<tr>
+<td>31.25m</td>
+<td>31.25m</td>
+<td>12</td>
+<td>0.5625</td>
+<td>0.000274658203125</td>
+</tr>
+<tr>
+<td>250m</td>
+<td>250m</td>
+<td>9</td>
+<td>0.5625</td>
+<td>0.002197265625</td>
+</tr>
+<tr>
+<td>500m</td>
+<td>500m</td>
+<td>8</td>
+<td>0.5625</td>
+<td>0.00439453125</td>
+</tr>
+<tr>
+<td>1km</td>
+<td>1km</td>
+<td>7</td>
+<td>0.5625</td>
+<td>0.0087890625</td>
+</tr>
+<tr>
+<td>2km</td>
+<td>2km</td>
+<td>6</td>
+<td>0.5625</td>
+<td>0.017578125</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nsidc-sea-ice-polar-stereographic-north-epsg3413">NSIDC Sea Ice Polar Stereographic North (EPSG:3413)</h3>
+<table>
+<thead>
+<tr>
+<th>Resolution (per pixel)</th>
+<th>Tile Matrix Set (WMTS)</th>
+<th># Zoom Levels</th>
+<th>Max Resolution (deg/pixel)</th>
+<th>Min Resolution (deg/pixel)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>250m</td>
+<td>250m</td>
+<td>6</td>
+<td>8192.0</td>
+<td>256.0</td>
+</tr>
+<tr>
+<td>500m</td>
+<td>500m</td>
+<td>5</td>
+<td>8192.0</td>
+<td>512.0</td>
+</tr>
+<tr>
+<td>1km</td>
+<td>1km</td>
+<td>4</td>
+<td>8192.0</td>
+<td>1024.0</td>
+</tr>
+<tr>
+<td>2km</td>
+<td>2km</td>
+<td>3</td>
+<td>8192.0</td>
+<td>2048.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="antarctic-polar-stereographic-epsg3031">Antarctic Polar Stereographic (EPSG:3031)</h3>
+<table>
+<thead>
+<tr>
+<th>Resolution (per pixel)</th>
+<th>Tile Matrix Set (WMTS)</th>
+<th># Zoom Levels</th>
+<th>Max Resolution (deg/pixel)</th>
+<th>Min Resolution (deg/pixel)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>250m</td>
+<td>250m</td>
+<td>6</td>
+<td>8192.0</td>
+<td>256.0</td>
+</tr>
+<tr>
+<td>500m</td>
+<td>500m</td>
+<td>5</td>
+<td>8192.0</td>
+<td>512.0</td>
+</tr>
+<tr>
+<td>1km</td>
+<td>1km</td>
+<td>4</td>
+<td>8192.0</td>
+<td>1024.0</td>
+</tr>
+<tr>
+<td>2km</td>
+<td>2km</td>
+<td>3</td>
+<td>8192.0</td>
+<td>2048.0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="web-mercator-epsg3857">Web Mercator (EPSG:3857)</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GIBS does not store visualizations in this projection. Instead, tiles are reprojected on-the-fly from Geographic (EPSG:4326) sources.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Resolution (per pixel)</th>
+<th>Tile Matrix Set (WMTS)</th>
+<th># Zoom Levels</th>
+<th>Max Resolution (deg/pixel)</th>
+<th>Min Resolution (deg/pixel)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19.10925707129405m</td>
+<td>GoogleMapsCompatible_Level13</td>
+<td>13</td>
+<td>156543.03390625</td>
+<td>19.10925707129405</td>
+</tr>
+<tr>
+<td>38.21851414258810m</td>
+<td>GoogleMapsCompatible_Level12</td>
+<td>12</td>
+<td>156543.03390625</td>
+<td>38.21851414258810</td>
+</tr>
+<tr>
+<td>305.7481131407048m</td>
+<td>GoogleMapsCompatible_Level9</td>
+<td>9</td>
+<td>156543.03390625</td>
+<td>305.7481131407048</td>
+</tr>
+<tr>
+<td>611.4962262814100m</td>
+<td>GoogleMapsCompatible_Level8</td>
+<td>8</td>
+<td>156543.03390625</td>
+<td>611.4962262814100</td>
+</tr>
+<tr>
+<td>1222.992452562820m</td>
+<td>GoogleMapsCompatible_Level7</td>
+<td>7</td>
+<td>156543.03390625</td>
+<td>1222.992452562820</td>
+</tr>
+<tr>
+<td>2445.984905125640m</td>
+<td>GoogleMapsCompatible_Level6</td>
+<td>6</td>
+<td>156543.03390625</td>
+<td>2445.984905125640</td>
+</tr>
+</tbody>
+</table>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="mapping-rgb-to-data-values">Mapping RGB to Data Values</h2>
+<p>Visualizations of scientific parameters (See <a href="../available-visualizations/#categories">Visualization Categories</a>) are generated by mapping data values, or value ranges, to specific RGB values.  These scientific parameters represent data from one of the following categories:</p>
+<ul>
+<li><strong>Continuous</strong> - Data values are captured as continuous values between an implicit or explicit minimum and maximum. The capturing instrument or processing system may impose a consistent precision. For example, aerosol optical depth where any value between -0.70 and 5.00 are possible. The data-to-image mapping process will associate a range of values with a specific color.</li>
+<li><strong>Discrete</strong> - Data values are captured as discrete values between an implicit or explicit minimum and maximum, though typically the latter. For example, percent cloud cover where only whole numbers between 0 and 100 are possible. The data-to-image mapping process will typically associate each discrete value with a specific color.</li>
+<li><strong>Classification</strong> - Data values are captured and mapped to non-measured (i.e. unitless) values. For example, land cover type with values of "Forest", "Sand", etc... The data-to-image mapping process will associate each classification value with a specific color.</li>
+</ul>
+<p>Clearly documenting the data value(s) and an RGB value is essential to correctly generate and interpret these visualizations.  To accomplish this, the "GIBS Colormap" specification was developed and is utilized to guide the creation and use of "GIBS Colormaps".  The following sections provide information regarding the specification, how the GIBS Colormaps are accessed, and various examples.</p>
+<h3 id="gibs-colormap-specification">GIBS Colormap Specification</h3>
+<p>The GIBS Colormap specification guides the creation of GIBS Colormap XML documents that comply with an (<a href="https://gibs.earthdata.nasa.gov/schemas/ColorMap_v1.3.xsd" target="_blank">XML Schema</a>).  Each XML document contains the information required to map data values and RGB colors in a raster visualization.  The necessary information required to generate a legend graphic representation of the mapping is also provided.  See below for the fields included in each of these content area's entries.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The terms "Colormap entry" and "Legend entry" are used to identify individual entries within the data-to-rgb value mapping and legend XML elements, respectively.</p>
+</div>
+<p><strong>Data To RGB Value Mapping</strong></p>
+<ul>
+<li><strong>Ref</strong> - The unique reference id used when associating Colormap entries to Legend entries.</li>
+<li><strong>RGB</strong> - The visual color associated with the data value(s).</li>
+<li><strong>Transparent</strong> - A boolean value designating whether the Colormap entry will be opaque or transparent</li>
+<li><strong>Raw Value(s)</strong> - The associated data values contained within the source data file(s).</li>
+<li><strong>Scaled Value(s)</strong> - The scaled data values to which units will be applied, if appropriate, for display to end users. If this is a classification, then the appropriate label is provided for reference.</li>
+<li><strong>No Data</strong> - A boolean value designating whether the Colormap entry is the "no data" value or not.</li>
+</ul>
+<p><strong>Legend Representation</strong></p>
+<ul>
+<li><strong>ID(s)</strong> - The <code>ref</code> values (see above) to which the Legend entry is associated.</li>
+<li><strong>RGB</strong> - The visual color associated with the Legend entry.</li>
+<li><strong>Tooltip</strong> - A unit-agnostic human-readable label for the Legend entry.</li>
+<li><strong>Show Tick</strong> - A boolean designating whether a tick mark should be used for this Legend entry in a generated legend graphic.</li>
+<li><strong>Show Label</strong> - A boolean designating whether a text label should be used for this Legend entry in a generated legend graphic.</li>
+</ul>
+<h3 id="metadata-association">Metadata Association</h3>
+<p>A raster visualization's GIBS Colormap XML document is associated to a GIBS visualiation as <code>Layer/ows:Metadata</code> elements within the WMTS Capabilities document. The following snippet shows an example of how these elements will appear. Note that there are three entries listed. One is for the "default" file and the other two are for versioned (e.g. <code>1.3</code>) files. This allows for the addition of future versions while retaining support for previous versions.  Case in point, the <code>v1.0</code> version is referenced to support legacy functionality.  Whereas <code>1.3</code> is the most recent, and default, version to be used.</p>
+<pre><code class="language-xml">&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/colormap&quot; 
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSR_Surface_Precipitation.xml&quot; 
+              xlink:title=&quot;GIBS Color Map: Data - RGB Mapping&quot;/&gt;
+
+&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.0&quot; 
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/colormaps/v1.0/AMSR_Surface_Precipitation.xml&quot; 
+              xlink:title=&quot;GIBS Color Map: Data - RGB Mapping&quot;/&gt;
+
+&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/colormap/1.3&quot; 
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/colormaps/v1.3/AMSR_Surface_Precipitation.xml&quot; 
+              xlink:title=&quot;GIBS Color Map: Data - RGB Mapping&quot;/&gt;
+</code></pre>
+<h3 id="pre-generated-legends">Pre-Generated Legends</h3>
+<p>As described previously, each GIBS Colormap XML document contains the information required (e.g. labels and tick marks) to generate a legend graphic image.  Visualization clients may utilize this information to generate their own legend images, if desired.  However, for ease of access, the GIBS system provides the following pre-generated legend images for each GIBS Colormap XML document.</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Orientation</th>
+<th>Sample URL</th>
+<th>Sample Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PNG</td>
+<td>Horizontal</td>
+<td><a href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.png" target="_blank">link</a></td>
+<td><img alt="PNG Horizontal" src="../img/AMSR_Wind_Speed_H.png" /></td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>Horizontal</td>
+<td><a href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.svg" target="_blank">link</a></td>
+<td><img alt="SVG Horizontal" src="../img/AMSR_Wind_Speed_H.svg" /></td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>Vertical</td>
+<td><a href="https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_V.svg" target="_blank">link</a></td>
+<td><img alt="SVG Vertical" src="../img/AMSR_Wind_Speed_V.svg" /></td>
+</tr>
+</tbody>
+</table>
+<p>These pre-generated legends are referenced in the WMTS and WMS Capabilities documents as is described below.</p>
+<p><strong>WMTS Capabilities</strong></p>
+<p>Pre-generated legends are referenced in the WMTS Capabilities document within the <code>Style/LegendURL</code> elements. The following snippet shows an example of how these elements will appear. Note that only the SVG-formatted legends are referenced. </p>
+<pre><code class="language-xml">&lt;Style isDefault=&quot;true&quot;&gt;
+    &lt;ows:Title xml:lang=&quot;en&quot;&gt;default&lt;/ows:Title&gt;
+    &lt;ows:Identifier&gt;default&lt;/ows:Identifier&gt;
+    &lt;LegendURL format=&quot;image/svg+xml&quot; xlink:type=&quot;simple&quot; 
+        xlink:role=&quot;http://earthdata.nasa.gov/gibs/legend-type/vertical&quot; 
+        xlink:href=&quot;https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_V.svg&quot; 
+        xlink:title=&quot;GIBS Color Map Legend: Vertical&quot; width=&quot;135&quot; height=&quot;287&quot;/&gt;
+    &lt;LegendURL format=&quot;image/svg+xml&quot; xlink:type=&quot;simple&quot; 
+        xlink:role=&quot;http://earthdata.nasa.gov/gibs/legend-type/horizontal&quot; 
+        xlink:href=&quot;https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.svg&quot; 
+        xlink:title=&quot;GIBS Color Map Legend: Horizontal&quot; width=&quot;377&quot; height=&quot;85&quot;/&gt;
+&lt;/Style&gt;
+</code></pre>
+<p><strong>WMS Capabilities</strong></p>
+<p>Pre-generated legends are referenced in the WMS Capabilities document within the <code>Style/LegendURL</code> element. The following snippet shows an example of how this element will appear. Note that only the PNG-formatted legend is referenced.</p>
+<pre><code class="language-xml">&lt;Style&gt;
+    &lt;Name&gt;default&lt;/Name&gt;
+    &lt;Title&gt;default&lt;/Title&gt;
+    &lt;LegendURL width=&quot;420&quot; height=&quot;95&quot;&gt;
+        &lt;Format&gt;image/png&lt;/Format&gt;
+        &lt;OnlineResource xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:type=&quot;simple&quot; 
+            xlink:href=&quot;https://gibs.earthdata.nasa.gov/legends/AMSR_Wind_Speed_H.png&quot;/&gt;
+    &lt;/LegendURL&gt;
+&lt;/Style&gt;
+</code></pre>
+<h3 id="examples">Examples</h3>
+<p>The following sections provide examples of Colormaps for each data category. Each example provides a table containing the values that define the data-to-rgb mapping process, the sample XML document, and a pre-generated legend image.  As you review each example, you will see that they each contain a no-data Colormap entry, as is required by the specification. This entry is always considered to be a "Classification" mapping type. As such, it will be contained within its own Colormap element for necessity in the Discrete and Continuous mapping types.</p>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="discrete-data">Discrete Data</h4>
+<p>In this example, the following Colormap and Legend entries define a mapping for single, discrete, values from 70 to 110. The units for the measured parameter are meters or "m".</p>
+<p><strong>Colormap Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>RGB</th>
+<th>Transparent</th>
+<th>Raw Value(s)</th>
+<th>Scaled Value(s)</th>
+<th>No Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>True</td>
+<td>[-9999]</td>
+<td>N/A</td>
+<td>True</td>
+</tr>
+<tr>
+<td>2</td>
+<td>100,000,119</td>
+<td>False</td>
+<td>[7000]</td>
+<td>[70]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>100,100,119</td>
+<td>False</td>
+<td>[8000]</td>
+<td>[80]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>200,000,119</td>
+<td>False</td>
+<td>[9000]</td>
+<td>[90]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>5</td>
+<td>200,100,119</td>
+<td>False</td>
+<td>[10000]</td>
+<td>[100]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>6</td>
+<td>200,200,119</td>
+<td>False</td>
+<td>[11000]</td>
+<td>[110]</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID(s)</th>
+<th>RGB</th>
+<th>Tooltip</th>
+<th>Show Tick</th>
+<th>Show Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>"Fill"</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>2</td>
+<td>100,000,119</td>
+<td>70</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>100,100,119</td>
+<td>80</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>200,000,119</td>
+<td>90</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>5</td>
+<td>200,100,119</td>
+<td>100</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>6</td>
+<td>200,200,119</td>
+<td>110</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>Using the information provided above, the following XML Colormap and legend are generated:</p>
+<pre><code class="language-xml">&lt;ColorMaps&gt;
+    &lt;ColorMap title=&quot;Fill&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;220,220,255&quot; transparent=&quot;true&quot; sourceValue=&quot;[-9999]&quot; nodata=&quot;true&quot; ref=&quot;1&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;classification&quot;&gt;
+            &lt;LegendEntry rgb=&quot;220,220,255&quot; tooltip=&quot;Fill&quot; id=&quot;1&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+
+    &lt;ColorMap title=&quot;Discrete Example&quot; units=&quot;m&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;100,000,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[7000]&quot; value=&quot;[70]&quot; ref=&quot;2&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;100,100,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[8000]&quot; value=&quot;[80]&quot; ref=&quot;3&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;200,000,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[9000]&quot; value=&quot;[90]&quot; ref=&quot;4&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;200,100,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[10000]&quot; value=&quot;[100]&quot; ref=&quot;5&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;200,200,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[11000]&quot; value=&quot;[110]&quot; ref=&quot;6&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;discrete&quot; minLabel=&quot;70&quot; maxLabel=&quot;110&quot;&gt;
+            &lt;LegendEntry rgb=&quot;100,000,119&quot; tooltip=&quot;70&quot; id=&quot;2&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;100,100,119&quot; tooltip=&quot;80&quot; id=&quot;3&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;200,000,119&quot; tooltip=&quot;90&quot; label=&quot;90&quot; id=&quot;4&quot; showLabel=&quot;true&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;200,100,119&quot; tooltip=&quot;100&quot; id=&quot;5&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;200,200,119&quot; tooltip=&quot;110&quot; id=&quot;6&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+&lt;/ColorMaps&gt;
+</code></pre>
+<p><img alt="Discrete Data Legend" src="../img/discrete.svg" /></p>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="continuous-data">Continuous Data</h4>
+<p>In this example, the following Colormap and Legend entries define a mapping for value ranges from &lt; 10 to 50 (exclusive). The units for the measured parameter are meters or "m".</p>
+<p><strong>Colormap Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>RGB</th>
+<th>Transparent</th>
+<th>Raw Value(s)</th>
+<th>Scaled Value(s)</th>
+<th>No Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>True</td>
+<td>[-9999]</td>
+<td>N/A</td>
+<td>True</td>
+</tr>
+<tr>
+<td>2</td>
+<td>50,010,255</td>
+<td>False</td>
+<td>(-INF,1000)</td>
+<td>(-INF,10)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>102,000,119</td>
+<td>False</td>
+<td>[1000,2000)</td>
+<td>[10,20)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>102,100,119</td>
+<td>False</td>
+<td>[2000,3000)</td>
+<td>[20,30)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>5</td>
+<td>183,015,141</td>
+<td>False</td>
+<td>[3000,4000)</td>
+<td>[30,40)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>6</td>
+<td>183,100,141</td>
+<td>False</td>
+<td>[4000,5000)</td>
+<td>[40,50)</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID(s)</th>
+<th>RGB</th>
+<th>Tooltip</th>
+<th>Show Tick</th>
+<th>Show Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>"Fill"</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>2</td>
+<td>50,010,255</td>
+<td>&lt; 10</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>102,000,119</td>
+<td>10 - 20</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>102,100,119</td>
+<td>20 - 30</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>4</td>
+<td>183,015,141</td>
+<td>30 - 40</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>4</td>
+<td>183,100,141</td>
+<td>40 - 50</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>Using the information provided above, the following XML Colormap and legend are generated:</p>
+<pre><code class="language-xml">&lt;ColorMaps&gt;
+    &lt;ColorMap title=&quot;Fill&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;220,220,255&quot; transparent=&quot;true&quot; sourceValue=&quot;[-9999]&quot; nodata=&quot;true&quot; ref=&quot;1&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;classification&quot;&gt;
+            &lt;LegendEntry rgb=&quot;220,220,255&quot; tooltip=&quot;Fill&quot; id=&quot;4&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+
+    &lt;ColorMap title=&quot;Continuous Example&quot; units=&quot;m&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;50,010,255&quot; transparent=&quot;false&quot; sourceValue=&quot;(-INF,1000)&quot; value=&quot;(-INF,10)&quot; ref=&quot;2&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;102,000,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[1000,2000)&quot; value=&quot;[10,20)&quot; ref=&quot;3&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;102,100,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[2000,3000)&quot; value=&quot;[20,30)&quot; ref=&quot;4&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;183,015,141&quot; transparent=&quot;false&quot; sourceValue=&quot;[3000,4000)&quot; value=&quot;[40,40)&quot; ref=&quot;5&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;183,100,141&quot; transparent=&quot;false&quot; sourceValue=&quot;[4000,5000)&quot; value=&quot;[40,50)&quot; ref=&quot;6&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;continuous&quot; minLabel=&quot;&amp;lt; 10&quot; maxLabel=&quot;50&quot;&gt;
+            &lt;LegendEntry rgb=&quot;50,10,255&quot;  tooltip=&quot;&lt; 10&quot; id=&quot;2&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;102,0,119&quot;  tooltip=&quot;10 - 20&quot; id=&quot;3&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;102,100,119&quot;  tooltip=&quot;20 - 30&quot; label=&quot;20&quot; showLabel=&quot;True&quot; id=&quot;4&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;183,15,141&quot;  tooltip=&quot;30 - 40&quot; label=&quot;30&quot; showLabel=&quot;True&quot; id=&quot;5&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;183,100,141&quot;  tooltip=&quot;40 - 50&quot; id=&quot;6&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+&lt;/ColorMaps&gt;
+</code></pre>
+<p><img alt="Continuous Data Legend" src="../img/continuous_simple.svg" /></p>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="continuous-data-reduced-legend">Continuous Data (Reduced Legend)</h4>
+<p>In this example, the following Colormap and Legend entries define a mapping for value ranges from &lt; 10 to 50 (exclusive). The units for the measured parameter are meters or "m".  Note, however, that there are fewer Legend entries than ColorMap entries. This is because the desired legend will have fewer visually distinguishable colors than data bins within the image. This is sometimes done by providers to facilitate historical imagery visualizations while allowing for the more advanced analysis that GIBS supports. Below are the specifics for how this is accomplished in this Colormap:</p>
+<ul>
+<li>The rgb values utilized in the Color Map contain two sets of entries that have imperceptibly different color variations to the human eye. The detail in the Color Map allows for higher fidelity data to raster image mapping, but the default coloring chosen does not represent this level of detail. Therefore, the Legend only contains two entries, one of each triplet of visually similar ColorMapEntry elements.</li>
+<li>The two Legend entries are each assigned a unique numerical id. At the same time, each of the Colormap entries is assigned a ref value. The Colormap entry's <code>ref</code> attribute references the Legend entry's <code>id</code> attribute. </li>
+</ul>
+<p><strong>Colormap Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>RGB</th>
+<th>Transparent</th>
+<th>Raw Value(s)</th>
+<th>Scaled Value(s)</th>
+<th>No Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>True</td>
+<td>[-9999]</td>
+<td>N/A</td>
+<td>True</td>
+</tr>
+<tr>
+<td>2</td>
+<td>50,010,255</td>
+<td>False</td>
+<td>(-INF,1000)</td>
+<td>(-INF,10)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>102,000,119</td>
+<td>False</td>
+<td>[1000,2000)</td>
+<td>[10,20)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>102,001,119</td>
+<td>False</td>
+<td>[2000,3000)</td>
+<td>[20,30)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>183,015,141</td>
+<td>False</td>
+<td>[3000,4000)</td>
+<td>[30,40)</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>183,016,141</td>
+<td>False</td>
+<td>[4000,5000)</td>
+<td>[40,50)</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID(s)</th>
+<th>RGB</th>
+<th>Tooltip</th>
+<th>Show Tick</th>
+<th>Show Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>"Fill"</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>2</td>
+<td>50,010,255</td>
+<td>&lt; 10</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>100,100,119</td>
+<td>10 - 30</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr>
+<td>4</td>
+<td>183,015,141</td>
+<td>30 - 50</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>Using the information provided above, the following XML Colormap and legend are generated:</p>
+<pre><code class="language-xml">&lt;ColorMaps&gt;
+    &lt;ColorMap title=&quot;Fill&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;220,220,255&quot; transparent=&quot;true&quot; sourceValue=&quot;[-9999]&quot; nodata=&quot;true&quot; ref=&quot;1&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;classification&quot;&gt;
+            &lt;LegendEntry rgb=&quot;220,220,255&quot; tooltip=&quot;Fill&quot; id=&quot;4&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+
+    &lt;ColorMap title=&quot;Continuous Example&quot; units=&quot;m&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;50,010,255&quot; transparent=&quot;false&quot; sourceValue=&quot;(-INF,1000)&quot; value=&quot;(-INF,10)&quot; ref=&quot;2&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;102,000,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[1000,2000)&quot; value=&quot;[10,20)&quot; ref=&quot;3&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;102,001,119&quot; transparent=&quot;false&quot; sourceValue=&quot;[2000,3000)&quot; value=&quot;[20,30)&quot; ref=&quot;3&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;183,015,141&quot; transparent=&quot;false&quot; sourceValue=&quot;[3000,4000)&quot; value=&quot;[40,40)&quot; ref=&quot;4&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;183,016,141&quot; transparent=&quot;false&quot; sourceValue=&quot;[4000,5000)&quot; value=&quot;[40,50)&quot; ref=&quot;4&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;continuous&quot; minLabel=&quot;&amp;lt; 10&quot; maxLabel=&quot;50&quot;&gt;
+            &lt;LegendEntry rgb=&quot;50,010,255&quot; tooltip=&quot;&amp;lt; 10&quot; id=&quot;1&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;102,000,119&quot; tooltip=&quot;10 – 30&quot; label=&quot;10&quot; showLabel=&quot;true&quot; id=&quot;2&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;183,015,141&quot; tooltip=&quot;30 – 50&quot; id=&quot;3&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+&lt;/ColorMaps&gt;
+</code></pre>
+<p><img alt="Continuous Data Legend - Reduced" src="../img/continuous_reduced.svg" /></p>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="classification-data">Classification Data</h4>
+<p>In this example, the following Colormap and Legend entries define a mapping for freeze/thaw classifications. There are no associated units.</p>
+<p><strong>Colormap Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>Ref</th>
+<th>RGB</th>
+<th>Transparent</th>
+<th>Raw Value(s)</th>
+<th>Scaled Value(s)</th>
+<th>No Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>True</td>
+<td>[-9999]</td>
+<td>N/A</td>
+<td>True</td>
+</tr>
+<tr>
+<td>2</td>
+<td>111,222,255</td>
+<td>False</td>
+<td>[200]</td>
+<td>N/A</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>222,220,255</td>
+<td>False</td>
+<td>[300]</td>
+<td>N/A</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>000,220,255</td>
+<td>False</td>
+<td>[400]</td>
+<td>N/A</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legend Entries</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID(s)</th>
+<th>RGB</th>
+<th>Tooltip</th>
+<th>Show Tick</th>
+<th>Show Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>220,220,255</td>
+<td>Fill</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>2</td>
+<td>111,222,255</td>
+<td>Frozen</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>3</td>
+<td>222,220,255</td>
+<td>Thawed</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr>
+<td>4</td>
+<td>000,220,255</td>
+<td>Transitional</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table>
+<p>Using the information provided above, the following XML Colormap and legend are generated:</p>
+<pre><code class="language-xml">&lt;ColorMaps&gt;
+    &lt;ColorMap title=&quot;Classification&quot;&gt;
+        &lt;Entries&gt;
+            &lt;ColorMapEntry rgb=&quot;220,220,255&quot; transparent=&quot;true&quot; sourceValue=&quot;[-9999]&quot; nodata=&quot;true&quot; ref=&quot;1&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;111,220,255&quot; transparent=&quot;false&quot; sourceValue=&quot;[200]&quot; ref=&quot;2&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;222,220,255&quot; transparent=&quot;false&quot; sourceValue=&quot;[300]&quot; ref=&quot;3&quot;/&gt;
+            &lt;ColorMapEntry rgb=&quot;000,220,255&quot; transparent=&quot;false&quot; sourceValue=&quot;[400]&quot; ref=&quot;4&quot;/&gt;
+        &lt;/Entries&gt;
+        &lt;Legend type=&quot;classification&quot;&gt;
+            &lt;LegendEntry rgb=&quot;111,220,255&quot; label=&quot;Frozen&quot; id=&quot;2&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;222,220,255&quot; label=&quot;Thawed&quot; id=&quot;3&quot;/&gt;
+            &lt;LegendEntry rgb=&quot;000,220,255&quot; label=&quot;Transitional&quot; id=&quot;4&quot;/&gt;
+        &lt;/Legend&gt;
+    &lt;/ColorMap&gt;
+&lt;/ColorMaps&gt;
+</code></pre>
+<p><img alt="Classification Data Legend - Reduced" src="../img/classification.svg" /></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="vector-visualizations">Vector Visualizations</h2>
+<p>Vector visualizations are accessible through the GIBS Web Map Tile Service (WMTS) and Web Map Service (WMS) (see <a href="../access-basics/#access-basics">Visualization Services</a>). WMTS responses are formatted as gzip-compressed Mapbox vector tiles (<a href="https://docs.mapbox.com/vector-tiles/specification/" target="_blank">specification</a>), or "MVTs", while WMS responses are available as raster images.</p>
+<p>The data behind the WMTS and WMS visualization services are the same, however the mechanism for styling differs. A client application is responsible for applying styling to MVTs when using the WMTS service. (See <a href="#vector-styles">Vector Styles</a>) Conversely, GIBS applies a default style when rendering vector data as a raster when using the WMS service.</p>
+<p>An MVT returned via the WMTS service contains information for a client to draw the features within the user interface, but also a set of properties that contain data associated with the feature. The Mapbox vector tile specification provides structure for representing these data, but no mechanism for interpreting the meaning or intended use. As such, additional metadata is required. GIBS has developed a specification for defining each property contained within MVTs in its vector products. (See <a href="#vector-properties">Vector Properties</a>)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vector visualizations are not provided in the EPSG:3857 projection through the WMS service.  A workaround is to utilize the EPSG:4326 endpoint with EPSG:3857-based SRS and BBOX query parameters (<a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?service=WMS&amp;request=GetMap&amp;version=1.1.1&amp;layers=VIIRS_SNPP_Thermal_Anomalies_375m_All&amp;styles=&amp;format=image%2Fpng&amp;transparent=false&amp;srs=EPSG:3857&amp;width=480&amp;height=480&amp;bbox=-20037508,-20037508,20037508,20037508&amp;time=2020-01-01" target="_blank">example</a>).</p>
+</div>
+<h3 id="access">Access</h3>
+<h4 id="wmts-vector-tiles">WMTS Vector Tiles</h4>
+<p>Accessing a vector visualization through the WMTS service follows the same rules as raster visualizations. The primary differences being the format or extension provided in the request.  When issuing a KVP WMTS request, the "format" value must be <code>application/vnd.mapbox-vector-tile</code>.  When issuing a REST-ful WMTS request, the extension must be <code>.mvt</code>. See below for examples of each:</p>
+<ul>
+<li>REST Tile - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01/500m/4/3/4.mvt" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01/500m/4/3/4.mvt</a></li>
+<li>KVP Tile - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=2020-10-01&amp;FORMAT=application/vnd.mapbox-vector-tile&amp;layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&amp;tilematrixset=500m&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;TileMatrix=4&amp;TileCol=4&amp;TileRow=3" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp; TIME=2020-10-01&amp;layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&amp;tilematrixset=500m&amp;TileMatrix=4&amp;TileCol=4&amp;TileRow=3&amp;FORMAT=application/vnd.mapbox-vector-tile</a></li>
+</ul>
+<p>The response to a KVP or REST-ful WMTS response will be a gzip-compressed MVT. The following Python code snippet provides an example of how to download and print out the contents of a vector tile. Note that the Python <a href="https://requests.readthedocs.io/en/master/" target="_blank">requests</a> library is automatically decoding the gzip'd response.</p>
+<p><strong>MVT Tile Printer</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python
+
+#
+# pip install mapbox_vector_tile and requests first
+#
+
+import mapbox_vector_tile
+import requests
+import sys
+
+url = 'https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/VIIRS_NOAA20_Thermal_Anomalies_375m_All/default/2020-10-01T00:00:00Z/500m/4/3/4.mvt'
+response = requests.get(url)
+
+decoded_data = mapbox_vector_tile.decode(response.content)
+
+print(repr(decoded_data))
+
+for key in decoded_data:
+   print(key + &quot; Feature Count: &quot; + str(len(decoded_data[key][&quot;features&quot;])))
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Vector visualizations are not provided in the EPSG:3857 projection through the WMTS service. At present there is no workaround.</p>
+</div>
+<hr style="border:1px solid gray">
+</hr>
+<h4 id="wms-raster-images">WMS Raster Images</h4>
+<p>Accessing a vector visualization through the WMS service follows the same rules as raster products. Both version 1.1.1 and 1.3.0 WMS GetMap requests will return rasterized representations. See below for an example request and response:</p>
+<ul>
+<li>Request: <a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?/wms/epsg4326/best/wms.cgi?TIME=2020-10-01T00:00:00Z&amp;LAYERS=VIIRS_NOAA20_Thermal_Anomalies_375m_All&amp;REQUEST=GetMap&amp;SERVICE=WMS&amp;FORMAT=image/png&amp;STYLES=&amp;HEIGHT=240&amp;VERSION=1.1.1&amp;SRS=epsg:4326&amp;WIDTH=480&amp;BBOX=-180,-90,180,90&amp;TRANSPARENT=TRUE" target="_blank">https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?/wms/epsg4326/best/wms.cgi?SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;TIME=2020-10-01T00:00:00Z&amp;LAYERS=VIIRS_NOAA20_Thermal_Anomalies_375m_All &amp;FORMAT=image/png&amp;STYLES=&amp;HEIGHT=240&amp;SRS=epsg:4326&amp;WIDTH=480&amp;BBOX=-180,-90,180,90&amp;TRANSPARENT=TRUE</a></li>
+<li>Response: (See Below)</li>
+</ul>
+<p><img alt="wms_response" src="../img/wms_response.png" /></p>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="vector-properties">Vector Properties</h3>
+<p>The Mapbox vector tile specification provides structure for including data values as properties associated with a feature, but no mechanism for interpreting the meaning or intended use.  As such, GIBS has developed a specification for defining each property contained within MVTs in its vector products. Each vector product has an associated JSON vector metadata file which provides the following information:</p>
+<ul>
+<li>A unique identifier for the property, as found in the MVT data itself</li>
+<li>Descriptive information such as a title, description, and the function of the property (e.g. identification vs styling)</li>
+<li>The data type and optional units for the property</li>
+<li>Valid values for the property</li>
+<li>Additional flags for improved UI experience</li>
+</ul>
+<h4 id="specification">Specification</h4>
+<p>The following table outlines the fields in the GIBS vector metadata specification. A JSON schema representation may be found <a href="https://gibs.earthdata.nasa.gov/schemas/VectorMetadata_v1.0.json" target="_blank">here</a>.</p>
+<table style="width: 100.0%;">
+    <colgroup>
+      <col style="width: 7.0931%;"/>
+      <col style="width: 56.8714%;"/>
+      <col style="width: 6.52312%;"/>
+      <col style="width: 10.3863%;"/>
+      <col style="width: 19.126%;"/>
+    </colgroup>
+    <tbody>
+      <tr>
+        <th style="text-align: center;">Name</th>
+        <th style="text-align: center;">Description</th>
+        <th style="text-align: center;">Type</th>
+        <th colspan="1" style="text-align: center;">Required?</th>
+        <th colspan="1" style="text-align: center;">Sample Value</th>
+      </tr>
+      <tr>
+        <th>Identifier</th>
+        <td>
+          <span>The unique identifier of the MVT property.</span>
+        </td>
+        <td style="text-align: center;">String</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>FRP</code>
+        </td>
+      </tr>
+      <tr>
+        <th>Title</th>
+        <td>A human readable title for the property.</td>
+        <td style="text-align: center;">String</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>Fire Radiative Power</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">Description</th>
+        <td colspan="1">A human readable description for the property.</td>
+        <td colspan="1" style="text-align: center;">String</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>A measure of the rate of radiant heat output from a fire.</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">Units</th>
+        <td colspan="1">The units value to be applied to the actual value of this property.</td>
+        <td colspan="1" style="text-align: center;">String</td>
+        <td colspan="1" style="text-align: center;">
+          No
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>MW</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">DataType</th>
+        <td colspan="1">The data type of this property. Possible values include <em>int</em>, <em>float</em>, <em>string</em>, or <em>datetime</em>.</td>
+        <td colspan="1" style="text-align: center;">Enumeration</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>float</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">ValueList</th>
+        <td colspan="1">A listing of the possible valid values for a 'string' property type, if the property has a controlled list.</td>
+        <td colspan="1" style="text-align: center;">Array</td>
+        <td rowspan="3" style="text-align: center;">
+          <p>
+            <br/>
+          </p>
+          <p>
+            ?
+          </p>
+          <p>Only one may be used </p>
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>[ "Lake Ice", "Sea Ice", "Not Ice" ]</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">ValueRanges</th>
+        <td colspan="1">A listing of mutually exclusive min and max value pairs representing ranges of valid values for the 'Integer', 'float', and 'datetime' property types.</td>
+        <td colspan="1" style="text-align: center;">Array of Objects</td>
+        <td colspan="1" style="text-align: center;">
+          <code>[ { "Min": 0, "Max": 99999999 } ]</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">ValueMap</th>
+        <td colspan="1">A map of the possible valid values for 'string' or 'int' property types, and their associated description.  <span>This facilitates a key-value lookup table allowing for a simplified property value (i.e. the ‘key’).</span>
+        </td>
+        <td colspan="1" style="text-align: center;">Object</td>
+        <td colspan="1" style="text-align: center;">
+          <code>{ 10 : “Processed Fire Pixel”,    20 : “Saturated Fire Pixel” }</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">Function</th>
+        <td colspan="1">
+          <p>The property’s intended function as a part of the visualization product. Possible values include:</p>
+          <ul>
+            <li>
+              <em>
+                <span>Identify</span>
+              </em>
+              <span> - Properties that form a “primary key” to identify the visualization product. Often these are used used during processing to separate data points into separate layers (e.g. Platform and Day/Night).  These properties typically would also be in the associated layer metadata (e.g. Platform or Version) and embedded in the layer identifier (e.g. MODIS_Terra_Day_Fires).</span>
+            </li>
+            <li>
+              <em>
+                <span>Style</span>
+              </em>
+              <span> - Properties that are utilized for styling or filtering vector features.  These will typically be included in the default style(s) offered through WMS or the Mapbox Style JSONs. </span>
+            </li>
+            <li>
+              <em>
+                <span>Describe</span>
+              </em>
+              <span> - Properties that provide additional information regarding the vector feature (e.g. Acquisition Time or Inclination Angle).  They may be useful for tooltip presentation to users.</span>
+            </li>
+          </ul>
+        </td>
+        <td colspan="1" style="text-align: center;">Enumeration</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>Describe</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">IsOptional</th>
+        <td colspan="1">Indicates whether the property is optional.</td>
+        <td colspan="1" style="text-align: center;">Boolean</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>true</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="1">IsLabel</th>
+        <td colspan="1">Indicates whether the property should be used to label the point in a user interface.</td>
+        <td colspan="1" style="text-align: center;">Boolean</td>
+        <td colspan="1" style="text-align: center;">
+          Yes
+        </td>
+        <td colspan="1" style="text-align: center;">
+          <code>true</code>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+<p>All vector metadata file are validated against the following "business logic" rules that extend beyond the basic individual property constraints.</p>
+<ol>
+<li>A single, non-optional, property will be identified as the "label".</li>
+<li>A single, non-optional, property will have the "Identify" function, which acts as the primary key for properties.</li>
+<li>Properties are uniquely identified by their <em>Identifier</em> field.</li>
+<li>Items in the <em>ValueList</em> are unique.</li>
+<li><em>ValueRanges</em> is only supported for properties with a <em>DataType</em> of "int", "float", or "datetime."</li>
+<li><em>ValueMap</em> is only supported for properties with a <em>DataType</em> of "int" or "string.</li>
+</ol>
+<h4 id="metadata-association_1">Metadata Association</h4>
+<p>A vector product's vector metadata file is associated to a GIBS visualization as <code>Layer/ows:Metadata</code> elements within the WMTS Capabilities document. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" <em>vector metadata</em> file and one for the versioned (e.g. '1.0') <em>vector metadata</em> file. This allows for the addition of future versions as enhancements are
+made to the GIBS vector product visualization capabilities, while retaining backwards compatibility.</p>
+<pre><code class="language-xml">&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/layer&quot; 
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json&quot;
+              xlink:title=&quot;Layer Metadata&quot;/&gt;
+
+&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/layer/1.0&quot;
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/vector-metadata/v1.0/FIRMS_MODIS_Thermal_Anomalies.json&quot; 
+              xlink:title=&quot;Layer Metadata&quot;/&gt;
+</code></pre>
+<h4 id="examples_1">Examples</h4>
+<p>A <em>vector metadata</em> file is a list of content blocks defining each property. The following snippet shows an example of a single property's definition within the <em>vector metadata</em> file.</p>
+<p><strong>Metadata Snippet</strong></p>
+<pre><code class="language-json">{
+&quot;Identifier&quot; : &quot;NumReactor&quot;,
+&quot;Title&quot; : &quot;Number of Reactors&quot;,
+&quot;Description&quot;: &quot;Number of Active Reactors at a given Plant&quot;,
+&quot;Units&quot; : &quot;Reactors&quot;,
+&quot;DataType&quot; : &quot;int&quot;,
+&quot;ValueRanges&quot;: [ { &quot;Min&quot;: 1, &quot;Max&quot;: 9 } ],
+&quot;Function&quot; : &quot;Style&quot;,
+&quot;IsOptional&quot; : false,
+&quot;IsLabel&quot; : false
+}
+</code></pre>
+<p>The following block provides a full example of a <em>vector metadata</em> file.</p>
+<p><strong>Full Metadata File</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;Nuclear_Power_Plant_Locations&quot;,
+  &quot;mvt_properties&quot;: [
+
+    {
+      &quot;Identifier&quot; : &quot;Plant&quot;,
+      &quot;Title&quot;      : &quot;Plant Site Name&quot;,
+      &quot;Description&quot;: &quot;Name of Nuclear Plant&quot;,
+      &quot;DataType&quot;   : &quot;string&quot;,
+      &quot;Function&quot;   : &quot;Identify&quot;,
+      &quot;IsOptional&quot; : false,
+      &quot;IsLabel&quot;    : true
+    },
+
+    {
+      &quot;Identifier&quot; : &quot;NumReactor&quot;,
+      &quot;Title&quot;      : &quot;Number of Reactors&quot;,
+      &quot;Description&quot;: &quot;Number of Active Reactors at a given Plant&quot;,
+      &quot;Units&quot;      : &quot;Reactors&quot;,
+      &quot;DataType&quot;   : &quot;int&quot;,
+      &quot;ValueRanges&quot;: [ { &quot;Min&quot;: 1, &quot;Max&quot;: 9 } ],
+      &quot;Function&quot;   : &quot;Style&quot;,
+      &quot;IsOptional&quot; : false,
+      &quot;IsLabel&quot;    : false
+    },
+
+    {
+      &quot;Identifier&quot; : &quot;p10_30&quot;,
+      &quot;Title&quot;      : &quot;Population within 30km (2010)&quot;,
+      &quot;Description&quot;: &quot;Total population within a 30km radius of the nuclear plant (2010)&quot;,
+      &quot;Units&quot;      : &quot;Persons&quot;,
+      &quot;DataType&quot;   : &quot;int&quot;,
+      &quot;ValueRanges&quot;: [ { &quot;Min&quot;: 275, &quot;Max&quot;: 7170590 } ],
+      &quot;Function&quot;   : &quot;Describe&quot;,
+      &quot;IsOptional&quot; : false,
+      &quot;IsLabel&quot;    : false
+    }
+}
+</code></pre>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="vector-styles">Vector Styles</h3>
+<p>As mentioned previously, a client is responsible for applying style to MVT tiles received from the GIBS WMTS service in order to represent the feature defined within the MVT. This is most simply done by utilizing the vector style file provided by GIBS for each vector visualization.  </p>
+<h4 id="specification_1">Specification</h4>
+<p>Vector style files comply with the <a href="https://docs.mapbox.com/mapbox-gl-js/style-spec/" target="_blank">Mapbox style specification</a>. Here is a <a href="https://nasa-gibs.github.io/gibs-web-examples/examples/openlayers/vectors/geographic-epsg4326-vector-mapbox-styles.html" target="_blank">live example</a> of how to use these styles with <a href="http://openlayers.org/" target="_blank">OpenLayers</a>.</p>
+<h4 id="metadata-association_2">Metadata Association</h4>
+<p>A vector product's vector style file is associated to a GIBS visualization as <code>Layer/ows:Metadata</code> elements within the WMTS Capabilities document. The following snippet shows an example of how these elements will appear in the XML Capabilities response. Note that there are two entries listed. One is for the "default" vector style file and one for the versioned (e.g. '1.0') vector style file. This allows for the addition of future versions as enhancements to the GIBS vector product visualization capabilities, while retaining backwards compatibility.</p>
+<p><strong>WMTS Capabilities Layer Metadata</strong></p>
+<pre><code class="language-xml">&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style&quot;
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json&quot;
+              xlink:title=&quot;Mapbox GL Layer Styles&quot;/&gt;
+
+&lt;ows:Metadata xlink:type=&quot;simple&quot; 
+              xlink:role=&quot;http://earthdata.nasa.gov/gibs/metadata-type/mapbox-gl-style/1.0&quot;
+              xlink:href=&quot;https://gibs.earthdata.nasa.gov/vector-styles/v1.0/FIRMS_VIIRS_Thermal_Anomalies.json&quot;
+              xlink:title=&quot;Mapbox GL Layer Styles&quot;/&gt;
+</code></pre>
+<h4 id="dynamic-legend-graphics">Dynamic Legend Graphics</h4>
+<p>As described <a href="#pre-generated-legends">here</a>, many raster visualizations have an associated pre-generated legend image representing the associated GIBS Colormap. However, for vector visualizations, there is no associated GIBS Colormap XML document to create a legend image. Instead, the GIBS WMS service's <code>GetLegendGraphic</code> request may be used to dynamcally generate a legend image. The following snippet shows how this is defined in the WMS Capabilities document.</p>
+<pre><code class="language-xml">&lt;Style&gt;
+  &lt;LegendURL width=&quot;138&quot; height=&quot;23&quot;&gt;
+    &lt;Format&gt;image/png&lt;/Format&gt;
+    &lt;OnlineResource xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xlink:type=&quot;simple&quot; xlink:href=&quot;https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?version=1.1.1&amp;service=WMS&amp;request=GetLegendGraphic&amp;layer=VIIRS_NOAA20_Thermal_Anomalies_375m_All&amp;format=image/png&amp;STYLE=default&quot;/&gt;
+  &lt;/LegendURL&gt;
+&lt;/Style&gt;
+</code></pre>
+<p>Issuing the sample request returns the following image.</p>
+<p><img alt="thermal_anomaly" src="../img/thermal_anomaly.png" /></p>
+<h4 id="examples_2">Examples</h4>
+<p>The <em>vector style</em> file contains the necessary information to apply a default style to a GIBS vector visualization, as required by the <a href="https://docs.mapbox.com/mapbox-gl-js/style-spec/" target="_blank">Mapbox style specification</a>. The file may contain style information for more than one vector product, as this allows for simplified file management within the GIBS system. Unneeded information should be ignored by the display library (e.g. <a href="http://openlayers.org/" target="_blank">OpenLayers</a>). The following block provides a full example of a <em>vector style</em> file.</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 8,
+  &quot;name&quot;: &quot;SEDAC&quot;,
+  &quot;sources&quot;: {
+    &quot;GRanD_Reservoirs&quot;: {
+      &quot;type&quot;: &quot;vector&quot;,
+      &quot;tiles&quot;: [
+        &quot;https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GRanD_Reservoirs/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.mvt&quot;
+      ]
+    }
+  },
+  &quot;layers&quot;: [
+    {
+      &quot;id&quot;: &quot;GRanD_Reservoirs_v1.01_STD&quot;,
+      &quot;source&quot;: &quot;GRanD_Reservoirs&quot;,
+      &quot;source-layer&quot;: &quot;GRanD_Reservoirs_v1.01_STD&quot;,
+      &quot;source-description&quot;: &quot;Default&quot;,
+      &quot;type&quot;: &quot;fill&quot;,
+      &quot;paint&quot;: {
+        &quot;fill-color&quot;: &quot;rgb(0, 77, 168)&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gis-usage/" class="btn btn-neutral float-right" title="Accessing via GIS Applications">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../access-basics/" class="btn btn-neutral" title="Access Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../access-basics/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../gis-usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../javascript/vue@3.js" defer></script>
+      <script src="../javascript/overrides.js" defer></script>
+      <script src="../javascript/components.js" defer></script>
+      <script src="../javascript/imagery-products.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

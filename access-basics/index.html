@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Access Basics - Global Imagery Browse Services (GIBS)</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="../css/loading-spinner.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Access Basics";
+    var mkdocs_page_input_path = "access-basics.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Global Imagery Browse Services (GIBS)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="tocbase current">
+    
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="..">Introduction</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../available-visualizations/">Available Visualizations</a>
+  </li>
+    
+      
+
+
+  
+    
+    <li class="navtree toctree-l1 page current">
+      <a class="current" href="./">
+        Access Basics
+      </a>
+    </li>
+    
+      
+
+
+
+  <li class="toctree-l1 current">
+    <ul class="subnav-l1 current">
+    
+      
+          
+
+  <li class="toctree-l2 current with-children">
+    <a href="#visualization-services">
+      Visualization Services
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2 current">
+    <ul class="subnav-l2 current">
+    
+      
+          
+
+  <li class="toctree-l3 current with-children">
+    <a href="#ogc-web-map-tile-service-wmts">
+      OGC Web Map Tile Service (WMTS)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3 current">
+    <ul class="subnav-l3 current">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#overview">Overview</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#service-endpoints">Service Endpoints</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#example-clients">Example Clients</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#ogc-web-map-service-wms">
+      OGC Web Map Service (WMS)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#overview_1">Overview</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#service-endpoints_1">Service Endpoints</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#example-clients_1">Example Clients</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+          
+
+  <li class="toctree-l3">
+    <a href="#tiled-web-map-service-twms">
+      Tiled Web Map Service (TWMS)
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l3">
+    <ul class="subnav-l3 toc-hidden">
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#overview_2">Overview</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#service-endpoints_2">Service Endpoints</a>
+        </li>
+    
+      
+        <li class="toctree-l4">
+          <a class="toctree-l5" href="#example-clients_2">Example Clients</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#generic-xyz-tile-access-tms">Generic XYZ Tile Access (TMS)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+      
+        <li class="toctree-l2">
+          <a class="toctree-l3" href="#map-projections">Map Projections</a>
+        </li>
+    
+      
+          
+
+  <li class="toctree-l2">
+    <a href="#time-dimension">
+      Time Dimension
+      <span class="toctree-expand"></span>
+    </a>
+  </li>
+
+
+
+  <li class="toctree-l2">
+    <ul class="subnav-l2 toc-hidden">
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#ogc-web-map-tile-service-wmts_1">OGC Web Map Tile Service (WMTS)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#ogc-web-map-service-wms_1">OGC Web Map Service (WMS)</a>
+        </li>
+    
+      
+        <li class="toctree-l3">
+          <a class="toctree-l4" href="#tiled-web-map-service-twms_1">Tiled Web Map Service (TWMS)</a>
+        </li>
+    
+    </ul>
+  </li>
+
+      
+    
+    </ul>
+  </li>
+
+
+  
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../access-advanced-topics/">Access Advanced Topics</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../gis-usage/">Accessing via GIS Applications</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../map-library-usage/">Accessing via Map Libraries and GDAL Scripts</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../python-usage/">Accessing via Python</a>
+  </li>
+    
+      
+
+
+  <li class="navtree toctree-l1 inactive">
+    <a class="" href="../contact-us/">Contact Us</a>
+  </li>
+    
+  </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Global Imagery Browse Services (GIBS)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Access Basics</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="access-basics">Access Basics</h1>
+<p>NASA's Global Imagery Browse Services (GIBS) visualizations are accessible through public standards-compliant web services, hosted on the <a href="https://gibs.earthdata.nasa.gov">https://gibs.earthdata.nasa.gov</a> domain.  Each service is accessed through service endpoints specific to the service and map projection.  Visualizations within these services are available in pre-determined resolutions. For a full list of available visualizations, see the <a href="../available-visualizations/#visualization-product-catalog">Visualization Product Catalog</a>.</p>
+<p>The information on this page covers the following topics related to accessing GIBS visualizations:</p>
+<ul>
+<li><a href="#access-basics">Visualization Services</a></li>
+<li><a href="#map-projections">Map Projections</a></li>
+<li><a href="#time-dimension">Time Dimension</a></li>
+</ul>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="visualization-services">Visualization Services</h2>
+<p>NASA's Global Imagery Browse Services (GIBS) provides visualizations through the APIs/services listed below. The following sections provide an overview of each visualization service, service endpoints, and reference clients that support the service.</p>
+<ul>
+<li><a href="#ogc-web-map-tile-service-wmts">OGC Web Map Tile Service (WMTS)</a></li>
+<li><a href="#ogc-web-map-service-wms">OGC Web Map Service (WMS)</a></li>
+<li><a href="#tiled-web-map-service-twms">Tiled Web Map Service (TWMS)</a></li>
+<li><a href="#generic-xyz-tile-access-tms">Generic XYZ Tile Service (TMS)</a></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the following content, service endpoints for the "Best Available" (See <a href="../access-advanced-topics/#best-available-layers">Best Available Layers</a>) are provided. For example: <code>https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/</code>.  However, the following endpoints also exist and may be accessed by simply replacing the <code>best</code> component of the provided service endpoints:</p>
+<ul>
+<li><em>std</em> - Standard-/science-quality visualizations only</li>
+<li><em>nrt</em> - Near real-time visualizations only</li>
+<li><em>all</em> - All best available, standard-/science-quality, and near real-time visualizations</li>
+</ul>
+</div>
+<h3 id="ogc-web-map-tile-service-wmts">OGC Web Map Tile Service (WMTS)</h3>
+<h4 id="overview">Overview</h4>
+<p>The <a href="http://www.opengeospatial.org/standards/wmts/" target="_blank">Open Geospatial Consortium (OGC) Web Map Tile Service (WMTS)</a> provides a way for clients to retrieve tiled mapping data in a standardized manner, handling product-specific details such as available number of zoom levels, map projections, image formats, tile sizes, etc. The WMTS specification provides guidance for three methods of tile retrieval: Key-Value Pair (KVP), REpresentational State Transfer (REST), and Simple Object Access Protocol (SOAP). GIBS supports the KVP and REST access methods.</p>
+<p>WMTS requests utilize the following URI/query-string elements. </p>
+<ul>
+<li><em>LayerIdentifier</em> - Unique identifier for a visualization within a specific service endpoint</li>
+<li><em>Time</em> - An optional dimension whereby visualizations are separated by data day (i.e. YYYY-MM-DD) or data data/time (i.e. YYYY-MM-DDTHH:MI:SSZ). <ul>
+<li>See <a href="#time-dimension">Time Dimension</a> for additional details.</li>
+</ul>
+</li>
+<li><em>TileMatrixSet</em> - The identifier for the Tile Matrix Set that the visualization utilizes</li>
+<li><em>TileMatrix</em> - The tile zoom level (0..N) for the requested tile; Min/Max are dictated by the Tile Matrix</li>
+<li><em>TileRow</em> - The tile row (0..N) for the requested tile; Min/Max are dictated by the Tile Matrix</li>
+<li><em>TileCol</em> - The tile column (0..N) for the requested tile; Min/Max are dictated by the Tile Matrix</li>
+<li><em>FormatExt/FormatMime</em> - The format extension or mime-type of the visualization</li>
+</ul>
+<p>The above elements may be found in examples of both RESTful and KVP access patterns seen below:</p>
+<ul>
+<li><strong>REST</strong><ul>
+<li><em>Pattern</em> - https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/{<em>LayerIdentifier</em>}/default/{<em>Time</em>}/{<em>TileMatrixSet</em>}/{<em>TileMatrix</em>}/{<em>TileRow</em>}/{<em>TileCol</em>}.{<em>FormatExt</em>}</li>
+<li><em>Example</em> - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/2012-07-09/250m/6/13/36.jpg" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/MODIS_Terra_CorrectedReflectance_TrueColor/default/2012-07-09/250m/6/13/36.jpg</a></li>
+</ul>
+</li>
+<li><strong>KVP</strong><ul>
+<li><em>Pattern</em> - https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;REQUEST=GetTile&amp;VERSION=1.0.0&amp;LAYER={<em>LayerIdentifier</em>}&amp;STYLE=&amp;TIME={<em>Time</em>}&amp;TILEMATRIXSET={<em>TileMatrixSet</em>}&amp;TILEMATRIX={<em>TileMatrix</em>}&amp;TILEROW={<em>TileRow</em>}&amp;TILECOL={<em>TileCol</em>}&amp;FORMAT={<em>FormatMime</em>}</li>
+<li><em>Example</em> - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;layer=MODIS_Terra_CorrectedReflectance_TrueColor&amp;tilematrixset=250m&amp;TileMatrix=6&amp;TileCol=36&amp;TileRow=13&amp;TIME=2012-07-09&amp;style=default&amp;Format=image%2Fjpeg" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0 &amp;layer=MODIS_Terra_CorrectedReflectance_TrueColor&amp;tilematrixset=250m&amp;TileMatrix=6&amp;TileCol=36&amp;TileRow=13&amp;style=default&amp;TIME=2012-07-09&amp;Format=image%2Fjpeg</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="service-endpoints">Service Endpoints</h4>
+<p>The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the WMTS GetCapabilities, GetTile, and DescribeDomains requests via both RESTful and KVP access methods. See <a href="#time-dimension">Time Dimension</a> for additional details on DescribeDomains.</p>
+<table>
+<thead>
+<tr>
+<th>Projection</th>
+<th>Endpoint Root</th>
+<th>GetCapabilities</th>
+<th>GetTile</th>
+<th>DescribeDomains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geographic (EPSG:4326)</td>
+<td><strong>REST:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/ <br/> <strong>KVP:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/1999-01-03/31.25m/3/2/3.jpg" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?TIME=default&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;style=default&amp;tilematrixset=31.25m&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image%2Fjpeg&amp;TileMatrix=3&amp;TileCol=3&amp;TileRow=2&amp;TIME=1999-01-03" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/31.25m/all/all.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;tilematrixset=31.25m&amp;Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>NSIDC Sea Ice Polar Stereographic North (EPSG:3413)</td>
+<td><strong>REST:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/ <br/><strong>KVP:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/wmts.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/WMTSCapabilities.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/1999-01-03/31.25m/4/8/9.jpg" target="_blank">REST</a> / <a href="https://gitc.earthdata.nasa.gov/wmts/epsg3413/best/wmts.cgi?TIME=default&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;style=default&amp;tilematrixset=31.25m&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image%2Fjpeg&amp;TileMatrix=4&amp;TileCol=9&amp;TileRow=8&amp;TIME=1999-01-03" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/1.0.0/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/31.25m/all/all.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3413/best/wmts.cgi?&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;tilematrixset=31.25m&amp;Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>Antarctic Polar Stereographic / WGS 84 (EPSG:3031)</td>
+<td><strong>REST:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/ <br/><strong>KVP:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/wmts.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/WMTSCapabilities.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/MODIS_Terra_Brightness_Temp_Band31_Day/default/2019-09-24/1km/2/1/1.png" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/wmts.cgi?TIME=default&amp;layer=MODIS_Terra_Brightness_Temp_Band31_Day&amp;style=default&amp;tilematrixset=1km&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image%2Fpng&amp;TileMatrix=2&amp;TileCol=1&amp;TileRow=1&amp;TIME=2019-09-24" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/1.0.0/MODIS_Terra_Brightness_Temp_Band31_Day/default/1km/all/all.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3031/best/wmts.cgi?layer=MODIS_Terra_Brightness_Temp_Band31_Day&amp;style=default&amp;tilematrixset=1km&amp;Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>Web Mercator - (EPSG:3857)</td>
+<td><strong>REST:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/ <br/><strong>KVP:</strong> https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/wmts.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/WMTSCapabilities.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/wmts.cgi?SERVICE=WMTS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/1999-01-02/GoogleMapsCompatible_Level12/4/2/3.jpg" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/wmts.cgi?TIME=default&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;style=default&amp;tilematrixset=GoogleMapsCompatible_Level12&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image%2Fjpeg&amp;TileMatrix=4&amp;TileCol=3&amp;TileRow=2&amp;TIME=1999-01-02" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/1.0.0/Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual/default/31.25m/all/all.xml" target="_blank">REST</a> / <a href="https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/wmts.cgi?&amp;layer=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual&amp;tilematrixset=31.25m&amp;Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0" target="_blank">KVP</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-clients">Example Clients</h4>
+<p>The following clients support the GIBS WMTS visualization services:</p>
+<ul>
+<li><a href="https://worldview.earthdata.nasa.gov" target="_blank">NASA Worldview</a></li>
+<li><a href="https://github.com/nasa-gibs/gibs-web-examples" target="_blank">OpenLayers v2 and v3, Leaflet, Bing Maps, Google Maps</a></li>
+</ul>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="ogc-web-map-service-wms">OGC Web Map Service (WMS)</h3>
+<h4 id="overview_1">Overview</h4>
+<p>The <a href="http://www.opengeospatial.org/standards/wms/" target="_blank">Open Geospatial Consortium (OGC) Web Map Service (WMS)</a> provides a way for clients to receive a customized response (e.g. raster image) based on request parameters such as a custom bounding box, dimensions, layer(s) and format. Unlike the rigidity enforced through tiled interfaces (e.g. WMTS and TWMS), WMS responses are more flexible and may contain multiple composited layers in a single output. Two WMS specifications are currently available and supported by GIBS: 1.1.1 and 1.3.0. Both WMS specifications support a single method of image retrieval, Key-Value Pair (KVP).</p>
+<h4 id="service-endpoints_1">Service Endpoints</h4>
+<p>The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the WMS GetCapabilities and GetMap requests using both 1.1.1 and 1.3.0 WMS specification versions.</p>
+<table>
+<thead>
+<tr>
+<th>Projection</th>
+<th>Endpoint Root</th>
+<th>GetCapabilities</th>
+<th>GetMap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geographic (EPSG:4326)</td>
+<td>https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.1.1" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" target="_blank">1.3.0</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?version=1.1.1&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-40,-40,40,40&amp;SRS=EPSG:4326&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-04-10&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?version=1.3.0&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-40,-40,40,40&amp;CRS=EPSG:4326&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-04-10&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.3.0</a></td>
+</tr>
+<tr>
+<td>NSIDC Sea Ice Polar Stereographic North (EPSG:3413)</td>
+<td>https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.1.1" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" target="_blank">1.3.0</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi?version=1.1.1&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-4000000,-4000000,0,0&amp;SRS=EPSG:3413&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-09-24&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3413/best/wms.cgi?version=1.3.0&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-4000000,-4000000,0,0&amp;CRS=EPSG:3413&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-09-24&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.3.0</a></td>
+</tr>
+<tr>
+<td>Antarctic Polar Stereographic / WGS 84 (EPSG:3031)</td>
+<td>https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.1.1" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" target="_blank">1.3.0</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi?version=1.1.1&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-4000000,-4000000,0,0&amp;SRS=EPSG:3031&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=2019-09-24&amp;layers=MODIS_Terra_Brightness_Temp_Band31_Day" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3031/best/wms.cgi?version=1.3.0&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-4000000,-4000000,0,0&amp;CRS=EPSG:3031&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=2019-09-24&amp;layers=MODIS_Terra_Brightness_Temp_Band31_Day" target="_blank">1.3.0</a></td>
+</tr>
+<tr>
+<td>Web Mercator - EPSG:3857</td>
+<td>https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?</td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.1.1" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" target="_blank">1.3.0</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?version=1.1.1&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-8000000,-8000000,8000000,8000000&amp;SRS=EPSG:3857&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-04-10&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.1.1</a> / <a href="https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi?version=1.3.0&amp;service=WMS&amp;request=GetMap&amp;format=image/png&amp;STYLE=default&amp;bbox=-8000000,-8000000,8000000,8000000&amp;CRS=EPSG:3857&amp;HEIGHT=600&amp;WIDTH=600&amp;TIME=1999-04-10&amp;layers=Landsat_WELD_CorrectedReflectance_Bands157_Global_Annual" target="_blank">1.3.0</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-clients_1">Example Clients</h4>
+<p>The following clients support the GIBS WMS visualization services:</p>
+<ul>
+<li><a href="../gis-usage/#qgis">QGIS</a></li>
+<li><a href="../gis-usage/#esri-arcgisarcmap">Esri ArcMap</a></li>
+<li><a href="../gis-usage/#esri-arcgis-online">Esri ArcGIS Online</a></li>
+</ul>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="tiled-web-map-service-twms">Tiled Web Map Service (TWMS)</h3>
+<h4 id="overview_2">Overview</h4>
+<p>Tiled WMS offers fast response to a limited number of WMS access patterns - specifically those access patterns which provide geographic
+bounds which fall along the edges of pregenerated tiles.</p>
+<p>Those patterns are described in the TWMS <a href="https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetTileService" target="_blank">GetTileService request</a>. The response is an XML encoded list of available WMS access patterns. A TiledPattern access pattern is a set gridded WMS requests, where parameter order, case and content are constant, with the exception of the bounding box (bbox) values. Using this pattern allows fast access to tiles for a given combination of layers and associated styles at a given resolution over a defined area. All the information about a pattern can be extracted form the provided WMS call, using these rules:</p>
+<ul>
+<li>Server prefix is defined in the OnlineResource tag</li>
+<li>Area covered is defined in the LatLonBoundingBox </li>
+<li>Tile size is provided by the <em>width</em> and <em>height</em> parameters values </li>
+<li>Tile format is provided by the <em>format</em> parameter value</li>
+<li>Tile coverage can be computed as <em>(Lon1-Lon0)</em> and <em>(Lat1-Lat0)</em>, where <em>Lon1,Lon0,Lat1 and Lat0</em> are the arguments of the <em>bbox</em> parameter. </li>
+<li>The Grid alignment results from the <em>bbox</em> argument and the tile coverage. </li>
+<li>The <em>bbox</em> argument values provided in the pattern are for the top-left tile, the other tile locations can be computed based on the tile coverage. </li>
+<li>Other metadata that might be of interest to a user is contained in the <em>Name</em>, <em>Title</em> and <em>Abstract</em> tags. </li>
+<li>Multiple WMS patterns in a single <em>TilePattern</em> are equivalent.</li>
+<li><em>TilePattern</em> tags that have something in common are grouped in a hierarchical structure build using <em>TiledGroup</em> tags. </li>
+<li>The innermost level refers to the same exact data, possible differences being the image size, image format, resolution, and alignment. </li>
+<li>Higher level <em>TiledGroup</em> are used to group together related datasets.</li>
+</ul>
+<p>A client application is expected to request this information only if it is defined as a request in the WMS server Capabilities. Once obtained, the application needs to analyze the patterns, decide which ones can be used and then issue only WMS requests that match the pattern to the normal WMS server, requests that can be built by modifying the <em>bbox</em> argument in a <em>TiledPattern</em> and prefixing the resulting string with the content of the <em>OnlineResource</em> tag.</p>
+<h4 id="service-endpoints_2">Service Endpoints</h4>
+<p>The following table contains the root service endpoint for each GIBS-supported map projection along with sample requests for the TWMS GetCapabilities, GetTileService, and GetMap requests.</p>
+<table>
+<thead>
+<tr>
+<th>Projection</th>
+<th>Endpoint Root</th>
+<th>GetCapabilities</th>
+<th>GetTileService</th>
+<th>GetMap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geographic (EPSG:4326)</td>
+<td>https://gibs.earthdata.nasa.gov/twms/epsg4326/best/</td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?SERVICE=TWMS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?SERVICE=TWMS&amp;request=GetTileService" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg4326/best/twms.cgi?request=GetMap&amp;layers=MODIS_Terra_CorrectedReflectance_TrueColor&amp;srs=EPSG:4326&amp;format=image/jpeg&amp;styles=&amp;time=2012-07-09&amp;width=512&amp;height=512&amp;bbox=-18,27,-13.5,31.5" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>NSIDC Sea Ice Polar Stereographic North (EPSG:3413)</td>
+<td>https://gibs.earthdata.nasa.gov/twms/epsg3413/best/</td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3413/best/twms.cgi?SERVICE=TWMS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3413/best/twms.cgi?SERVICE=TWMS&amp;request=GetTileService" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3413/best/twms.cgi?request=GetMap&amp;layers=MODIS_Terra_CorrectedReflectance_TrueColor&amp;srs=EPSG:3413&amp;format=image%2Fjpeg&amp;styles=&amp;time=2012-07-09&amp;width=512&amp;height=512&amp;bbox=1048576.00000000,-524288.00000000,1572864.00000000,0000.00000000" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>Antarctic Polar Stereographic / WGS 84 (EPSG:3031)</td>
+<td>https://gibs.earthdata.nasa.gov/twms/epsg3031/best/</td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3031/best/twms.cgi?SERVICE=TWMS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3031/best/twms.cgi?SERVICE=TWMS&amp;request=GetTileService" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3031/best/twms.cgi?request=GetMap&amp;layers=MODIS_Terra_CorrectedReflectance_TrueColor&amp;srs=EPSG:3031&amp;format=image%2Fjpeg&amp;styles=&amp;time=2012-02-09&amp;width=512&amp;height=512&amp;bbox=1048576.00000000,-524288.00000000,1572864.00000000,0000.00000000" target="_blank">KVP</a></td>
+</tr>
+<tr>
+<td>Web Mercator - (EPSG:3857)</td>
+<td>https://gibs.earthdata.nasa.gov/twms/epsg3857/best/</td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3857/best/twms.cgi?SERVICE=TWMS&amp;request=GetCapabilities" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3857/best/twms.cgi?SERVICE=TWMS&amp;request=GetTileService" target="_blank">KVP</a></td>
+<td><a href="https://gibs.earthdata.nasa.gov/twms/epsg3857/best/twms.cgi?request=GetMap&amp;layers=MODIS_Terra_CorrectedReflectance_TrueColor&amp;srs=EPSG:3857&amp;format=image/jpeg&amp;styles=&amp;time=2012-07-09&amp;width=256&amp;height=256&amp;bbox=-20037508.342789,10018754.171395,-10018754.171395,20037508.342789" target="_blank">KVP</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-clients_2">Example Clients</h4>
+<p>The following clients support the GIBS TWMS visualization services:</p>
+<ul>
+<li><a href="../map-library-usage/#gdal">GDAL</a></li>
+</ul>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="generic-xyz-tile-access-tms">Generic XYZ Tile Access (TMS)</h3>
+<p>The WMTS RESTful interface above can be easily adapted for use as a "generic" XYZ tile server if the developer pre-populates all of the required fields except the tile row, column, and zoom level. For example, by starting with the most generalized GIBS API request:</p>
+<p><code>https://gibs.earthdata.nasa.gov/wmts/epsg{*EPSG:Code*}/best/{*LayerIdentifier*}/default/{*Time*}/{*TileMatrixSet*}/{*ZoomLevel*}/{*TileRow*}/{*TileCol*}.png</code></p>
+<p>Populating the fields with the desired map projection, product, time, etc (Terra/MODIS Aerosol Optical depth from 2014/04/09, in this case), GIBS products can be used by clients such as <a href="http://www.arcgis.com/home/webmap/viewer.html" target="_blank">ESRI's ArcGIS Online</a> to add a "Tile Layer" by leaving the row, column, and zoom level as parameters:</p>
+<p><code>https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Aerosol/default/2014-04-09/GoogleMapsCompatible_Level6/{level}/{row}/{col}.png</code></p>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="map-projections">Map Projections</h2>
+<p>GIBS visualizations are available in one or more of the following map projections, as is appropriate for the data being visualized. Consider the following guidelines when accessing visualizations through the GIBS web services:</p>
+<ol>
+<li>A visualization available in multiple projections has the same identifier. </li>
+<li>A visualization available in one or more of the EPSG:4326, EPSG:3413, and EPSG:3031 projections has the same WMTS TileMatrixSet.<ul>
+<li>Exception: If the <code>2km</code> TileMatrixSet is utilized in the EPSG:4326 projection, the <code>1km</code> TileMatrix set will be utilized in polar projections.</li>
+</ul>
+</li>
+<li>A visualization available in the EPSG:4326 projection is also available in the EPSG:3857 projection.<ul>
+<li>Exception: Some utility visualizations (e.g. coastlines, land mask) may not be available in the EPSG:3857 projection.</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Projection</th>
+<th>EPSG Code</th>
+<th>Spatial Extents</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WGS 84 / Geographic</td>
+<td><a href="https://epsg.io/4326" target="_blank">4326</a></td>
+<td><strong>WGS84 Coordinates</strong><br/>Lower Left: -180,-90 <br/> Upper Right: 180,90</td>
+<td><img alt="EPSG4326" src="../img/espg4326.png" /></td>
+</tr>
+<tr>
+<td>NSIDC Sea Ice Polar Stereographic North</td>
+<td><a href="https://epsg.io/3413" target="_blank">3413</a></td>
+<td><strong>Native Coordinates</strong><br/>Lower Left: -4194304,-4194304 <br/> Upper Right: 4194304,4194304 <br/><br/> <strong>WGS84 Coordinates</strong><br/>Lower Left: -180, 38.807151 <br/>Upper Right: 180,90</td>
+<td><img alt="arctic" src="../img/arctic-sm.png" /></td>
+</tr>
+<tr>
+<td>Antarctic Polar Stereographic / WGS 84</td>
+<td><a href="https://epsg.io/3031" target="_blank">3031</a></td>
+<td><strong>Native Coordinates</strong><br/>Lower Left: -4194304,-4194304 <br/> Upper Right: 4194304,4194304 <br/><br/> <strong>WGS84 Coordinates</strong><br/>Lower Left: -180, -90 <br/>Upper Right: 180,-38.941373**</td>
+<td><img alt="arctic" src="../img/antarctic-sm.png" /></td>
+</tr>
+<tr>
+<td>Web Mercator / "Google Projection"</td>
+<td><a href="https://epsg.io/3857" target="_blank">3857</a></td>
+<td><strong>Native Coordinates</strong><br/>Lower Left: -20037508.34278925,-20037508.34278925 <br/> Upper Right: 20037508.34278925,20037508.34278925 <br/><br/> <strong>WGS84 Coordinates</strong><br/>Lower Left: -180,-85.051129 <br/> Upper Right: 180,85.051129</td>
+<td><img alt="webmerc" src="../img/webmerc-sm.png" /></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The spatial extents of the GIBS Geographic and Web Mercator projections match the full extents of the official projection definition. However, the GIBS spatial extents of the north and south polar projections are a subset of the official projection's extents. The GIBS' extents were selected to a) cover the main land/ice masses at each pole and b) to facilitate a "power of two" extent expansion between zoom levels as required for tiled access.  See <a href="../access-advanced-topics/#tiled-access-resolutions">here</a> for more on GIBS tiled access resolutions.</p>
+</div>
+<hr style="border:2px solid gray">
+</hr>
+<h2 id="time-dimension">Time Dimension</h2>
+<p>The core concept within the GetCapabilities response is a map layer. GIBS map layers represent data that change over time, most commonly providing a different map each day. Therefore, the layer definition within the GIBS GetCapabilities response must present a time dimension.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When requesting a visualization for the current date, much of the world may be empty if data acquisition and processing has not yet occurred.</p>
+</div>
+<h4 id="ogc-web-map-tile-service-wmts_1">OGC Web Map Tile Service (WMTS)</h4>
+<p>GIBS WMTS services support the following custom <code>time</code> dimension on each time-varying visualization.  </p>
+<pre><code class="language-xml">&lt;Dimension&gt;
+  &lt;ows:Identifier&gt;time&lt;/ows:Identifier&gt;
+  &lt;UOM&gt;ISO8601&lt;/UOM&gt;
+  &lt;Default&gt;2013-05-29&lt;/Default&gt;
+  &lt;Current&gt;false&lt;/Current&gt;
+  &lt;Value&gt;2012-05-08/2013-05-29/P1D&lt;/Value&gt;
+&lt;/Dimension&gt;
+</code></pre>
+<p>Elements of the <code>Dimension</code> data structure are prescribed in the WMTS 1.0.0 spec (Table 9, p. 22). However, since the WMTS spec doesn't address the time dimension, we are adapting some aspects of the WMS specification regarding the time dimension, specifically:</p>
+<ol>
+<li>The contents of the <code>&lt;UOM&gt;</code> part match the contents of the "units=" attribute in the WMS <code>&lt;Dimension&gt;</code> element.</li>
+<li>The contents of the <code>&lt;Value&gt;</code> part match the contents of the WMS <code>&lt;Extent&gt;</code> element.</li>
+</ol>
+<p>Visualizations that represent "subdaily" (e.g. period &lt; 1 day) require that the <code>time</code> dimension value be provided with a <code>YYYY-MM-DDTHH:MI:SSZ</code> format.  All other visualizations also support a simplified <code>YYYY-MM-DD</code> formatted value with an implied <code>00:00:00Z</code>.</p>
+<p>If the <code>time</code> dimension is omitted in the WMTS request, GIBS will return tiles for the default date, as specified in the <code>&lt;Default&gt;</code> tag. Note that GIBS' imagery layers all have a value of false in the <code>&lt;Current&gt;</code> tag which means that the special current keyword cannot be provided as the time value. However, GIBS does support use of the special <code>default</code> value, which results in the same response as though the date were omitted.</p>
+<p><strong>DescribeDomains</strong></p>
+<p>To maintain a manageable size of the GetCapabilities document, the <code>Dimension</code> data structure in the WMTS GetCapabilities will display only the latest 100 time periods for each layer. To obtain all time periods for a layer, GIBS WMTS also supports the proposed DescribeDomains request as proposed by the <a href="https://docs.ogc.org/per/16-042r1.html#_compact_domain_inspection">OGC Testbed-12 WMS/WMTS Enhanced Engineering Report</a>.</p>
+<p>DescribeDomains requests utilize the following URI/query-string elements. </p>
+<ul>
+<li><em>LayerIdentifier</em> - Unique identifier for a visualization within a specific service endpoint</li>
+<li><em>Time</em> - An optional parameter to only request periods that occur within an inclusive domain bounded by a specified <code>StartDatetime</code> and <code>EndDatetime</code>.<ul>
+<li>For REST requests, this parameter should take the form of <code>StartDatetime--EndDatetime</code>.</li>
+<li>For KVP requests, this parameter should take the form of <code>StartDatetime/EndDatetime</code>.</li>
+<li>If only one datetime is specified without the delimiter <code>--</code> or <code>/</code>, or is followed by the delimiter (i.e. <code>StartDatetime--</code> or <code>StartDatetime/</code>), then the specified datetime will be treated as a <code>StartDatetime</code> with an unbounded <code>EndDatetime</code>.</li>
+<li>If only one datetime is specified and is preceeded by <code>--</code> for REST requests or <code>/</code> for KVP requests (i.e. <code>--EndDatetime</code> or <code>/EndDatetime</code>), then the specified datetime will be treated as an <code>EndDatetime</code> with an unbounded <code>StartDatetime</code>.</li>
+<li>Not specifying a <em>Time</em> parameter or specifying <code>all</code> will return all available periods for the layer.</li>
+</ul>
+</li>
+<li><em>BBox</em> - A parameter to specify the bounding box to be used. All layers have the same extent in GIBS, so this option has no effect on the returned result. Also accepts <code>all</code>.</li>
+<li><em>TileMatrixSet</em> - The identifier for the Tile Matrix Set that the visualization utilizes</li>
+</ul>
+<p>The above elements may be found in examples of both RESTful and KVP access patterns seen below:</p>
+<ul>
+<li><strong>REST</strong><ul>
+<li><em>Pattern</em> - https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/{<em>LayerIdentifier</em>}/default/{<em>TileMatrixSet</em>}/{<em>BBox</em>}/{<em>Time</em>}.xml</li>
+<li><em>Example</em> - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/MODIS_Terra_CorrectedReflectance_TrueColor/default/250m/all/2015-01-26--2022-11-03.xml" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/MODIS_Terra_CorrectedReflectance_TrueColor/default/250m/all/2015-01-26--2022-11-03.xml</a></li>
+</ul>
+</li>
+<li><strong>KVP</strong><ul>
+<li><em>Pattern</em> - https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?SERVICE=WMTS&amp;REQUEST=DescribeDomains&amp;VERSION=1.0.0&amp;LAYER={<em>LayerIdentifier</em>}&amp;TILEMATRIXSET={<em>TileMatrixSet</em>}&amp;TIME={<em>Time</em>}</li>
+<li><em>Example</em> - <a href="https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0&amp;layer=MODIS_Terra_CorrectedReflectance_TrueColor&amp;tilematrixset=250m&amp;TIME=2015-01-26/2022-11-03" target="_blank">https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/wmts.cgi?Service=WMTS&amp;Request=DescribeDomains&amp;Version=1.0.0&amp;layer=MODIS_Terra_CorrectedReflectance_TrueColor&amp;tilematrixset=250m&amp;TIME=2015-01-26/2022-11-03</a></li>
+</ul>
+</li>
+</ul>
+<p>Time information can be found in the DimensionDomain element of the returned XML document:</p>
+<pre><code class="language-xml">&lt;DimensionDomain&gt;
+   &lt;ows:Identifier&gt;time&lt;/ows:Identifier&gt;
+   &lt;Domain&gt;2018-05-26/2018-11-03/P1D,2019-08-23/2021-09-03/P1D&lt;/Domain&gt;
+   &lt;Size&gt;2&lt;/Size&gt;
+&lt;/DimensionDomain&gt;
+</code></pre>
+<p>The <code>&lt;Domain&gt;</code> element will contain a comma-separated list of time periods. The <code>&lt;Size&gt;</code> element will contain an integer corresponding to the number of time periods in the <code>&lt;Domain&gt;</code> element.</p>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="ogc-web-map-service-wms_1">OGC Web Map Service (WMS)</h3>
+<p>GIBS WMS services support a <code>time</code> dimension on each time-varying visualization, as is displayed below according the respective OGC WMS specification:</p>
+<p><strong>WMS v1.1.1</strong></p>
+<pre><code>&lt;Dimension name=&quot;time&quot; units=&quot;ISO8601&quot;/&gt;
+&lt;Extent name=&quot;time&quot; default=&quot;2018-11-14&quot; nearestValue=&quot;1&quot;&gt;2013-07-16/2018-11-14/P1D&lt;/Extent&gt;
+</code></pre>
+<p><strong>WMS v1.3.0</strong></p>
+<pre><code>&lt;Dimension name=&quot;time&quot; units=&quot;ISO8601&quot; default=&quot;2018-10-01&quot; nearestValue=&quot;1&quot;&gt;2002-09-01/2018-10-
+/P1M&lt;/Dimension&gt;
+</code></pre>
+<p>Visualizations that represent "subdaily" (e.g. period &lt; 1 day) require that the <code>time</code> dimension value be provided with a <code>YYYY-MM-DDTHH:MI:SSZ</code> format.  All other visualizations also support a simplified <code>YYYY-MM-DD</code> formatted value with an implied <code>00:00:00Z</code>.</p>
+<p>If the <code>time</code> dimension is omitted in the WMS request, GIBS will return tiles for the default date, as specified in the <em>default</em> attribute. Note that GIBS' imagery layers all have a value of <em>1</em> in the <em>nearestValue</em> tag indicating that GIBS will snap to the nearest time value within the specified dimension extents. Additionally, GIBS supports use of the special <code>default</code> value, which results in the same response as though the date were omitted.</p>
+<hr style="border:1px solid gray">
+</hr>
+<h3 id="tiled-web-map-service-twms_1">Tiled Web Map Service (TWMS)</h3>
+<p>GIBS TWMS services support a <code>time</code> dimension on each time-varying visualization, as is defined in the TWMS <code>GetTileService</code> document as the following:</p>
+<pre><code>&lt;Key&gt;${time}&lt;/Key&gt;
+</code></pre>
+<p>Visualizations that represent "subdaily" (e.g. period &lt; 1 day) require that the <code>time</code> dimension value be provided with a <code>YYYY-MM-DDTHH:MI:SSZ</code> format.  All other visualizations also support a simplified <code>YYYY-MM-DD</code> formatted value with an implied <code>00:00:00Z</code>.</p>
+<p>See <a href="#ogc-web-map-service-wms_1">WMS above</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../access-advanced-topics/" class="btn btn-neutral float-right" title="Access Advanced Topics">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../available-visualizations/" class="btn btn-neutral" title="Available Visualizations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../available-visualizations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../access-advanced-topics/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../javascript/vue@3.js" defer></script>
+      <script src="../javascript/overrides.js" defer></script>
+      <script src="../javascript/components.js" defer></script>
+      <script src="../javascript/imagery-products.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
