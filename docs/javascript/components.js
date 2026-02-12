@@ -1,43 +1,43 @@
-Vue.component('category-selector', {
+const CategorySelector = {
   props: ['categories', 'selectCategory'],
   template: `
     <div class="category-selector">
       <h3 class="categories-header"> Science Disciplines: &nbsp; </h3>
-      <select class="category-selector" v-on:change="selectCategory($event)">
-        <option 
-          v-for="category in categories" 
-          :value="category.title" 
+      <select class="category-selector" @change="selectCategory($event)">
+        <option
+          v-for="category in categories"
+          :value="category.title"
           :key="category.title">
             {{ category.title }}
         </option>
       </select>
     </div>
   `
-})
+}
 
-Vue.component('layer-table', {
+const LayerTable = {
   props: ['measurement'],
   template: `
     <table class="layer-table docutils">
       <thead>
-        <tr> 
+        <tr>
           <th v-for="col in visibleColumns" :style="col.style">
-            <span v-on:click="sort(col)" :class="{ sort: col.sortable }"> 
+            <span @click="sort(col)" :class="{ sort: col.sortable }">
               <span v-html="col.title"></span>
               <span v-if="col.sortable && col.sorted === 'ASC'"> &uarr; </span>
               <span v-else-if="col.sortable && col.sorted === 'DESC'"> &darr; </span>
               <span class="unsorted" v-else-if="col.sortable"> &varr; </span>
-            </span> 
-          </th> 
+            </span>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="layer in layers">
           <td v-for="col in visibleColumns">
-              <component 
-                :is="col.renderer" 
+              <component
+                :is="col.renderer"
                 :property="col.property"
-                :layer="layer" 
+                :layer="layer"
                 :url="getUrl(layer)"
               >
               </component>
@@ -46,11 +46,11 @@ Vue.component('layer-table', {
       </tbody>
     </table>`,
   computed: {
-    visibleColumns: function () {
+    visibleColumns() {
       return this.columns.filter(({visible}) => visible);
     }
   },
-  data: function () {
+  data() {
     const { layers } = this.measurement;
     const defaultRenderer = {
       props: ['layer', 'property', 'url'],
@@ -84,9 +84,9 @@ Vue.component('layer-table', {
           renderer: {
             ...defaultRenderer,
             template: `
-              <span> 
-                {{ layer.title }} <br/> 
-                <a v-bind:href="url" target="_blank"> {{layer.id}} </a> 
+              <span>
+                {{ layer.title }} <br/>
+                <a :href="url" target="_blank"> {{layer.id}} </a>
               </span>`
           }
         },
@@ -138,11 +138,11 @@ Vue.component('layer-table', {
           renderer: {
             ...defaultRenderer,
             template: `
-              <div> 
+              <div>
                 <span v-if="Object.keys(layer.resolution).length === 1">
                   {{Object.keys(layer.resolution)[0]}}
                 </span>
-                <span v-else v-for="(projections, resolution) in layer.resolution"> 
+                <span v-else v-for="(projections, resolution) in layer.resolution">
                   {{resolution}}
                   <ul>
                     <li v-for="proj in projections"> {{proj}} </li>
@@ -153,7 +153,7 @@ Vue.component('layer-table', {
         },
         {
           title: 'Format',
-          property: 'format', 
+          property: 'format',
           sortable: true,
           visible: (() => layers.some(({ format }) => format ))(),
           renderer: defaultRenderer
@@ -170,7 +170,7 @@ Vue.component('layer-table', {
             ...defaultRenderer,
             template: `
               <div>
-                <div v-for="prod in layer.products"> 
+                <div v-for="prod in layer.products">
                   {{prod.type}}: &nbsp; <a :href="prod.url" target="_blank"  class="monospace"> {{ prod.shortName }} {{prod.version}} </a>
                 </div>
               </div>
@@ -181,14 +181,14 @@ Vue.component('layer-table', {
     }
   },
   methods: {
-    resetSortCol: function (col) {
+    resetSortCol(col) {
       this.columns.forEach(column => {
         if (column.property !== col.property) {
           column.sorted = false;
         }
       });
     },
-    sortAlpha: function (col) {
+    sortAlpha(col) {
       const { property } = col;
       const getVal = (obj) => obj[property] ? obj[property] : ' ';
       if (col.sorted === 'ASC') {
@@ -200,7 +200,7 @@ Vue.component('layer-table', {
       }
       this.resetSortCol(col);
     },
-    sortDate: function (col) {
+    sortDate(col) {
       if (col.sorted === 'ASC') {
         this.layers.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
         col.sorted = 'DESC'
@@ -210,12 +210,12 @@ Vue.component('layer-table', {
       }
       this.resetSortCol(col);
     },
-    sort: function (col) {
+    sort(col) {
       if (!col.sortable) return;
       if (col.sortFn) col.sortFn(col)
       else this.sortAlpha(col)
     },
-    getUrl: function (layer) {
+    getUrl(layer) {
       const { id, startDate } = layer;
       let date;
       const addDays = (date, days) => {
@@ -255,32 +255,32 @@ Vue.component('layer-table', {
       const projectionParam = getProjectionParam(layer.projections);
       const params = startDate ? `&t=${date}` : ``
       return baseUrl + params + projectionParam;
-    } 
+    }
   },
-  mounted: function () {
+  mounted() {
     this.sort(this.columns.find(({sorted}) => sorted));
   }
-})
+}
 
-Vue.component('measurement-container', {
+const MeasurementContainer = {
   props: ['measurement'],
   template: `
     <div class="measurement-container">
-      <h3 v-on:click="toggleExpanded()"> {{expandSymbol}} {{ measurement.title }} </h3>
+      <h3 @click="toggleExpanded()"> {{expandSymbol}} {{ measurement.title }} </h3>
       <div v-if="isExpanded">
         <layer-table :measurement="measurement"> </layer-table>
       </div>
     </div>`,
-  data: function () {
+  data() {
     return {
       isExpanded: false,
       expandSymbol: '+'
     }
   },
   methods: {
-    toggleExpanded: function () {
+    toggleExpanded() {
       this.isExpanded = !this.isExpanded
       this.expandSymbol = this.isExpanded ? '-' : '+'
     }
   }
-})
+}

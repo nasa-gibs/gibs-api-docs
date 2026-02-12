@@ -87,36 +87,39 @@ function formatLayers (layers) {
   return layers;
 }
 
-const app = new Vue({
-  el: '#app-container',
-  data: {
-    loading: true,
-    errorLoading: false,
-    allMeasurements: undefined,
-    allLayers: undefined,
-    measurements: undefined,
-    categories: undefined, 
-    selectedCategory: 'All',
+const { createApp } = Vue;
+
+const app = createApp({
+  data() {
+    return {
+      loading: true,
+      errorLoading: false,
+      allMeasurements: undefined,
+      allLayers: undefined,
+      measurements: undefined,
+      categories: undefined,
+      selectedCategory: 'All',
+    }
   },
   methods: {
-    selectCategory: function(event) {
+    selectCategory(event) {
       const category = event.target.options[event.target.options.selectedIndex].text
       this.measurements = this.getMeasurementsForCategory(category);
       this.selectedCategory = category;
     },
-    init: function (data) {
-      const { measurements, layers, categories } = data; 
+    init(data) {
+      const { measurements, layers, categories } = data;
       this.loading = false;
       this.allMeasurements = measurements;
       this.allLayers = formatLayers(layers);
       this.categories = categories['science disciplines'];
       this.measurements = this.getMeasurementsForCategory(this.selectedCategory);
     },
-    error: function () {
+    error() {
       this.loading = false;
       this.errorLoading = true;
     },
-    getMeasurementsForCategory: function (category) {
+    getMeasurementsForCategory(category) {
       const { measurements } = this.categories[category];
       return measurements.map((key) => {
         const m = this.allMeasurements[key];
@@ -135,15 +138,24 @@ const app = new Vue({
   }
 });
 
-const requestSettings = {
-  url: "https://worldview.earthdata.nasa.gov/config/wv.json",
-  type: "GET",
-  crossDomain: true,
-  dataType: "json",
-  success: app.init,
-  error: app.error,
-}
+// Register components before mounting
+app.component('category-selector', CategorySelector);
+app.component('layer-table', LayerTable);
+app.component('measurement-container', MeasurementContainer);
 
-$(document).ready(() => { 
-  $.ajax(requestSettings);
+$(document).ready(() => {
+  // Only mount if the container exists (available-visualizations page)
+  const container = document.getElementById('app-container');
+  if (!container) return;
+
+  const vm = app.mount('#app-container');
+
+  $.ajax({
+    url: "https://worldview.earthdata.nasa.gov/config/wv.json",
+    type: "GET",
+    crossDomain: true,
+    dataType: "json",
+    success: (data) => vm.init(data),
+    error: () => vm.error(),
+  });
 });
