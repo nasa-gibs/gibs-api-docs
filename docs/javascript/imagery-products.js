@@ -143,10 +143,13 @@ app.component('category-selector', CategorySelector);
 app.component('layer-table', LayerTable);
 app.component('measurement-container', MeasurementContainer);
 
-// Mount the app
-const vm = app.mount('#app-container');
-
 $(document).ready(() => {
+  // Only mount if the container exists (available-visualizations page)
+  const container = document.getElementById('app-container');
+  if (!container) return;
+
+  const vm = app.mount('#app-container');
+
   $.ajax({
     url: "https://worldview.earthdata.nasa.gov/config/wv.json",
     type: "GET",
