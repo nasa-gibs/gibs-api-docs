@@ -59,11 +59,50 @@ const getProducts = (conceptIds) => {
 }
 
 /**
+ * Layers that are not available via GIBS and should be excluded from the product catalog
+ */
+const EXCLUDED_LAYERS = [
+  'Reference_Labels_15m',
+  'AERONET_AOD_500NM',
+  'AERONET_ANGSTROM_440-870NM',
+  'DAILY_AERONET_AOD_500NM',
+  'DAILY_AERONET_ANGSTROM_440-870NM',
+  'World_Database_on_Protected_Areas',
+  'NOAA_2025_ERI_WMTS',
+  'World_Imagery',
+  'HLS_Customizable_Landsat',
+  'HLS_NDVI_Landsat',
+  'HLS_EVI_Landsat',
+  'HLS_SAVI_Landsat',
+  'HLS_MSAVI_Landsat',
+  'HLS_NBR_Landsat',
+  'HLS_NBR2_Landsat',
+  'HLS_TVI_Landsat',
+  'HLS_False_Color_Landsat',
+  'HLS_False_Color_Urban_Landsat',
+  'HLS_False_Color_Vegetation_Landsat',
+  'HLS_Shortwave_Infrared_Landsat',
+  'HLS_Customizable_Sentinel',
+  'HLS_NDVI_Sentinel',
+  'HLS_EVI_Sentinel',
+  'HLS_SAVI_Sentinel',
+  'HLS_MSAVI_Sentinel',
+  'HLS_NBR_Sentinel',
+  'HLS_NBR2_Sentinel',
+  'HLS_TVI_Sentinel',
+  'HLS_False_Color_Sentinel',
+  'HLS_False_Color_Urban_Sentinel',
+  'HLS_False_Color_Vegetation_Sentinel',
+  'HLS_Shortwave_Infrared_Sentinel',
+];
+
+/**
  * Build an array of all layers with display properties formatted as needed for docs
- * @param {*} layers 
- * @returns 
+ * @param {*} layers
+ * @returns
  */
 function formatLayers (layers) {
+  EXCLUDED_LAYERS.forEach(id => delete layers[id]);
   Object.keys(layers).forEach(id => {
     const layer = layers[id];
     const { layerPeriod: period, title, layergroup } = layer;
