@@ -65,7 +65,7 @@ The following subsections provide details regarding each projection's supported 
 ### WGS 84 / Lat-lon / Geographic (EPSG:4326)
 | Resolution (per pixel) | Tile Matrix Set (WMTS) | # Zoom Levels | Max Resolution (deg/pixel) | Min Resolution (deg/pixel) |
 | ---------------------- | ---------------------- | ------------- | -------------------------- | -------------------------- |
-| 15.625m | 15.125m | 13 | 0.5625 | 0.0001373291015625 |
+| 15.625m | 15.625m | 13 | 0.5625 | 0.0001373291015625 |
 | 31.25m | 31.25m | 12 | 0.5625 | 0.000274658203125 |
 | 250m | 250m | 9 | 0.5625 | 0.002197265625 |
 | 500m | 500m | 8 | 0.5625 | 0.00439453125 |
